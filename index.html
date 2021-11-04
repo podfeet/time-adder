@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta charset="utf-8" />
+    <!-- Responsive viewport meta tag (for Bootstrap) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- include Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <style>
+      /* removes spinner (up/down arrows) on input="number" */
+      input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+       -webkit-appearance: none;
+       appearance: none;
+       margin: 0;
+      }
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+      /* Align placeholder input text to right */
+      input[type="number"]::placeholder {
+        text-align: right;
+      }
+      input[type="number"] {
+        text-align: right;
+      }
+
+      </style>
+
+
+		<title>A Web App to Add Time</title>
+	</head>
+
+	<body>
+
+    <div class="container text-center">   
+      <div class="row mt-2">
+        <div class="col">
+          <div class="row">
+            <div class="col-2" id="hours">Hours</div>
+            <div class="col-2" id="min">Min</div>
+            <div class="col-2" id="sec">Sec</div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <div class="col" id="timeRowPlaceholder"></div>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-6">
+          <button type="submit" id="moreTimes" class="btn btn-primary mt-2">Add Another Row</button>
+        </div>
+      </div>
+    </div>
+
+   <!-- define the template string -->
+   <div class="container"></div>
+    <script type="text/html" id="tpl_string">
+      {{#ids}}
+        <div class="row mt-2">
+          <div class="col-2">
+            <input type="number" step="1" min="0" id={{hoursID}} class="form-control text-right" placeholder="0" aria-labelledby="hours" >
+          </div>
+          <div class="col-2">
+            <input type="number" step="1" min="0" id={{minID}} class="form-control text-right" placeholder="0" aria-labelledby="min" >
+          </div> 
+          <div class="col-2">
+            <input type="number" step="1" min="0" id={{secID}} class="form-control text-right" placeholder="0" aria-labelledby="sec" >
+          </div>
+          <!-- ADD & SUBTRACT BUTTONS -->
+          <div class="col col-md-3"><!-- without col-md-3 buttons are above/below each other on mobile -->
+            <button type="submit" id = "{{addBtn}}" class="btn btn-primary pl-1 pr-1">+</button>
+            <button type="submit" id = "{{subBtn}}" class="btn btn-danger disabled">-</button>
+            </div>    
+        </div>      
+      {{/ids}}
+    </script>
+  </div>
+
+
+
+
+
+  <!-- include jQuery, Popper & Bootstrap in this order -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Load mustache.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.5.1/mustache.min.js" integrity="sha512-sPEy+9yNbQ1EeqCoJ6B0t++upTDRzr1GZpWcXWiy5bOcNpAfGMZ8tdqkenvGeuwDNOaGnWTeyBjpEqBjkXmqfQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Load Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Load the local JS Code AFTER the other libraries -->
+    <script type="text/javascript" src="./script.js"></script>
+  </body>
+</html>
