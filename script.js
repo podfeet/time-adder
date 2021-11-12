@@ -19,15 +19,19 @@ const timeInputArray = {
     },
   ],
 };
+
 let i = 2;
 // Document Ready Handler
 $(() => {
-  //  get the template string from the script tag
-  const tplString = $('#tpl_string').html();
-  //  render the template string with the data
-  const tplOutput = Mustache.render(tplString, timeInputArray);
-  //  put the rendered template string into the placeholder div
-  $('#timeRowPlaceholder').html(tplOutput);
+  function renderRow(){
+    //  get the template string from the script tag
+    const tplString = $('#tpl_string').html();
+    //  render the template string with the data
+    const tplOutput = Mustache.render(tplString, timeInputArray);
+    //  put the rendered template string into the placeholder div
+    $('#timeRowPlaceholder').html(tplOutput);
+  }
+  renderRow();
 
   //  add event listeners to the buttons
   function addRow() {
@@ -39,10 +43,16 @@ $(() => {
       addBtnID: `add-${i}`,
       subBtnID: `sub-${i}`,
     });
+     //  render the template string with the data
+    const tplOutput = Mustache.render(tplString, timeInputArray);
     //  put the rendered template string into the placeholder div
     $('#timeRowPlaceholder').html(tplOutput);
   }
 
   //  add event listeners to the buttons
-  $('#moreTimes').on('click', addRow());
+  $('#moreTimes').click(function() {
+    addRow();
+  })
+  // this works to add a 3rd set of IDs to the array, but doesn't draw the 3rd row
+  // rendering isn't happening
 });
