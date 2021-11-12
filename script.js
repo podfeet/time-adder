@@ -43,10 +43,7 @@ $(() => {
       addBtnID: `add-${i}`,
       subBtnID: `sub-${i}`,
     });
-     //  render the template string with the data
-    const tplOutput = Mustache.render(tplString, timeInputArray);
-    //  put the rendered template string into the placeholder div
-    $('#timeRowPlaceholder').html(tplOutput);
+     renderRow();
   }
 
   //  add event listeners to the buttons
