@@ -32,17 +32,38 @@
 	</head>
 
 	<body>
-
+    <!-- container to hold the column labels & time rows -->
     <div class="container text-center">   
+      <!-- row for totals -->
       <div class="row mt-2">
+        <div class="col-6">
+          <div class="row">
+            <h2>Total</h2>
+          </div>
+        </div>
+      </div><div class="row mt-2">
         <div class="col">
           <div class="row">
-            <div class="col-2" id="hours">Hours</div>
-            <div class="col-2" id="min">Min</div>
-            <div class="col-2" id="sec">Sec</div>
+            <div class="col-2" id="hTot">hours total</div>
+            <div class="col-2" id="mTot">min total</div>
+            <div class="col-2" id="sTot">sec total</div>
           </div>
         </div>
       </div>
+      <!-- row for hours, min, sec labels -->
+      <div class="row mt-2">
+        <div class="col">
+          <div class="row">
+            <div class="col-2" id="hours">H</div>
+            <div class="col-2" id="min">M</div>
+            <div class="col-2" id="sec">S</div>
+          </div>
+        </div>
+      </div>
+      
+
+
+
       <div class="row mt-2">
         <div class="col">
           <div class="col" id="timeRowPlaceholder"></div>
@@ -50,6 +71,7 @@
       </div>
       <div class="row text-center">
         <div class="col-6">
+          <!-- button to add more rows -->
           <button type="submit" id="moreTimes" class="btn btn-primary mt-2">Add Another Row</button>
         </div>
       </div>
