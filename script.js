@@ -50,6 +50,5 @@ $(() => {
   $('#moreTimes').click(function() {
     addRow();
   })
-  // this works to add a 3rd set of IDs to the array, but doesn't draw the 3rd row
-  // rendering isn't happening
+  
 });
