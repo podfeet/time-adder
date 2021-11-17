@@ -36,6 +36,9 @@ $(() => {
       $(`#add-${j}`).click(function() {
         console.log(`add button add-${j} was clicked`);
       });
+      $(`#sub-${j}`).click(function() {
+        console.log(`sub button sub-${j} was clicked`);
+      });
     };
   };
   renderRow();
