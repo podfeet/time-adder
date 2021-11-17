@@ -33,44 +33,34 @@
 
 	<body>
     <!-- container to hold the column labels & time rows -->
-    <div class="container text-center">   
-      <!-- row for totals -->
-      <div class="row mt-2">
-        <div class="col-6">
-          <div class="row">
-            <h2>Total</h2>
-          </div>
+    <div class="container text-center">
+      <div class="container border bg-light">
+        <!-- row for Title of Totals -->
+        <div class="row mt-2">
+          <div class="h3 offset-4 col-6">Total</div>
         </div>
-      </div><div class="row mt-2">
-        <div class="col">
-          <div class="row">
-            <div class="col-2" id="hTot">hours total</div>
-            <div class="col-2" id="mTot">min total</div>
-            <div class="col-2" id="sTot">sec total</div>
-          </div>
+        <!-- row for Totals -->
+        <div class="row">
+            <div class="offset-4 col-2 border" id="hTot">20 hrs</div>
+            <div class="col-2 border" id="mTot">10 min</div>
+            <div class="col-2 border" id="sTot">5 sec</div>
         </div>
-      </div>
-      <!-- row for hours, min, sec labels -->
-      <div class="row mt-2">
-        <div class="col">
-          <div class="row">
-            <div class="col-2" id="hours">H</div>
-            <div class="col-2" id="min">M</div>
-            <div class="col-2" id="sec">S</div>
-          </div>
-        </div>
-      </div>
+      </div>   
       
-
-
-
+        <!-- row for hours, min, sec labels -->
+      <div class="row mt-1">
+        <div class="offset-4 col-2" id="hours">H</div>
+        <div class="col-2" id="min">M</div>
+        <div class="col-2" id="sec">S</div>
+      </div>
+      <!-- placeholder html for new time rows -->
       <div class="row mt-2">
         <div class="col">
           <div class="col" id="timeRowPlaceholder"></div>
         </div>
       </div>
       <div class="row text-center">
-        <div class="col-6">
+        <div class="offset-4 col-6">
           <!-- button to add more rows -->
           <button type="submit" id="moreTimes" class="btn btn-primary mt-2">Add Another Row</button>
         </div>
@@ -82,6 +72,12 @@
     <script type="text/html" id="tpl_string">
       {{#ids}}
         <div class="row mt-2">
+          <!-- ADD & SUBTRACT BUTTONS -->
+          <div class="col-4"><!-- without col-md-3 buttons are above/below each other on mobile -->
+            <button type="submit" id = "{{addBtn}}" class="btn btn-primary pl-1 pr-1">+</button>
+            <button type="submit" id = "{{subBtn}}" class="btn btn-danger disabled">-</button>
+          </div>  
+          <!-- Columns for hours min sec to be entered -->
           <div class="col-2">
             <input type="number" step="1" min="0" id={{hoursID}} class="form-control text-right" placeholder="0" aria-labelledby="hours" >
           </div>
@@ -90,12 +86,7 @@
           </div> 
           <div class="col-2">
             <input type="number" step="1" min="0" id={{secID}} class="form-control text-right" placeholder="0" aria-labelledby="sec" >
-          </div>
-          <!-- ADD & SUBTRACT BUTTONS -->
-          <div class="col col-md-3"><!-- without col-md-3 buttons are above/below each other on mobile -->
-            <button type="submit" id = "{{addBtn}}" class="btn btn-primary pl-1 pr-1">+</button>
-            <button type="submit" id = "{{subBtn}}" class="btn btn-danger disabled">-</button>
-            </div>    
+          </div>  
         </div>      
       {{/ids}}
     </script>
