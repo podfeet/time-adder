@@ -21,6 +21,7 @@ const timeInputArray = {
 };
 
 let i = 2;
+
 // Document Ready Handler
 $(() => {
   function renderRow(){
@@ -30,8 +31,16 @@ $(() => {
     const tplOutput = Mustache.render(tplString, timeInputArray);
     //  put the rendered template string into the placeholder div
     $('#timeRowPlaceholder').html(tplOutput);
+
+    // for (j = 1; j == timeInputArray.ids.length; j += 1) {
+    //   $(`#add-${j}`).click(function() {
+    //     console.log('add button clicked');
+    //   });
+    // };
   }
   renderRow();
+
+
 
   //  add event listeners to the buttons
   function addRow() {
@@ -46,16 +55,17 @@ $(() => {
      renderRow();
   }
 
-  //  add event listeners to the buttons
+  //  add click handler to the AddAnotherRow button
   $('#moreTimes').click(function() {
     addRow();
   })
   
   // Let's take a crack at doing something when +/- buttons are clicked
-  //  add event listeners to the buttons
-  // BUG: error on the ID of the button, worked generically as #add-1
-  for (i = 0; i < timeInputArray.ids.length; i += 1) {
-    $('#add-${i}').click(function() {
+  //  add click handler to the +/- buttons
+  
+  for (j = 0; j == timeInputArray.ids.length; j += 1) {
+    console.log(`waffles`)
+    $(`#add-${j}`).click(function() {
       console.log('add button clicked');
     });
   };
