@@ -51,4 +51,15 @@ $(() => {
     addRow();
   })
   
+  // Let's take a crack at doing something when +/- buttons are clicked
+  //  add event listeners to the buttons
+  // BUG: error on the ID of the button, worked generically as #add-1
+  for (i = 0; i < timeInputArray.ids.length; i += 1) {
+    $('#add-${i}').click(function() {
+      console.log('add button clicked');
+    });
+  };
+
+
+
 });
