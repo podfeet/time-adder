@@ -35,9 +35,13 @@ $(() => {
     for (let j = 1; j < (timeInputArray.ids.length + 1); j += 1) {
       $(`#add-${j}`).click(function() {
         console.log(`add button add-${j} was clicked`);
+        $(`#add-${j}`).removeClass('btn-outline-primary').addClass('btn-primary');
+        $(`#sub-${j}`).removeClass('btn-danger').addClass('btn-outline-danger');
       });
       $(`#sub-${j}`).click(function() {
         console.log(`sub button sub-${j} was clicked`);
+        $(`#sub-${j}`).removeClass('btn-outline-danger').addClass('btn-danger');
+        $(`#add-${j}`).removeClass('btn-primary').addClass('btn-outline-primary');
       });
     };
   };
