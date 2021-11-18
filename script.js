@@ -33,6 +33,7 @@ $(() => {
     $('#timeRowPlaceholder').html(tplOutput);
     // add click functions to 3 and up + buttons
     for (let j = 1; j < (timeInputArray.ids.length + 1); j += 1) {
+      // BUG: when adding another row, outline/solid changes back to defaults. This means the whole row is getting re-rendered, so what people have typed in will disappear too. Need to figure out how to not change existing rows when addRow() is run. Maybe this is why I need a Class?
       $(`#add-${j}`).click(function() {
         console.log(`add button add-${j} was clicked`);
         $(`#add-${j}`).removeClass('btn-outline-primary').addClass('btn-primary');
@@ -46,8 +47,6 @@ $(() => {
     };
   };
   renderRow();
-
-
 
   //  add event listeners to the buttons
   function addRow() {
@@ -67,17 +66,5 @@ $(() => {
   $('#moreTimes').click(function() {
     addRow();
   })
-  
-  // Let's take a crack at doing something when +/- buttons are clicked
-  //  add click handler to the +/- buttons
-  
-  // for (j = 0; j == timeInputArray.ids.length; j += 1) {
-  //   console.log(`waffles`)
-  //   $(`#add-${j}`).click(function() {
-  //     console.log('add button clicked');
-  //   });
-  // };
-
-
 
 });
