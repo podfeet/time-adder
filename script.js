@@ -24,47 +24,83 @@ let i = 2;
 
 // Document Ready Handler
 $(() => {
-  function renderRow(){
-    //  get the template string from the script tag
-    const tplString = $('#tpl_string').html();
-    //  render the template string with the data
-    const tplOutput = Mustache.render(tplString, timeInputArray);
-    //  put the rendered template string into the placeholder div
-    $('#timeRowPlaceholder').html(tplOutput);
-    // add click functions to 3 and up + buttons
-    for (let j = 1; j < (timeInputArray.ids.length + 1); j += 1) {
-      // BUG: when adding another row, outline/solid changes back to defaults. This means the whole row is getting re-rendered, so what people have typed in will disappear too. Need to figure out how to not change existing rows when addRow() is run. Maybe this is why I need a Class?
-      $(`#add-${j}`).click(function() {
-        console.log(`add button add-${j} was clicked`);
-        $(`#add-${j}`).removeClass('btn-outline-primary').addClass('btn-primary');
-        $(`#sub-${j}`).removeClass('btn-danger').addClass('btn-outline-danger');
-      });
-      $(`#sub-${j}`).click(function() {
-        console.log(`sub button sub-${j} was clicked`);
-        $(`#sub-${j}`).removeClass('btn-outline-danger').addClass('btn-danger');
-        $(`#add-${j}`).removeClass('btn-primary').addClass('btn-outline-primary');
-      });
+
+  // ****************************** //
+  //  Define the Class //
+  // ****************************** //
+  /** 
+   * never know what to write here
+   */
+  class ARow {
+    constructor(details) {
+      this.hoursIDhours = details.hoursID;
+      this.minIDmin = details.minID;
+      this.secIDsec = details.secID;
+      this.addBtnIDadd = details.addBtnID;
+      this.subBtnIDsub = details.subBtnID;
+
+      // this.addRow();
+    }
+    // ****************************** //
+    //  Define the Instance functions //
+    // ****************************** //
+    renderRow(){
+      //  get the template string from the script tag
+      const tplString = $('#tpl_string').html();
+      //  render the template string with the data
+      const tplOutput = Mustache.render(tplString, timeInputArray);
+      //  put the rendered template string into the placeholder div
+      $('#timeRowPlaceholder').html(tplOutput);
+      // add click functions to 3 and up + buttons
+      for (let j = 1; j < (timeInputArray.ids.length + 1); j += 1) {
+        $(`#add-${j}`).click(function() {
+          console.log(`add button add-${j} was clicked`);
+          $(`#add-${j}`).removeClass('btn-outline-primary').addClass('btn-primary');
+          $(`#sub-${j}`).removeClass('btn-danger').addClass('btn-outline-danger');
+        });
+        $(`#sub-${j}`).click(function() {
+          console.log(`sub button sub-${j} was clicked`);
+          $(`#sub-${j}`).removeClass('btn-outline-danger').addClass('btn-danger');
+          $(`#add-${j}`).removeClass('btn-primary').addClass('btn-outline-primary');
+        });
+      };
     };
+
+    putRowUp() {
+      this.renderRow();
+    }
+    
+
   };
-  renderRow();
+  // finish ARow Class definition
 
-  //  add event listeners to the buttons
-  function addRow() {
-    i += 1;
-    console.log(`DEBUG: i is ${i}`)
-    timeInputArray.ids.push({
-      hoursID: `hours-${i}`,
-      minID: `min-${i}`,
-      secID: `sec-${i}`,
-      addBtnID: `add-${i}`,
-      subBtnID: `sub-${i}`,
-    });
-     renderRow();
-  }
+  // Create a function to make the original two rows
+  function makeTwoRows() {
+    const row1 = new ARow(timeInputArray.ids[0]);
+    const row2 = new ARow(timeInputArray.ids[1]);
+    row1.putRowUp();
+    row2.putRowUp();
+    let i=2;
+  };
+  makeTwoRows();
 
-  //  add click handler to the AddAnotherRow button
-  $('#moreTimes').click(function() {
-    addRow();
-  })
+  // function addRow() {
+  //   i += 1; // NOTE: will this still be true? where do I define "i"? in my orig code it was i=2
+  //   console.log(`DEBUG: i is ${i}`)
+  //   timeInputArray.ids.push({
+  //     hoursID: `hours-${i}`,
+  //     minID: `min-${i}`,
+  //     secID: `sec-${i}`,
+  //     addBtnID: `add-${i}`,
+  //     subBtnID: `sub-${i}`,
+  //   });
+  //   const row`${i}` = new ARow(timeInputArray.ids[`${i}`]);
+  // }
+  
+
+  // //  add click handler to the AddAnotherRow button
+  // $('#moreTimes').click(function() {
+  //   addRow();
+  // })
 
 });
