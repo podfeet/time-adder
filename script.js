@@ -71,34 +71,43 @@ $(() => {
   };
   // finish ARow Class definition
   
-  // initialize the row numbers (I know, it should have started at 0)
-  let i = 1; // without this, "TypeError: undefined is not an object (evaluating 'details.hoursID')"
   function makeRows(){
-    const row = new ARow(timeInputArray.ids[i]);
-    row.putRowUp();
-  }
+    for (let i = 0; i < timeInputArray.ids.length; i += 1) {
+      const row = new ARow(timeInputArray.ids[i]);
+      row.putRowUp();
+      };
+    };
   function makeInitialRows(){
-    for (let j = 0; j < 2; j += 1) { // make 2 rows
+    for (let i = 0; i < 2; i += 1) { // make 2 rows
       makeRows();
     }
   }
-  makeInitialRows();
 
-  // i is 2 at this point
-  // i needs to be 3 in order to push values to the array
-  
+  function makeInitialRows(){
+    for (let i = 1; i < 3; i += 1) { // make 2 rows
+      makeRows();
+    }
+  }
+
+  makeInitialRows();
+  // initialize the row number
+  let rowNum = 2; 
+
   function addRow() {
-    i++; // increment i for the two existing rows
-    console.log(`DEBUG: i in addRow is ${i}`)
+    // i needs to be 3 in order to push values to the array
+
+    rowNum++; // BUG: it HAS to increment first but it fails. If I incrmeent after it works but duplicates row #2.
     timeInputArray.ids.push({
-      hoursID: `hours-${i}`,
-      minID: `min-${i}`,
-      secID: `sec-${i}`,
-      addBtnID: `add-${i}`,
-      subBtnID: `sub-${i}`,
+      hoursID: `hours-${rowNum}`,
+      minID: `min-${rowNum}`,
+      secID: `sec-${rowNum}`,
+      addBtnID: `add-${rowNum}`,
+      subBtnID: `sub-${rowNum}`,
     });
-    let x = new ARow(timeInputArray.ids[i]);
+    // console.log(timeInputArray.ids[2].hoursID); //returns hours-1
+    let x = new ARow(timeInputArray.ids[rowNum]);
     makeRows();
+    console.log(`DEBUG: rowNum after addRow is ${rowNum}`)
   }
   
 
