@@ -1,7 +1,7 @@
 /* eslint-env jquery */
 /* global Mustache */
 
-const timeInputArray = {
+let timeInputArray = {
   ids: [
     {
       hoursID: 'hours-1',
@@ -19,8 +19,6 @@ const timeInputArray = {
     },
   ],
 };
-
-let i = 2;
 
 // Document Ready Handler
 $(() => {
@@ -68,39 +66,46 @@ $(() => {
 
     putRowUp() {
       this.renderRow();
+      // i++;
     }
-    
-
   };
   // finish ARow Class definition
+  
+  // initialize the row numbers (I know, it should have started at 0)
+  let i = 1; // without this, "TypeError: undefined is not an object (evaluating 'details.hoursID')"
+  function makeRows(){
+    const row = new ARow(timeInputArray.ids[i]);
+    row.putRowUp();
+  }
+  function makeInitialRows(){
+    for (let j = 0; j < 2; j += 1) { // make 2 rows
+      makeRows();
+    }
+  }
+  makeInitialRows();
 
-  // Create a function to make the original two rows
-  function makeTwoRows() {
-    const row1 = new ARow(timeInputArray.ids[0]);
-    const row2 = new ARow(timeInputArray.ids[1]);
-    row1.putRowUp();
-    row2.putRowUp();
-    let i=2;
-  };
-  makeTwoRows();
-
-  // function addRow() {
-  //   i += 1; // NOTE: will this still be true? where do I define "i"? in my orig code it was i=2
-  //   console.log(`DEBUG: i is ${i}`)
-  //   timeInputArray.ids.push({
-  //     hoursID: `hours-${i}`,
-  //     minID: `min-${i}`,
-  //     secID: `sec-${i}`,
-  //     addBtnID: `add-${i}`,
-  //     subBtnID: `sub-${i}`,
-  //   });
-  //   const row`${i}` = new ARow(timeInputArray.ids[`${i}`]);
-  // }
+  // i is 2 at this point
+  // i needs to be 3 in order to push values to the array
+  
+  function addRow() {
+    i++; // increment i for the two existing rows
+    console.log(`DEBUG: i in addRow is ${i}`)
+    timeInputArray.ids.push({
+      hoursID: `hours-${i}`,
+      minID: `min-${i}`,
+      secID: `sec-${i}`,
+      addBtnID: `add-${i}`,
+      subBtnID: `sub-${i}`,
+    });
+    let x = new ARow(timeInputArray.ids[i]);
+    makeRows();
+  }
   
 
   // //  add click handler to the AddAnotherRow button
-  // $('#moreTimes').click(function() {
-  //   addRow();
-  // })
+  $('#moreTimes').click(function() {
+    addRow();
+  })
+
 
 });
