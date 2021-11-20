@@ -36,8 +36,6 @@ $(() => {
       this.secIDsec = details.secID;
       this.addBtnIDadd = details.addBtnID;
       this.subBtnIDsub = details.subBtnID;
-
-      // this.addRow();
     }
     // ****************************** //
     //  Define the Instance functions //
@@ -63,18 +61,13 @@ $(() => {
         });
       };
     };
-
-    putRowUp() {
-      this.renderRow();
-      // i++;
-    }
   };
   // finish ARow Class definition
   
   function makeRows(){
     for (let i = 0; i < timeInputArray.ids.length; i += 1) {
       const row = new ARow(timeInputArray.ids[i]);
-      row.putRowUp();
+      row.renderRow();
       };
     };
   function makeInitialRows(){
