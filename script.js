@@ -70,19 +70,8 @@ $(() => {
       row.renderRow();
       };
     };
-  function makeInitialRows(){
-    for (let i = 0; i < 2; i += 1) { // make 2 rows
-      makeRows();
-    }
-  }
-
-  function makeInitialRows(){
-    for (let i = 1; i < 3; i += 1) { // make 2 rows
-      makeRows();
-    }
-  }
-
-  makeInitialRows();
+    makeRows();
+    
   // initialize the row number
   let rowNum = 2; 
 
