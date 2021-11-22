@@ -4,16 +4,16 @@
 let timeInputArray = {
   ids: [
     {
-      hoursID: 'hours-1',
-      minID: 'min-1',
-      secID: 'sec-1',
+      hoursID: 'h-1',
+      minID: 'm-1',
+      secID: 's-1',
       addBtnID: 'add-1',
       subBtnID: 'sub-1',
     },
     {
-      hoursID: 'hours-2',
-      minID: 'min-2',
-      secID: 'sec-2',
+      hoursID: 'h-2',
+      minID: 'm-2',
+      secID: 's-2',
       addBtnID: 'add-2',
       subBtnID: 'sub-2',
     },
@@ -80,13 +80,13 @@ $(() => {
 
     rowNum++; 
     timeInputArray.ids.push({
-      hoursID: `hours-${rowNum}`,
-      minID: `min-${rowNum}`,
-      secID: `sec-${rowNum}`,
+      hoursID: `h-${rowNum}`,
+      minID: `m-${rowNum}`,
+      secID: `s-${rowNum}`,
       addBtnID: `add-${rowNum}`,
       subBtnID: `sub-${rowNum}`,
     });
-    // console.log(timeInputArray.ids[2].hoursID); //returns hours-1
+    // console.log(timeInputArray.ids[2].hoursID); //returns h-1
     let x = new ARow(timeInputArray.ids[rowNum-1]);
     makeRows();
   }
