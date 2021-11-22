@@ -21,7 +21,10 @@ let timeInputArray = {
 };
 
 // Initialize an array of numerical values for each input
-let numArray = [];
+let numArray = {
+  rows: [
+  ]
+};
 
 // Document Ready Handler
 $(() => {
@@ -101,7 +104,11 @@ $(() => {
     addRow();
   })
 
-
+for (i = 1; i < (timeInputArray.ids.length + 1); i++) {
+  numArray.rows.push({
+    hVal: $('#h-1').val(),
+  });
+}
 
 
 });
