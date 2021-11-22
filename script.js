@@ -78,7 +78,7 @@ $(() => {
   function addRow() {
     // i needs to be 3 in order to push values to the array
 
-    rowNum++; // BUG: it HAS to increment first but it fails. If I increment after it works but duplicates row #2.
+    rowNum++; 
     timeInputArray.ids.push({
       hoursID: `hours-${rowNum}`,
       minID: `min-${rowNum}`,
@@ -89,7 +89,6 @@ $(() => {
     // console.log(timeInputArray.ids[2].hoursID); //returns hours-1
     let x = new ARow(timeInputArray.ids[rowNum-1]);
     makeRows();
-    console.log(`DEBUG: rowNum after addRow is ${rowNum}`)
   }
   
 
