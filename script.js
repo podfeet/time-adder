@@ -20,6 +20,9 @@ let timeInputArray = {
   ],
 };
 
+// Initialize an array of numerical values for each input
+let numArray = [];
+
 // Document Ready Handler
 $(() => {
 
@@ -40,6 +43,8 @@ $(() => {
     // ****************************** //
     //  Define the Instance functions //
     // ****************************** //
+
+    // renderRow actually creates the html with the Mustache
     renderRow(){
       //  get the template string from the script tag
       const tplString = $('#tpl_string').html();
@@ -64,6 +69,7 @@ $(() => {
   };
   // finish ARow Class definition
   
+  //  makeRows creates isntances of the rows and adds them to the array
   function makeRows(){
     for (let i = 0; i < timeInputArray.ids.length; i += 1) {
       const row = new ARow(timeInputArray.ids[i]);
@@ -74,10 +80,9 @@ $(() => {
     
   // initialize the row number
   let rowNum = 2; 
-
+  
+  // addRow creates a new row of input boxes and is triggered by the click function for the Add Another Row button
   function addRow() {
-    // i needs to be 3 in order to push values to the array
-
     rowNum++; 
     timeInputArray.ids.push({
       hoursID: `h-${rowNum}`,
@@ -91,11 +96,12 @@ $(() => {
     makeRows();
   }
   
-
-  // //  add click handler to the AddAnotherRow button
+  // click handler for the AddAnotherRow button to call addRow
   $('#moreTimes').click(function() {
     addRow();
   })
+
+
 
 
 });
