@@ -18,13 +18,17 @@ let timeInputArray = {
       subBtnID: 'sub-2',
     },
   ],
+  values: [
+    {h1: 0, m1: 0, s1: 0},
+    {h2: 0, m2: 23, s2: 0},
+  ]
 };
 
 // Initialize an array of numerical values for each input
-let numArray = {
-  rows: [
-  ]
-};
+// let numArray = {
+//   rows: [
+//   ]
+// };
 
 // Document Ready Handler
 $(() => {
@@ -104,11 +108,18 @@ $(() => {
     addRow();
   })
 
-for (i = 1; i < (timeInputArray.ids.length + 1); i++) {
-  numArray.rows.push({
-    hVal: $('#h-1').val(),
-  });
-}
+  // Loop through the ids.length because it's keeping track of how many rows exist (values have not been created yet?)
+  for (i = 1; i < (timeInputArray.ids.length + 1); i++) {
+    console.log(timeInputArray.values[1].m2);
+   
+    timeInputArray.values[i-1].h${i} = $('#h-' + i).val();
+    ({
+      hVal: $(`#h-${i}`).val(),
+    });
+  }
+// numArray.rows.push({
+//   hVal: $(`#h-1`).val(),
+// })
 
 
 });
