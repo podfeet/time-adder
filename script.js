@@ -105,7 +105,7 @@ $(() => {
       let hours = timeInputArray.ids[i].hoursID;
       let min = timeInputArray.ids[i].minID;
       let sec = timeInputArray.ids[i].secID;
-      
+
       timeInputArray.values.push({
         h: $(`#${hours}`).val(),
         m: $(`#${min}`).val(),
@@ -116,5 +116,10 @@ $(() => {
   }
   pushValues();
 
-
+  // for (i=1; i < rowNum+1; i++) {
+  //   let total = ($('#(h-${i})').val()*3600) + ($('#(m-${i})').val()*60) + ($('#(s-${i}')).val();
+  //   console.log(total);
+  // }
+  let total = ($('#h-1').val()*3600) + ($('#m-1').val()*60) + $('#s-1)').val();
+  console.log(total);
 });
