@@ -18,10 +18,7 @@ let timeInputArray = {
       subBtnID: 'sub-2',
     },
   ],
-  values: [
-    {h: 0, m: 23, s: 0},
-    {h: 0, m: 7, s: 0},
-  ]
+  values: [],
 };
 
 // Document Ready Handler
@@ -106,9 +103,10 @@ $(() => {
   function pushValues() {
     for (i = 0; i < (timeInputArray.ids.length); i++) {
       console.log(`DEBUG: i is ${i}`)
-      console.log(`DEBUG: timeInputArray.values[i].m is ${timeInputArray.values[i].m}`)
-      console.log($('#m-1').val());
-      // timeInputArray.values[i]({
+      // console.log(timeInputArray.values[i].m)
+      console.log(timeInputArray.ids[i].hoursID); //returns h-1 then h-2
+      // but I want to addres $('#hoursID').val()
+      // timeInputArray.values[i].push({
       //   h: $('#hoursID').val(),
       //   m: $('#minID').val(),
       //   s: $('#secID').val(),
