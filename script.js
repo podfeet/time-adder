@@ -19,8 +19,8 @@ let timeInputArray = {
     },
   ],
   values: [
-    {h1: 0, m1: 0, s1: 0},
-    {h2: 0, m2: 23, s2: 0},
+    {h: 0, m: 0, s: 0},
+    {h: 0, m: 23, s: 0},
   ]
 };
 
@@ -109,17 +109,18 @@ $(() => {
   })
 
   // Loop through the ids.length because it's keeping track of how many rows exist (values have not been created yet?)
-  for (i = 1; i < (timeInputArray.ids.length + 1); i++) {
-    console.log(timeInputArray.values[1].m2);
+  for (i = 0; i < (timeInputArray.ids.length); i++) {
+    console.log(`DEBUG: i is ${i}`)
+    console.log(timeInputArray.values[i].m); // returns 23 which is hard-wired
    
-    timeInputArray.values[i-1].h${i} = $('#h-' + i).val();
-    ({
-      hVal: $(`#h-${i}`).val(),
-    });
+    // timeInputArray.values[i-1].h${i} = $('#h-' + i).val();
+    // ({
+    //   hVal: $(`#h-${i}`).val(),
+    // });
   }
 // numArray.rows.push({
 //   hVal: $(`#h-1`).val(),
-// })
+// }
 
 
 });
