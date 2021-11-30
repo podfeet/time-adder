@@ -112,6 +112,8 @@ $(() => {
         s: $(`#${sec}`).val(),
       }) 
       console.log(timeInputArray.values[i]);
+      let total = timeInputArray.values.h*3600+timeInputArray.values.m*60+timeInputArray.values.s;
+      console.log(total);
     }
   }
   pushValues();
@@ -120,6 +122,6 @@ $(() => {
   //   let total = ($('#(h-${i})').val()*3600) + ($('#(m-${i})').val()*60) + ($('#(s-${i}')).val();
   //   console.log(total);
   // }
-  let total = ($('#h-1').val()*3600) + ($('#m-1').val()*60) + $('#s-1)').val();
-  console.log(total);
+  // let total = ($('#h-1').val()*3600) + ($('#m-1').val()*60) + $('#s-1)').val();
+  // console.log(total);
 });
