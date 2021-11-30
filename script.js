@@ -19,16 +19,10 @@ let timeInputArray = {
     },
   ],
   values: [
-    {h: 0, m: 0, s: 0},
     {h: 0, m: 23, s: 0},
+    {h: 0, m: 7, s: 0},
   ]
 };
-
-// Initialize an array of numerical values for each input
-// let numArray = {
-//   rows: [
-//   ]
-// };
 
 // Document Ready Handler
 $(() => {
@@ -109,18 +103,19 @@ $(() => {
   })
 
   // Loop through the ids.length because it's keeping track of how many rows exist (values have not been created yet?)
-  for (i = 0; i < (timeInputArray.ids.length); i++) {
-    console.log(`DEBUG: i is ${i}`)
-    console.log(timeInputArray.values[i].m); // returns 23 which is hard-wired
-   
-    // timeInputArray.values[i-1].h${i} = $('#h-' + i).val();
-    // ({
-    //   hVal: $(`#h-${i}`).val(),
-    // });
+  function pushValues() {
+    for (i = 0; i < (timeInputArray.ids.length); i++) {
+      console.log(`DEBUG: i is ${i}`)
+      console.log(`DEBUG: timeInputArray.values[i].m is ${timeInputArray.values[i].m}`)
+      console.log($('#m-1').val());
+      // timeInputArray.values[i]({
+      //   h: $('#hoursID').val(),
+      //   m: $('#minID').val(),
+      //   s: $('#secID').val(),
+      // }) 
+    }
   }
-// numArray.rows.push({
-//   hVal: $(`#h-1`).val(),
-// }
+  pushValues();
 
 
 });
