@@ -102,15 +102,24 @@ $(() => {
   // Loop through the ids.length because it's keeping track of how many rows exist (values have not been created yet?)
   function pushValues() {
     for (i = 0; i < (timeInputArray.ids.length); i++) {
-      console.log(`DEBUG: i is ${i}`)
+      // console.log(`DEBUG: i is ${i}`)
       // console.log(timeInputArray.values[i].m)
-      console.log(timeInputArray.ids[i].hoursID); //returns h-1 then h-2
-      // but I want to addres $('#hoursID').val()
-      // timeInputArray.values[i].push({
-      //   h: $('#hoursID').val(),
-      //   m: $('#minID').val(),
-      //   s: $('#secID').val(),
-      // }) 
+      // console.log(timeInputArray.ids[i].hoursID); //returns h-1 then h-2
+      let hours = timeInputArray.ids[i].hoursID;
+      // let hoursVal = $(`#${hours}`).val();
+      let min = timeInputArray.ids[i].minID;
+      // let minVal = $(`#${min}`).val();
+      let sec = timeInputArray.ids[i].secID;
+      // let secVal = $(`#${sec}`).val();
+
+      // console.log(`DEBUG: hoursVal is ${hoursVal}`) 
+      
+      timeInputArray.values[i].push({
+        h: $(`#${hours}`).val(),
+        m: $(`#${min}`).val(),
+        s: $(`#${sec}`).val(),
+      }) 
+      console.log(timeInputArray.values[i]);
     }
   }
   pushValues();
