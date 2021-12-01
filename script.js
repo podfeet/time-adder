@@ -62,6 +62,11 @@ $(() => {
           $(`#sub-${j}`).removeClass('btn-outline-danger').addClass('btn-danger');
           $(`#add-${j}`).removeClass('btn-primary').addClass('btn-outline-primary');
         });
+        // adding onchange event to the input fields to run the addValues function
+        $(`#h-${j}`).attr("onchange", "addValues('this');");
+        $(`#m-${j}`).attr("onchange", "addValues('this');");
+        $(`#s-${j}`).attr("onchange", "addValues('this');");
+
       };
     };
   };
