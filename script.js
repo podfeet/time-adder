@@ -100,23 +100,35 @@ $(() => {
   })
 
   // Loop through the ids.length because it's keeping track of how many rows exist (values have not been created yet?)
-  function pushValues() {
+  function addValues() {
     for (i = 0; i < (timeInputArray.ids.length); i++) {
-      let hours = timeInputArray.ids[i].hoursID;
-      let min = timeInputArray.ids[i].minID;
-      let sec = timeInputArray.ids[i].secID;
+      let hoursID = timeInputArray.ids[i].hoursID;
+      let minID = timeInputArray.ids[i].minID;
+      let secID = timeInputArray.ids[i].secID;
 
-      timeInputArray.values.push({
-        h: $(`#${hours}`).val(),
-        m: $(`#${min}`).val(),
-        s: $(`#${sec}`).val(),
-      }) 
-      console.log(timeInputArray.values[i]);
-      let total = timeInputArray.values.h*3600+timeInputArray.values.m*60+timeInputArray.values.s;
-      console.log(total);
+      let hVal = $(`#${hoursID}`).val();
+      let mVal = $(`#${minID}`).val();
+      let sVal = $(`#${secID}`).val();
+
+      // console.log(`DEBUG: hVal is ${hVal}`);
+      // console.log(`DEBUG: mVal is ${mVal}`);
+      // console.log(`DEBUG: sVal is ${sVal}`);
+
+      rowTotalSec = hVal*3600+mVal*60+sVal*1;
+      console.log(`DEBUG: rowTotalSec is ${rowTotalSec}`) // returns 36601 instead of 3661
+
+
+      // timeInputArray.values.push({
+      //   h: $(`#${h}`).val(),
+      //   m: $(`#${m}`).val(),
+      //   s: $(`#${sec}`).val(),
+      // }) 
+      // console.log(timeInputArray.values[i]);
+      // let total = timeInputArray.values.h*3600+timeInputArray.values.m*60+timeInputArray.values.s;
+      // console.log(total);
     }
   }
-  pushValues();
+  addValues();
 
   // for (i=1; i < rowNum+1; i++) {
   //   let total = ($('#(h-${i})').val()*3600) + ($('#(m-${i})').val()*60) + ($('#(s-${i}')).val();
