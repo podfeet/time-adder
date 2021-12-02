@@ -25,6 +25,8 @@ let timeInputArray = {
   values: [],
 };
 
+let rowNum = 0;
+
 // Document Ready Handler
 $(() => {
 
@@ -86,7 +88,7 @@ $(() => {
     makeRows();
     
   // initialize the row number
-  let rowNum = 2; 
+  rowNum = 2; 
   
   // addRow creates a new row of input boxes and is triggered by the click function for the Add Another Row button
   function addRow() {
@@ -117,7 +119,7 @@ $(() => {
 // initialize the total seconds value in the global scope
 let totSec = 0;
 function calcTotSec() {
-  for (i = 0; i < (timeInputArray.ids.length); i++) {
+  for (i = 0; i < rowNum; i++) {
     let hoursID = timeInputArray.ids[i].hoursID;
     let minID = timeInputArray.ids[i].minID;
     let secID = timeInputArray.ids[i].secID;
@@ -132,9 +134,11 @@ function calcTotSec() {
     
     // this is where I will call the module timeMath
     // multipled sVal * 1 to force it to be a number
+    
     rowTotSec = hVal*3600+mVal*60+sVal*1;
     totSec = totSec + rowTotSec;
     console.log(`DEBUG: totSec is ${totSec}`)
+
     // reset totSec to 0
     // totSec = 0; // nope - this makes the total only be whatever is in the row that just changed
     // rowTotSec = 0; // nope - this doesn't change anything, all rows keep adding to the total
