@@ -2,8 +2,8 @@
 /* global Mustache */
 
 // import the module timeMath
-
-import {doTheMath as timeMath} from './timeMath.mjs';
+// BUG: import statement below returns "SyntaxError: Unexpected token '{'. import call expects exactly one argument." Online suggestions say the script must be called with type="module"
+// import timeMath from './timeMath.mjs';
 
 let timeInputArray = {
   ids: [
@@ -67,9 +67,9 @@ $(() => {
           $(`#add-${j}`).removeClass('btn-primary').addClass('btn-outline-primary');
         });
         // adding onchange event to the input fields to run the addValues function
-        $(`#h-${j}`).attr("onchange", "addValues('this');");
-        $(`#m-${j}`).attr("onchange", "addValues('this');");
-        $(`#s-${j}`).attr("onchange", "addValues('this');");
+        $(`#h-${j}`).attr("onchange", "calcTotSec('this');");
+        $(`#m-${j}`).attr("onchange", "calcTotSec('this');");
+        $(`#s-${j}`).attr("onchange", "calcTotSec('this');");
 
       };
     };
@@ -112,7 +112,9 @@ $(() => {
 
 // Loop through the ids.length because it's keeping track of how many rows exist (values have not been created yet)
 // This function must be in global scope (outside of the document ready handler or else the html doesn't know it exists)
-function addValues() {
+// initialize the total seconds value in the global scope
+let totSec = 0;
+function calcTotSec() {
   for (i = 0; i < (timeInputArray.ids.length); i++) {
     let hoursID = timeInputArray.ids[i].hoursID;
     let minID = timeInputArray.ids[i].minID;
@@ -126,11 +128,13 @@ function addValues() {
     // console.log(`DEBUG: mVal is ${mVal}`);
     // console.log(`DEBUG: sVal is ${sVal}`);
     
-    // tried both parseInt and parseFloat and neither one made this work.
     // this is where I will call the module timeMath
-    // rowTotalSec = hVal*3600+mVal*60+sVal*1;
-
-    timeMath();
-    console.log(`DEBUG: rowTotalSec is ${rowTotalSec}`)
+    // multipled sVal * 1 to force it to be a number
+   
+    rowTotSec = hVal*3600+mVal*60+sVal*1;
+    totSec = totSec + rowTotSec;
+    console.log(`DEBUG: totSec is ${totSec}`)
+    // timeMath();
+    // console.log(`DEBUG: rowTotSec is ${rowTotSec}`)
   }
 }

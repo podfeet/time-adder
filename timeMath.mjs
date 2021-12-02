@@ -5,7 +5,7 @@
 /**
  * A function to add and subtract elapsed time and return the total
  * @example
- * Given inputs of hVal, mVal and sVal, the function will return the total
+ * Given inputs of hVal, mVal and sVal, the function will return the total number of seconds
  * @function timeMath.add
  */
 
