@@ -1,6 +1,10 @@
 /* eslint-env jquery */
 /* global Mustache */
 
+// import the module timeMath
+
+import {doTheMath as timeMath} from './timeMath.mjs';
+
 let timeInputArray = {
   ids: [
     {
@@ -124,7 +128,9 @@ function addValues() {
     
     // tried both parseInt and parseFloat and neither one made this work.
     // this is where I will call the module timeMath
-    rowTotalSec = hVal*3600+mVal*60+sVal*1;
+    // rowTotalSec = hVal*3600+mVal*60+sVal*1;
+
+    timeMath();
     console.log(`DEBUG: rowTotalSec is ${rowTotalSec}`)
   }
 }
