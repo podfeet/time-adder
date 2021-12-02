@@ -76,7 +76,7 @@ $(() => {
   };
   // finish ARow Class definition
   
-  //  makeRows creates isntances of the rows and adds them to the array
+  //  makeRows creates instances of the rows and adds them to the array
   function makeRows(){
     for (let i = 0; i < timeInputArray.ids.length; i += 1) {
       const row = new ARow(timeInputArray.ids[i]);
@@ -104,6 +104,8 @@ $(() => {
   }
   
   // click handler for the AddAnotherRow button to call addRow
+  // BUG: BIG BUG - adding a row erases the values in existing rows
+  //NOTE: Maybe I can use rowNum in the iteration for makeRows? like i = rowNum+1?
   $('#moreTimes').click(function() {
     addRow();
   })
@@ -130,10 +132,12 @@ function calcTotSec() {
     
     // this is where I will call the module timeMath
     // multipled sVal * 1 to force it to be a number
-   
     rowTotSec = hVal*3600+mVal*60+sVal*1;
     totSec = totSec + rowTotSec;
     console.log(`DEBUG: totSec is ${totSec}`)
+    // reset totSec to 0
+    // totSec = 0; // nope - this makes the total only be whatever is in the row that just changed
+    // rowTotSec = 0; // nope - this doesn't change anything, all rows keep adding to the total
     // timeMath();
     // console.log(`DEBUG: rowTotSec is ${rowTotSec}`)
   }
