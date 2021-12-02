@@ -104,7 +104,6 @@ $(() => {
     addRow();
   })
 
-  addValues();
 });
 
 // Loop through the ids.length because it's keeping track of how many rows exist (values have not been created yet)
