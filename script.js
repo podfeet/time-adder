@@ -1,9 +1,10 @@
-/* eslint-env jquery */
+// /* eslint-env jquery */
 /* global Mustache */
 
 // import the module timeMath
 // BUG: import statement below returns "SyntaxError: Unexpected token '{'. import call expects exactly one argument." Online suggestions say the script must be called with type="module"
 // import timeMath from './timeMath.mjs';
+// console.log(`DEBUG: x is ${x}`)
 
 let timeInputArray = {
   ids: [
