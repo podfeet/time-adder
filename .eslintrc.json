@@ -19,14 +19,14 @@
         ],
         "init-declarations": [
             "error",
-            "never"
-        ],
-        "ignoreForLoopInit": true,
+            "always"
+        ],       
         "prefer-arrow-callback": [
             "error",
             {
                 "allowNamedFunctions": true
             }
-        ]
+        ],
+        "no-console": "off"
     }
 }
