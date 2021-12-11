@@ -121,23 +121,40 @@ $(() => {
 // This function must be in global scope (outside of the document ready handler or else the html doesn't know it exists)
 // initialize the total seconds value in the global scope
 let totSec = 0;
-function calcTotSec() {
-  for (i = 0; i < rowNum; i++) {
-    let hoursID = timeInputArray.ids[i].hoursID;
-    let minID = timeInputArray.ids[i].minID;
-    let secID = timeInputArray.ids[i].secID;
+function calcTime(e) {
+  // one input box changed
+  // the input box has an ID like h-2
+  // first find the ID. I need to parse it into two parts
+  // the first part is the prefix (h- or m- or s-)
+  // the second part is the number (1, 2, 3, etc.)
+  console.log('I got into calcTime');
+  const { id } = this;
+  console.log(`DEBUG: id is ${id}`);
+  let idParts = id.split('-');
+  let prefix = idParts[0];
+  let num = idParts[1];
+  console.log(prefix); // returns h
+  console.log(num); // returns 2
 
-    let hVal = $(`#${hoursID}`).val();
-    let mVal = $(`#${minID}`).val();
-    let sVal = $(`#${secID}`).val();
+  // console.log ($this.attr('id'));
+  // console.log($this.val());
+
+  for (let i = 0; i < rowNum; i += 1) {
+    const { hoursID, minID, secID } = timeInputArray.ids[i];
+
+    // const is used because within one pass of the for loop,
+    // the value of the variable is not changed
+    const hVal = $(`#${hoursID}`).val();
+    const mVal = $(`#${minID}`).val();
+    const sVal = $(`#${secID}`).val();
 
     // console.log(`DEBUG: hVal is ${hVal}`);
     // console.log(`DEBUG: mVal is ${mVal}`);
     // console.log(`DEBUG: sVal is ${sVal}`);
-    
+
     // this is where I will call the module timeMath
     // multipled sVal * 1 to force it to be a number
-    
+
     rowTotSec = hVal*3600+mVal*60+sVal*1;
     totSec = totSec + rowTotSec;
     console.log(`DEBUG: totSec is ${totSec}`)
@@ -145,7 +162,7 @@ function calcTotSec() {
     // reset totSec to 0
     // totSec = 0; // nope - this makes the total only be whatever is in the row that just changed
     // rowTotSec = 0; // nope - this doesn't change anything, all rows keep adding to the total
-    // timeMath();
+    // timeMath(hVal,mVal,sVal);
     // console.log(`DEBUG: rowTotSec is ${rowTotSec}`)
   }
 }
