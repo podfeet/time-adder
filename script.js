@@ -69,15 +69,17 @@ $(() => {
           $(`#sub-${j}`).removeClass('btn-outline-danger').addClass('btn-danger');
           $(`#add-${j}`).removeClass('btn-primary').addClass('btn-outline-primary');
         });
-        // adding onchange event to the input fields to run the addValues function
-        $(`#h-${j}`).attr("onchange", "calcTotSec('this');");
-        $(`#m-${j}`).attr("onchange", "calcTotSec('this');");
-        $(`#s-${j}`).attr("onchange", "calcTotSec('this');");
-
-      };
+        // adding onchange event to the input fields to run the calcTime function
+        $(`#h-${j}`).attr("change", calcTime($(`#h-${j}`)));
+        $(`#m-${j}`).attr("change", calcTime($(`#m-${j}`)));
+        $(`#s-${j}`).attr("change", calcTime($(`#s-${j}`)));
+      }
     };
   };
   // finish ARow Class definition
+
+  let x;
+  
   
   //  makeRows creates instances of the rows and adds them to the array
   function makeRows(){
