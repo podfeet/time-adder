@@ -26,7 +26,6 @@ const timeInputArray = {
       subBtnID: 'sub-2',
     },
   ],
-  values: [],
 };
 
 let rowNum = 0;
