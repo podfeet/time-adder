@@ -1,12 +1,17 @@
 // /* eslint-env jquery */
 /* global Mustache */
+/* eslist class-methods-use-this { "enforceForClassFields": false } */
+
+/* eslint class-methods-use-this: ["error", { "enforceForClassFields": false }] */
 
 // import the module timeMath
-// BUG: import statement below returns "SyntaxError: Unexpected token '{'. import call expects exactly one argument." Online suggestions say the script must be called with type="module"
+// BUG: import statement below returns:
+// "SyntaxError: Unexpected token '{'. import call expects exactly one
+// argument." Online suggestions say the script must be called with type="module"
 // import timeMath from './timeMath.mjs';
 // console.log(`DEBUG: x is ${x}`)
 
-let timeInputArray = {
+const timeInputArray = {
   ids: [
     {
       hoursID: 'h-1',
@@ -30,11 +35,10 @@ let rowNum = 0;
 
 // Document Ready Handler
 $(() => {
-
   // ****************************** //
   //  Define the Class //
   // ****************************** //
-  /** 
+  /**
    * never know what to write here
    */
   class ARow {
@@ -50,7 +54,7 @@ $(() => {
     // ****************************** //
 
     // renderRow actually creates the html with the Mustache
-    renderRow(){
+    renderRow() {
       //  get the template string from the script tag
       const tplString = $('#tpl_string').html();
       //  render the template string with the data
@@ -59,12 +63,12 @@ $(() => {
       $('#timeRowPlaceholder').html(tplOutput);
       // add click functions to 3 and up + buttons
       for (let j = 1; j < (timeInputArray.ids.length + 1); j += 1) {
-        $(`#add-${j}`).click(function() {
-          console.log(`add button add-${j} was clicked`);
+        $(`#add-${j}`).click(function () {
+          Console.log(`add button add-${j} was clicked`);
           $(`#add-${j}`).removeClass('btn-outline-primary').addClass('btn-primary');
           $(`#sub-${j}`).removeClass('btn-danger').addClass('btn-outline-danger');
         });
-        $(`#sub-${j}`).click(function() {
+        $(`#sub-${j}`).click(function () {
           console.log(`sub button sub-${j} was clicked`);
           $(`#sub-${j}`).removeClass('btn-outline-danger').addClass('btn-danger');
           $(`#add-${j}`).removeClass('btn-primary').addClass('btn-outline-primary');
@@ -72,30 +76,27 @@ $(() => {
         // adding onchange event to the input fields to run the calcTime function
         $(`#h-${j}`).attr("change", calcTime($(`#h-${j}`)));
         $(`#m-${j}`).attr("change", calcTime($(`#m-${j}`)));
-        $(`#s-${j}`).attr("change", calcTime($(`#s-${j}`)));
+        $(`#s-${j}`).attr('change', calcTime($(`#s-${j}`)));
       }
     };
-  };
+  }
   // finish ARow Class definition
 
-  let x;
-  
-  
   //  makeRows creates instances of the rows and adds them to the array
-  function makeRows(){
+  function makeRows() {
     for (let i = 0; i < timeInputArray.ids.length; i += 1) {
       const row = new ARow(timeInputArray.ids[i]);
       row.renderRow();
-      };
     };
-    makeRows();
-    
+  }
+  makeRows();
   // initialize the row number
-  rowNum = 2; 
-  
-  // addRow creates a new row of input boxes and is triggered by the click function for the Add Another Row button
+  rowNum = 2;
+
+  // addRow creates a new row of input boxes and is
+  // triggered by the click function for the Add Another Row button
   function addRow() {
-    rowNum++; 
+    rowNum += rowNum;
     timeInputArray.ids.push({
       hoursID: `h-${rowNum}`,
       minID: `m-${rowNum}`,
@@ -110,15 +111,16 @@ $(() => {
   
   // click handler for the AddAnotherRow button to call addRow
   // BUG: BIG BUG - adding a row erases the values in existing rows
-  //NOTE: Maybe I can use rowNum in the iteration for makeRows? like i = rowNum+1?
-  $('#moreTimes').click(function() {
+  // NOTE: Maybe I can use rowNum in the iteration for makeRows? like i = rowNum+1?
+  $('#moreTimes').click(() => {
     addRow();
-  })
-
+  });
 });
 
-// Loop through the ids.length because it's keeping track of how many rows exist (values have not been created yet)
-// This function must be in global scope (outside of the document ready handler or else the html doesn't know it exists)
+// Loop through the ids.length because it's keeping track
+// of how many rows exist (values have not been created yet)
+// This function must be in global scope (outside of the
+// document ready handler or else the html doesn't know it exists)
 // initialize the total seconds value in the global scope
 let totSec = 0;
 function calcTime(e) {
@@ -130,9 +132,9 @@ function calcTime(e) {
   console.log('I got into calcTime');
   const { id } = this;
   console.log(`DEBUG: id is ${id}`);
-  let idParts = id.split('-');
-  let prefix = idParts[0];
-  let num = idParts[1];
+  const idParts = id.split('-');
+  const prefix = idParts[0];
+  const num = idParts[1];
   console.log(prefix); // returns h
   console.log(num); // returns 2
 
