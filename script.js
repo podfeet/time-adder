@@ -1,8 +1,6 @@
-// /* eslint-env jquery */
+/* eslint-disable class-methods-use-this */
+/* eslint-env jquery */
 /* global Mustache */
-/* eslist class-methods-use-this { "enforceForClassFields": false } */
-
-/* eslint class-methods-use-this: ["error", { "enforceForClassFields": false }] */
 
 // import the module timeMath
 // BUG: import statement below returns:
@@ -68,14 +66,14 @@ $(() => {
           $(`#add-${j}`).removeClass('btn-outline-primary').addClass('btn-primary');
           $(`#sub-${j}`).removeClass('btn-danger').addClass('btn-outline-danger');
         });
-        $(`#sub-${j}`).click(function () {
+        $(`#sub-${j}`).click(() => {
           console.log(`sub button sub-${j} was clicked`);
           $(`#sub-${j}`).removeClass('btn-outline-danger').addClass('btn-danger');
           $(`#add-${j}`).removeClass('btn-primary').addClass('btn-outline-primary');
         });
         // adding onchange event to the input fields to run the calcTime function
-        $(`#h-${j}`).attr("change", calcTime($(`#h-${j}`)));
-        $(`#m-${j}`).attr("change", calcTime($(`#m-${j}`)));
+        $(`#h-${j}`).attr('change', calcTime($(`#h-${j}`)));
+        $(`#m-${j}`).attr('change', calcTime($(`#m-${j}`)));
         $(`#s-${j}`).attr('change', calcTime($(`#s-${j}`)));
       }
     };
@@ -105,10 +103,10 @@ $(() => {
       subBtnID: `sub-${rowNum}`,
     });
     // console.log(timeInputArray.ids[2].hoursID); //returns h-1
-    let x = new ARow(timeInputArray.ids[rowNum-1]);
+    let x = new ARow(timeInputArray.ids[rowNum - 1]);
     makeRows();
   }
-  
+
   // click handler for the AddAnotherRow button to call addRow
   // BUG: BIG BUG - adding a row erases the values in existing rows
   // NOTE: Maybe I can use rowNum in the iteration for makeRows? like i = rowNum+1?
@@ -123,7 +121,10 @@ $(() => {
 // document ready handler or else the html doesn't know it exists)
 // initialize the total seconds value in the global scope
 let totSec = 0;
-function calcTime(e) {
+// BUG: calcTime is called when the page loads
+// Should only run on change event
+// NOTE look here for help https://stackoverflow.com/questions/1628826/how-to-add-an-onchange-event-to-a-select-box-via-javascript
+function calcTime() {
   // one input box changed
   // the input box has an ID like h-2
   // first find the ID. I need to parse it into two parts
