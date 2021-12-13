@@ -1,13 +1,8 @@
 /* eslint-disable class-methods-use-this */
+// without next line, can't add event listener to the input box
+/* eslint-disable no-use-before-define */
 /* eslint-env jquery */
 /* global Mustache */
-
-// import the module timeMath
-// BUG: import statement below returns:
-// "SyntaxError: Unexpected token '{'. import call expects exactly one
-// argument." Online suggestions say the script must be called with type="module"
-// import timeMath from './timeMath.mjs';
-// console.log(`DEBUG: x is ${x}`)
 
 const timeInputArray = {
   ids: [
