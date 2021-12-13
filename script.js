@@ -1,6 +1,12 @@
+// calcTime is defined here but called by event listener on input boxes
+/* eslint-disable no-unused-vars */
+
+// Without this I can't have my render function inside the Class
 /* eslint-disable class-methods-use-this */
+
 // without next line, can't add event listener to the input box
 /* eslint-disable no-use-before-define */
+
 /* eslint-env jquery */
 /* global Mustache */
 
@@ -53,6 +59,7 @@ $(() => {
       // add click functions to 3 and up + buttons
       for (let j = 1; j < (timeInputArray.ids.length + 1); j += 1) {
         $(`#add-${j}`).click(() => {
+          // BUG: button count is weird. if 4 buttons, says 1,2,4 then nothing on 4th
           console.log(`add button add-${j} was clicked`);
           $(`#add-${j}`).removeClass('btn-outline-primary').addClass('btn-primary');
           $(`#sub-${j}`).removeClass('btn-danger').addClass('btn-outline-danger');
@@ -63,9 +70,12 @@ $(() => {
           $(`#add-${j}`).removeClass('btn-primary').addClass('btn-outline-primary');
         });
         // adding onchange event to the input fields to run the calcTime function
-        $(`#h-${j}`).attr('change', calcTime());
-        $(`#m-${j}`).attr('change', calcTime());
-        $(`#s-${j}`).attr('change', calcTime());
+        // NOTE: 'this' has to be an input, so what is this?
+        // I guess I want it to be the VALUE that is being changed
+        // but now I've added it in index.html so commenting out
+        // $(`#h-${j}`).attr('onchange', calcTime(this));
+        // $(`#m-${j}`).attr('onchange', calcTime(this));
+        // $(`#s-${j}`).attr('onchange', calcTime(this));
         // Helma wrote below to try to talk to the exact ids
         // $(`#h-${j}`).attr('change', calcTime($(`#h-${j}`)));
         // $(`#m-${j}`).attr('change', calcTime($(`#m-${j}`)));
