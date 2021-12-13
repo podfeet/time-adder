@@ -30,9 +30,6 @@ $(() => {
   // ****************************** //
   //  Define the Class //
   // ****************************** //
-  /**
-   * never know what to write here
-   */
   class ARow {
     constructor(details) {
       this.hoursIDhours = details.hoursID;
