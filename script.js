@@ -63,11 +63,15 @@ $(() => {
           $(`#add-${j}`).removeClass('btn-primary').addClass('btn-outline-primary');
         });
         // adding onchange event to the input fields to run the calcTime function
-        $(`#h-${j}`).attr('change', calcTime($(`#h-${j}`)));
-        $(`#m-${j}`).attr('change', calcTime($(`#m-${j}`)));
-        $(`#s-${j}`).attr('change', calcTime($(`#s-${j}`)));
+        $(`#h-${j}`).attr('change', calcTime());
+        $(`#m-${j}`).attr('change', calcTime());
+        $(`#s-${j}`).attr('change', calcTime());
+        // Helma wrote below to try to talk to the exact ids
+        // $(`#h-${j}`).attr('change', calcTime($(`#h-${j}`)));
+        // $(`#m-${j}`).attr('change', calcTime($(`#m-${j}`)));
+        // $(`#s-${j}`).attr('change', calcTime($(`#s-${j}`)));
       }
-    };
+    }
   }
   // finish ARow Class definition
 
