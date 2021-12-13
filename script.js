@@ -127,14 +127,17 @@ $(() => {
 // initialize the total seconds value in the global scope
 let totSec = 0;
 
-function calcTime() {
+function calcTime(input) {
   // one input box changed
   // the input box has an ID like h-2
+  // have to figure out who called calcTime
+
   // first find the ID. I need to parse it into two parts
   // the first part is the prefix (h- or m- or s-)
   // the second part is the number (1, 2, 3, etc.)
   console.log('I got into calcTime');
-  const { id } = this;
+  console.log(`input is ${input}`); // w00t! this returns h-2
+  const id = input;
   console.log(`DEBUG: id is ${id}`);
   const idParts = id.split('-');
   const prefix = idParts[0];
