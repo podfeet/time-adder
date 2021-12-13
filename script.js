@@ -126,9 +126,7 @@ $(() => {
 // document ready handler or else the html doesn't know it exists)
 // initialize the total seconds value in the global scope
 let totSec = 0;
-// BUG: calcTime is called when the page loads
-// Should only run on change event
-// NOTE look here for help https://stackoverflow.com/questions/1628826/how-to-add-an-onchange-event-to-a-select-box-via-javascript
+
 function calcTime() {
   // one input box changed
   // the input box has an ID like h-2
