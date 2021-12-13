@@ -60,8 +60,8 @@ $(() => {
       $('#timeRowPlaceholder').html(tplOutput);
       // add click functions to 3 and up + buttons
       for (let j = 1; j < (timeInputArray.ids.length + 1); j += 1) {
-        $(`#add-${j}`).click(function () {
-          Console.log(`add button add-${j} was clicked`);
+        $(`#add-${j}`).click(() => {
+          console.log(`add button add-${j} was clicked`);
           $(`#add-${j}`).removeClass('btn-outline-primary').addClass('btn-primary');
           $(`#sub-${j}`).removeClass('btn-danger').addClass('btn-outline-danger');
         });
@@ -84,7 +84,7 @@ $(() => {
     for (let i = 0; i < timeInputArray.ids.length; i += 1) {
       const row = new ARow(timeInputArray.ids[i]);
       row.renderRow();
-    };
+    }
   }
   makeRows();
   // initialize the row number
@@ -102,7 +102,7 @@ $(() => {
       subBtnID: `sub-${rowNum}`,
     });
     // console.log(timeInputArray.ids[2].hoursID); //returns h-1
-    let x = new ARow(timeInputArray.ids[rowNum - 1]);
+    // let x = new ARow(timeInputArray.ids[rowNum - 1]);
     makeRows();
   }
 
@@ -157,9 +157,9 @@ function calcTime() {
     // this is where I will call the module timeMath
     // multipled sVal * 1 to force it to be a number
 
-    rowTotSec = hVal*3600+mVal*60+sVal*1;
-    totSec = totSec + rowTotSec;
-    console.log(`DEBUG: totSec is ${totSec}`)
+    const rowTotSec = hVal * 3600 + mVal * 60 + sVal * 1;
+    totSec += rowTotSec;
+    console.log(`DEBUG: totSec is ${totSec}`);
 
     // reset totSec to 0
     // totSec = 0; // nope - this makes the total only be whatever is in the row that just changed
