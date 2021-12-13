@@ -79,13 +79,13 @@
           </div>  
           <!-- Columns for hours min sec to be entered -->
           <div class="col-2">
-            <input type="number" step="1" min="0" id={{hoursID}} class="form-control text-right" placeholder="0" aria-labelledby="hours" onchange="calcTime()">
+            <input type="number" step="1" min="0" id={{hoursID}} class="form-control text-right" placeholder="0" aria-labelledby="hours" onchange="calcTime(id)">
           </div>
           <div class="col-2">
-            <input type="number" step="1" min="0" id={{minID}} class="form-control text-right" placeholder="0" aria-labelledby="min" onchange="calcTime()">
+            <input type="number" step="1" min="0" id={{minID}} class="form-control text-right" placeholder="0" aria-labelledby="min" onchange="calcTime(id)">
           </div> 
           <div class="col-2">
-            <input type="number" step="1" min="0" id={{secID}} class="form-control text-right" placeholder="0" aria-labelledby="sec" onchange="calcTime()">
+            <input type="number" step="1" min="0" id={{secID}} class="form-control text-right" placeholder="0" aria-labelledby="sec" onchange="calcTime(id)">
           </div>  
         </div>      
       {{/ids}}
