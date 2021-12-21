@@ -1,4 +1,15 @@
 {
+  "name": "time-adder",
+  "version": "0.0.1",
+  "description": "A JavaScript application to add (and subtract) elapsed time",
+  "main": "script.js",
+  "scripts": {
+    "docs": "docDir='./docs'; [[ -e \"$docDir\" ]] && rm -rf \"$docDir/\"*; npx jsdoc -c ./jsdoc.conf.json --destination \"$docDir/\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Allison Sheridan",
+  "license": "ISC",
+  "dependencies": {},
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
