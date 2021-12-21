@@ -59,7 +59,7 @@ $(() => {
       // add click functions to 3 and up + buttons
       for (let j = 1; j < (timeInputArray.ids.length + 1); j += 1) {
         $(`#add-${j}`).click(() => {
-          // BUG: button count is weird. if 4 buttons, says 1,2,4 then nothing on 4th
+          // BUG: button count is weird. if 4 buttons, says 1,2,4,8
           console.log(`add button add-${j} was clicked`);
           $(`#add-${j}`).removeClass('btn-outline-primary').addClass('btn-primary');
           $(`#sub-${j}`).removeClass('btn-danger').addClass('btn-outline-danger');
@@ -98,6 +98,11 @@ $(() => {
 
   // addRow creates a new row of input boxes and is
   // triggered by the click function for the Add Another Row button
+  /**
+   * A function to add a new row of input boxes
+   * param {string} ids - the id of the button that was clicked
+   * param {Array} timeInputArray - the array of input boxes
+   */
   function addRow() {
     rowNum += rowNum;
     timeInputArray.ids.push({
@@ -135,19 +140,18 @@ function calcTime(input) {
   // first find the ID. I need to parse it into two parts
   // the first part is the prefix (h- or m- or s-)
   // the second part is the number (1, 2, 3, etc.)
-  console.log('I got into calcTime');
-  console.log(`input is ${input}`); // w00t! this returns h-2
+  // console.log('I got into calcTime');
+  // console.log(`input is ${input}`); // w00t! this returns h-2
   const id = input;
-  console.log(`DEBUG: id is ${id}`);
+  // console.log(`DEBUG: id is ${id}`);
   const idParts = id.split('-');
   const prefix = idParts[0];
   const num = idParts[1];
-  console.log(prefix); // returns h
-  console.log(num); // returns 2
+  // console.log(prefix); // returns h
+  // console.log(num); // returns 2
 
-  // console.log ($this.attr('id'));
-  // console.log($this.val());
-
+  // NOTE: Why am I using an iterator when I know 'num' and i know the ID?
+  // NOTE: after all that do I actually need to know which id changed?
   for (let i = 0; i < rowNum; i += 1) {
     const { hoursID, minID, secID } = timeInputArray.ids[i];
 
@@ -157,21 +161,19 @@ function calcTime(input) {
     const mVal = $(`#${minID}`).val();
     const sVal = $(`#${secID}`).val();
 
-    // console.log(`DEBUG: hVal is ${hVal}`);
-    // console.log(`DEBUG: mVal is ${mVal}`);
-    // console.log(`DEBUG: sVal is ${sVal}`);
+    // BUG: TypeError: Right side of assignment cannot be destructured
+    // BUG: Only happens if new rows have been added
 
-    // this is where I will call the module timeMath
-    // multipled sVal * 1 to force it to be a number
-
+    // multipled sVal * 1 to coerce it to a number
     const rowTotSec = hVal * 3600 + mVal * 60 + sVal * 1;
+    console.log(`DEBUG: rowTotSec is ${rowTotSec} for row ${i}`);
     totSec += rowTotSec;
     console.log(`DEBUG: totSec is ${totSec}`);
 
-    // reset totSec to 0
-    // totSec = 0; // nope - this makes the total only be whatever is in the row that just changed
-    // rowTotSec = 0; // nope - this doesn't change anything, all rows keep adding to the total
-    // timeMath(hVal,mVal,sVal);
-    // console.log(`DEBUG: rowTotSec is ${rowTotSec}`)
+    // BUG: rows keep adding, not just once
+
+  // reset totSec to 0
+  // totSec = 0; // nope - this makes the total only be whatever is in the row that just changed
+  // rowTotSec = 0; // nope - this doesn't change anything, all rows keep adding to the total
   }
 }
