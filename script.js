@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 // calcTime is defined here but called by event listener on input boxes
 /* eslint-disable no-unused-vars */
 
@@ -9,6 +10,11 @@
 
 /* eslint-env jquery */
 /* global Mustache */
+
+/**
+ * @param {string} timeInputArray - the timeInputArray object
+ * @param {string} rowNum - the number of rows in the table
+ */
 
 const timeInputArray = {
   ids: [
@@ -36,6 +42,9 @@ $(() => {
   // ****************************** //
   //  Define the Class //
   // ****************************** //
+  /**
+   * @class aRow - a class to hold the data for a row
+   */
   class ARow {
     constructor(details) {
       this.hoursIDhours = details.hoursID;
@@ -47,8 +56,12 @@ $(() => {
     // ****************************** //
     //  Define the Instance functions //
     // ****************************** //
+    /**
+     * @param {string} tplString - the template string
+     * @param {string} tplOutput - the rendered template string
+     * @returns {} - not sure what to call it, but adds the click function  & subtract buttons to change the color of the buttons
+     */
 
-    // renderRow actually creates the html with the Mustache
     renderRow() {
       //  get the template string from the script tag
       const tplString = $('#tpl_string').html();
