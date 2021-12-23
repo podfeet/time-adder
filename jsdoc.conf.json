@@ -1,7 +1,25 @@
 {
+  "docdash": {
+      "collapse": true,
+      "menu": {
+          "Bartificer Creations": {
+              "href":"https://bartificer.net/",
+              "target": "_blank"
+          },
+          "Podfeet Podcasts": {
+              "href":"https://podfeet.com/",
+              "target": "_blank"
+          }
+      },
+      "search": true,
+      "sectionOrder": ["Modules", "Classes", "Tutorials"],
+      "static": true,
+      "typedefs": true
+  },
   "opts": {
     "encoding": "utf8",
-    "readme": "README.md"
+    "readme": "README.md",
+    "tutorials": "./pages/"
   },
   "source": {
     "include": [
