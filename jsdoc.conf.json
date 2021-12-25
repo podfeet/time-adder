@@ -24,7 +24,7 @@
   },
   "source": {
     "include": [
-      "./script.js"
+      "src/script.js"
     ]
   }, 
   "plugins": [
