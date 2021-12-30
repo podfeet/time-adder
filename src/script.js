@@ -163,7 +163,8 @@ $(() => {
 // This function must be in global scope (outside of the
 // document ready handler or else the html doesn't know it exists)
 // initialize the total seconds value in the global scope
-let totSec = 0;
+// let totSec = 0;
+const rowTotalArray = [];
 
 /**
  * The function calcTime is triggered by the onchange event of the input fields
