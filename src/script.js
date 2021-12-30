@@ -12,12 +12,15 @@
 /* eslint-env jquery */
 /* global Mustache */
 
+// BUG: can't seem to get the array to show up in the docs
 /**
- * @param {string} timeInputArray - the timeInputArray object
- * @param {string} rowNum - the number of rows in the table
+ * timeInputObject is an Object to hold an array of the IDs for the input boxes for hours, minutes and seconds in each row, along with the add/subtraction button IDs.
+ * @typedef {Object} timeInput
  */
-
-const timeInputArray = {
+const timeInputObject = {
+  /**
+   * @type {Array.<timeInputObject.ids>}
+   */
   ids: [
     {
       hoursID: 'h-1',
@@ -47,6 +50,15 @@ $(() => {
    * @class aRow - a class to hold the data for a row
    */
   class ARow {
+    /**
+     * @constructs
+     * @param {string} details
+     * @param {string} hoursID The html ID for the hours input box for a given row
+     * @param {string} minID The html ID for the minutes input box for a given row
+     * @param {string} secID The html ID for the seconds input box for a given row
+     * @param {string} addBtnID The html ID for the add button for a given row
+     * @param {string} subBtnID The html ID for the subtraction button for a given row
+     */
     constructor(details) {
       this.hoursIDhours = details.hoursID;
       this.minIDmin = details.minID;
@@ -58,7 +70,9 @@ $(() => {
     //  Define the Instance functions //
     // ****************************** //
     /**
+     * @instance
      * @param {string} tplString - the template string
+     * @param {timeInput}
      * @param {string} tplOutput - the rendered template string
      * @returns {} - not sure what to call it, but adds the click function  & subtract buttons to change the color of the buttons
      */
@@ -146,10 +160,18 @@ $(() => {
 // initialize the total seconds value in the global scope
 let totSec = 0;
 
+/**
+ * The function calcTime is triggered by the onchange event of the input fields
+ * The function should start by determining which input field was changed and in which row the input field is, e.g. h-1 would be row 1.
+ * calcTime accepts one parameter called input, which is the ID of the field that was changed.
+ * It then parses the ID into two parts, the prefix (the 'h') and the num (the 1), storing the prefix and the num in an array called idParts. idParts[0] will be the prefix and idParts[1] will be the num.
+ * Given the ID of the input field, the function will calculate the number of seconds from that ID (x3600 for hours, x60 for min, x1 for sec). It will need to add that value to any other values in the same row. So I'll need a way to store the total for the row.
+ * @function calcTime
+ * @param {string} input - input is the ID of the input box in which the user typed text
+ */
+
 function calcTime(input) {
-  // one input box changed
-  // the input box has an ID like h-2
-  // have to figure out who called calcTime
+  // one input box changed with an ID like h-2. I think I need to figure out who called calcTime
 
   // first find the ID. I need to parse it into two parts
   // the first part is the prefix (h- or m- or s-)
