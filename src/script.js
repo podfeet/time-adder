@@ -176,7 +176,7 @@ const rowTotalArray = [];
  * @param {string} input - input is the ID of the input box in which the user typed text
  */
 
-function calcTime(input) {
+function calcTime() {
   // one input box changed with an ID like h-2. I think I need to figure out who called calcTime
 
   // first find the ID. I need to parse it into two parts
