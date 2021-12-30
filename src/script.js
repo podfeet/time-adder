@@ -78,7 +78,6 @@ $(() => {
      * @param {string} tplString - the template string
      * @param {timeInput}
      * @param {string} tplOutput - the rendered template string
-     * @returns {} - not sure what to call it, but adds the click function  & subtract buttons to change the color of the buttons
      */
 
     renderRow() {
@@ -108,6 +107,8 @@ $(() => {
   //  makeRows creates instances of the rows and adds them to the array
   /**
    * makeRows loops through the Array timeInputObject.ids and for each entry creates an instance of the class aRow and then calls the renderRow function to actually display the input boxes and add/subtract buttons
+   *
+   * To do: makeRows erases the values in the input boxes, so I think I need to figure out how to actually ADD rows, not replace all rows and add a new one
    * @function makeRows
    * @param {Array.<timeInputObject.ids>} - The Array of IDs for h/m/s and add/sub buttons
    */
@@ -164,8 +165,8 @@ const rowTotalArray = [];
  *
  * Finally the math of this whole project occurs. For the given row of the loop, it calculates the total number of seconds in the row and stores it in the array rowTotalArray at position 'i' of the loop.
  *
- * Finally it uses the Array.prototype.reduce() method to add up all of the values in rowTotalArray and saves it to the constant totSec.
- * 
+ * It then uses the `Array.prototype.reduce()` method to add up all of the values in rowTotalArray and saves it to the constant totSec. totSec then needs to be parsed back into hours, minutes and seconds.
+ *
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce Mozilla docs on reduce()}
  * @function calcTime
  * @param {timeInput}
