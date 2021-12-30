@@ -29,7 +29,7 @@
     
     <input type="text" id="nav-search" placeholder="Search" />
     
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://bartificer.net/" target="_blank" >Bartificer Creations</a></h2><h2><a href="https://podfeet.com/" target="_blank" >Podfeet Podcasts</a></h2><h3>Classes</h3><ul><li><a href="ARow.html">ARow</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ARow.html#renderRow">renderRow</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#timeInputArray">timeInputArray</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://pbs.bartificer.net" target="_blank" >Programming by Stealth</a></h2><h2><a href="https://jsdoc.app/index.html" target="_blank" >JSDoc</a></h2><h3>Classes</h3><ul><li><a href="ARow.html">ARow</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ARow.html#renderRow">renderRow</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#addRow">addRow</a></li><li><a href="global.html#calcTime">calcTime</a></li><li><a href="global.html#makeRows">makeRows</a></li><li><a href="global.html#timeInput">timeInput</a></li></ul>
 </nav>
 
 <div id="main">
@@ -44,7 +44,8 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/* eslint-disable max-len */
+            <pre class="prettyprint source linenums"><code>/* eslint-disable consistent-return */
+/* eslint-disable max-len */
 // calcTime is defined here but called by event listener on input boxes
 /* eslint-disable no-unused-vars */
 
@@ -57,12 +58,15 @@
 /* eslint-env jquery */
 /* global Mustache */
 
+// BUG: can't seem to get the array to show up in the docs
 /**
- * @param {string} timeInputArray - the timeInputArray object
- * @param {string} rowNum - the number of rows in the table
+ * timeInputObject is an Object to hold an array of the IDs for the input boxes for hours, minutes and seconds in each row, along with the add/subtraction button IDs.
+ * @typedef {Object} timeInput
  */
-
-const timeInputArray = {
+const timeInputObject = {
+  /**
+   * @type {Array.&lt;timeInputObject.ids>}
+   */
   ids: [
     {
       hoursID: 'h-1',
@@ -92,6 +96,15 @@ $(() => {
    * @class aRow - a class to hold the data for a row
    */
   class ARow {
+    /**
+     * @constructs
+     * @param {string} details
+     * @param {string} hoursID The html ID for the hours input box for a given row
+     * @param {string} minID The html ID for the minutes input box for a given row
+     * @param {string} secID The html ID for the seconds input box for a given row
+     * @param {string} addBtnID The html ID for the add button for a given row
+     * @param {string} subBtnID The html ID for the subtraction button for a given row
+     */
     constructor(details) {
       this.hoursIDhours = details.hoursID;
       this.minIDmin = details.minID;
@@ -103,7 +116,9 @@ $(() => {
     //  Define the Instance functions //
     // ****************************** //
     /**
+     * @instance
      * @param {string} tplString - the template string
+     * @param {timeInput}
      * @param {string} tplOutput - the rendered template string
      * @returns {} - not sure what to call it, but adds the click function  &amp; subtract buttons to change the color of the buttons
      */
@@ -112,11 +127,11 @@ $(() => {
       //  get the template string from the script tag
       const tplString = $('#tpl_string').html();
       //  render the template string with the data
-      const tplOutput = Mustache.render(tplString, timeInputArray);
+      const tplOutput = Mustache.render(tplString, timeInputObject);
       //  put the rendered template string into the placeholder div
       $('#timeRowPlaceholder').html(tplOutput);
       // add click functions to 3 and up + buttons
-      for (let j = 1; j &lt; (timeInputArray.ids.length + 1); j += 1) {
+      for (let j = 1; j &lt; (timeInputObject.ids.length + 1); j += 1) {
         $(`#add-${j}`).click(() => {
           // BUG: button count is weird. if 4 buttons, says 1,2,4,8
           console.log(`add button add-${j} was clicked`);
@@ -145,9 +160,14 @@ $(() => {
   // finish ARow Class definition
 
   //  makeRows creates instances of the rows and adds them to the array
+  /**
+   * makeRows loops through the Array timeInputObject.ids and for each entry creates an instance of the class aRow and then calls the renderRow function to actually display the input boxes and add/subtract buttons
+   * @function makeRows
+   * @param {Array.&lt;timeInputObject.ids>} - The Array of IDs for h/m/s and add/sub buttons
+   */
   function makeRows() {
-    for (let i = 0; i &lt; timeInputArray.ids.length; i += 1) {
-      const row = new ARow(timeInputArray.ids[i]);
+    for (let i = 0; i &lt; timeInputObject.ids.length; i += 1) {
+      const row = new ARow(timeInputObject.ids[i]);
       row.renderRow();
     }
   }
@@ -155,25 +175,25 @@ $(() => {
   // initialize the row number
   rowNum = 2;
 
-  // addRow creates a new row of input boxes and is
-  // triggered by the click function for the Add Another Row button
   /**
-   * A function to add a new row of input boxes
-   * param {string} ids - the id of the button that was clicked
-   * param {Array} timeInputArray - the array of input boxes
+   * addRow creates a new row of input boxes and add/subtract buttons. It is triggered by the onclick event handler for the Add Another Row button
+   * @function addRow
+   * @param {number} rowNum - The number of rows before the add a new row button was clicked
+   * @returns {number} rowNum - The number of rows after the add a new row button was clicked
    */
   function addRow() {
-    rowNum += rowNum;
-    timeInputArray.ids.push({
+    rowNum += 1;
+    timeInputObject.ids.push({
       hoursID: `h-${rowNum}`,
       minID: `m-${rowNum}`,
       secID: `s-${rowNum}`,
       addBtnID: `add-${rowNum}`,
       subBtnID: `sub-${rowNum}`,
     });
-    // console.log(timeInputArray.ids[2].hoursID); //returns h-1
-    // let x = new ARow(timeInputArray.ids[rowNum - 1]);
+    // console.log(timeInputObject.ids[2].hoursID); //returns h-1
+    // let x = new ARow(timeInputObject.ids[rowNum - 1]);
     makeRows();
+    return rowNum;
   }
 
   // click handler for the AddAnotherRow button to call addRow
@@ -189,53 +209,43 @@ $(() => {
 // This function must be in global scope (outside of the
 // document ready handler or else the html doesn't know it exists)
 // initialize the total seconds value in the global scope
-let totSec = 0;
+// let totSec = 0;
+const rowTotalArray = [];
 
-function calcTime(input) {
-  // one input box changed
-  // the input box has an ID like h-2
-  // have to figure out who called calcTime
+/**
+ * The function calcTime is triggered by the onchange event of the input fields
+ * It loops through the id's of all of the input boxes, and on each pass creates an Object with the IDs of the hours, minutes and seconds boxes.  It then finds the value in each input box of the current row and coerces it into a Number and stores the values in constants.
+ *
+ * Finally the math of this whole project occurs. For the given row of the loop, it calculates the total number of seconds in the row and stores it in the array rowTotalArray at position 'i' of the loop.
+ *
+ * Finally it uses the Array.prototype.reduce() method to add up all of the values in rowTotalArray and saves it to the constant totSec.
+ *
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce Mozilla docs on reduce()}
+ * @function calcTime
+ * @param {timeInput}
+ * @returns {number} totSec - the total number of seconds in all input boxes
+ */
 
-  // first find the ID. I need to parse it into two parts
-  // the first part is the prefix (h- or m- or s-)
-  // the second part is the number (1, 2, 3, etc.)
-  // console.log('I got into calcTime');
-  // console.log(`input is ${input}`); // w00t! this returns h-2
-  const id = input;
-  // console.log(`DEBUG: id is ${id}`);
-  const idParts = id.split('-');
-  const prefix = idParts[0];
-  const num = idParts[1];
-  // console.log(prefix); // returns h
-  // console.log(num); // returns 2
-
-  // NOTE: Why am I using an iterator when I know 'num' and i know the ID?
-  // NOTE: after all that do I actually need to know which id changed?
+function calcTime() {
   for (let i = 0; i &lt; rowNum; i += 1) {
-    const { hoursID, minID, secID } = timeInputArray.ids[i];
+    const { hoursID, minID, secID } = timeInputObject.ids[i];
 
-    // const is used because within one pass of the for loop,
-    // the value of the variable is not changed
-    const hVal = $(`#${hoursID}`).val();
-    const mVal = $(`#${minID}`).val();
-    const sVal = $(`#${secID}`).val();
+    const hVal = Number($(`#${hoursID}`).val());
+    const mVal = Number($(`#${minID}`).val());
+    const sVal = Number($(`#${secID}`).val());
 
-    // BUG: TypeError: Right side of assignment cannot be destructured
-    // BUG: Only happens if new rows have been added
+    rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
+    // console.log(`DEBUG: rowTotSec is ${rowTotSec} for row ${i}`);
+    // totSec += rowTotSec;
+    // console.log(`DEBUG: Total Seconds for all rows is ${totSec}`);
 
-    // multipled sVal * 1 to coerce it to a number
-    const rowTotSec = hVal * 3600 + mVal * 60 + sVal * 1;
-    console.log(`DEBUG: rowTotSec is ${rowTotSec} for row ${i}`);
-    totSec += rowTotSec;
-    console.log(`DEBUG: totSec is ${totSec}`);
-
-    // BUG: rows keep adding, not just once
-
-  // reset totSec to 0
-  // totSec = 0; // nope - this makes the total only be whatever is in the row that just changed
-  // rowTotSec = 0; // nope - this doesn't change anything, all rows keep adding to the total
+    const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    const totSec = rowTotalArray.reduce(reducer);
+    return totSec;
   }
 }
+
+console.log(`DEBUG: Total Seconds for all rows is ${totSec}`);
 </code></pre>
         </article>
     </section>
@@ -250,7 +260,7 @@ function calcTime(input) {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Thu Dec 23 2021 09:38:57 GMT-0800 (Pacific Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Thu Dec 30 2021 07:27:32 GMT-0800 (Pacific Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

@@ -2,12 +2,12 @@
   "docdash": {
       "collapse": true,
       "menu": {
-          "Bartificer Creations": {
-              "href":"https://bartificer.net/",
+          "Programming by Stealth": {
+              "href":"https://pbs.bartificer.net",
               "target": "_blank"
           },
-          "Podfeet Podcasts": {
-              "href":"https://podfeet.com/",
+          "JSDoc": {
+              "href":"https://jsdoc.app/index.html",
               "target": "_blank"
           }
       },
@@ -24,7 +24,8 @@
   },
   "source": {
     "include": [
-      "src/script.js"
+      "src/script.js",
+      "README.MD"
     ]
   }, 
   "plugins": [
