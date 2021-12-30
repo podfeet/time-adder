@@ -177,41 +177,22 @@ const rowTotalArray = [];
  */
 
 function calcTime() {
-  // one input box changed with an ID like h-2. I think I need to figure out who called calcTime
-
-  // first find the ID. I need to parse it into two parts
-  // the first part is the prefix (h- or m- or s-)
-  // the second part is the number (1, 2, 3, etc.)
-  // console.log('I got into calcTime');
-  // console.log(`input is ${input}`); // w00t! this returns h-2
-  const id = input;
-  // console.log(`DEBUG: id is ${id}`);
-  const idParts = id.split('-');
-  const prefix = idParts[0];
-  const num = idParts[1];
-  // console.log(prefix); // returns h
-  // console.log(num); // returns 2
-
-  // NOTE: Why am I using an iterator when I know 'num' and i know the ID?
-  // NOTE: after all that do I actually need to know which id changed?
   for (let i = 0; i < rowNum; i += 1) {
     const { hoursID, minID, secID } = timeInputObject.ids[i];
 
     // const is used because within one pass of the for loop, the value of the variable is not changed
     // Number coerces the values into numbers if possible
     const hVal = Number($(`#${hoursID}`).val());
-    // if (isNaN(hVal)) throw new TypeError('Entered value must be a number.'); // this doesn't throw an error!
     const mVal = Number($(`#${minID}`).val());
     const sVal = Number($(`#${secID}`).val());
 
-    // BUG: TypeError: Right side of assignment cannot be destructured
-    // BUG: Only happens if new rows have been added
-
-    totSec = hVal * 3600 + mVal * 60 + sVal;
+    rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
     // console.log(`DEBUG: rowTotSec is ${rowTotSec} for row ${i}`);
     // totSec += rowTotSec;
-    console.log(`DEBUG: totSec is ${totSec}`);
-    return totSec;
+    // console.log(`DEBUG: Total Seconds for all rows is ${totSec}`);
+
+    const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    const totSec = rowTotalArray.reduce(reducer);
+    console.log(`DEBUG: Total Seconds for all rows is ${totSec}`);
   }
-  console.log(`DEBUG: final totSec is ${totSec}`);
 }
