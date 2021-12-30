@@ -168,20 +168,22 @@ const rowTotalArray = [];
 
 /**
  * The function calcTime is triggered by the onchange event of the input fields
- * The function should start by determining which input field was changed and in which row the input field is, e.g. h-1 would be row 1.
- * calcTime accepts one parameter called input, which is the ID of the field that was changed.
- * It then parses the ID into two parts, the prefix (the 'h') and the num (the 1), storing the prefix and the num in an array called idParts. idParts[0] will be the prefix and idParts[1] will be the num.
- * Given the ID of the input field, the function will calculate the number of seconds from that ID (x3600 for hours, x60 for min, x1 for sec). It will need to add that value to any other values in the same row. So I'll need a way to store the total for the row.
+ * It loops through the id's of all of the input boxes, and on each pass creates an Object with the IDs of the hours, minutes and seconds boxes.  It then finds the value in each input box of the current row and coerces it into a Number and stores the values in constants.
+ *
+ * Finally the math of this whole project occurs. For the given row of the loop, it calculates the total number of seconds in the row and stores it in the array rowTotalArray at position 'i' of the loop.
+ * 
+ * Finally it uses the Array.prototype.reduce() method to add up all of the values in rowTotalArray and saves it to the constant totSec.
+ * 
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce Mozilla docs on reduce()}
  * @function calcTime
- * @param {string} input - input is the ID of the input box in which the user typed text
+ * @param {timeInput}
+ * @returns {number} totSec - the total number of seconds in all input boxes
  */
 
 function calcTime() {
   for (let i = 0; i < rowNum; i += 1) {
     const { hoursID, minID, secID } = timeInputObject.ids[i];
 
-    // const is used because within one pass of the for loop, the value of the variable is not changed
-    // Number coerces the values into numbers if possible
     const hVal = Number($(`#${hoursID}`).val());
     const mVal = Number($(`#${minID}`).val());
     const sVal = Number($(`#${secID}`).val());
