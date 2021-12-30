@@ -39,8 +39,11 @@ const timeInputObject = {
     },
   ],
 };
-
 let rowNum = 0;
+// initialize values for total hours, minutes and seconds to zero
+$('#hTot').val(0);
+$('#mTot').val(0);
+$('#sTot').val(0);
 
 // Document Ready Handler
 $(() => {
