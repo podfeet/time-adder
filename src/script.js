@@ -15,6 +15,8 @@
 /**
  * timeInputObject is an Object to hold an array of the IDs for the input boxes for hours, minutes and seconds in each row, along with the add/subtraction button IDs.
  * @typedef {Object} timeInput
+ * @property {Array.<{hoursID: string, minID: string, secID: string, addBtnID: string, subBtnID: string}>} ids
+ * @param {{hoursID: string, minID: string, secID: string, addBtnID: string, subBtnID: string}} timeInput.ids
  */
 const timeInputObject = {
   /**
