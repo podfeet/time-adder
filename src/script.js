@@ -194,27 +194,23 @@ function calcTime(input) {
   // NOTE: Why am I using an iterator when I know 'num' and i know the ID?
   // NOTE: after all that do I actually need to know which id changed?
   for (let i = 0; i < rowNum; i += 1) {
-    const { hoursID, minID, secID } = timeInputArray.ids[i];
+    const { hoursID, minID, secID } = timeInputObject.ids[i];
 
-    // const is used because within one pass of the for loop,
-    // the value of the variable is not changed
-    const hVal = $(`#${hoursID}`).val();
-    const mVal = $(`#${minID}`).val();
-    const sVal = $(`#${secID}`).val();
+    // const is used because within one pass of the for loop, the value of the variable is not changed
+    // Number coerces the values into numbers if possible
+    const hVal = Number($(`#${hoursID}`).val());
+    // if (isNaN(hVal)) throw new TypeError('Entered value must be a number.'); // this doesn't throw an error!
+    const mVal = Number($(`#${minID}`).val());
+    const sVal = Number($(`#${secID}`).val());
 
     // BUG: TypeError: Right side of assignment cannot be destructured
     // BUG: Only happens if new rows have been added
 
-    // multipled sVal * 1 to coerce it to a number
-    const rowTotSec = hVal * 3600 + mVal * 60 + sVal * 1;
-    console.log(`DEBUG: rowTotSec is ${rowTotSec} for row ${i}`);
-    totSec += rowTotSec;
+    totSec = hVal * 3600 + mVal * 60 + sVal;
+    // console.log(`DEBUG: rowTotSec is ${rowTotSec} for row ${i}`);
+    // totSec += rowTotSec;
     console.log(`DEBUG: totSec is ${totSec}`);
-
-    // BUG: rows keep adding, not just once
-
-  // reset totSec to 0
-  // totSec = 0; // nope - this makes the total only be whatever is in the row that just changed
-  // rowTotSec = 0; // nope - this doesn't change anything, all rows keep adding to the total
+    return totSec;
   }
+  console.log(`DEBUG: final totSec is ${totSec}`);
 }
