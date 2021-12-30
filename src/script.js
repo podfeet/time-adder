@@ -81,11 +81,11 @@ $(() => {
       //  get the template string from the script tag
       const tplString = $('#tpl_string').html();
       //  render the template string with the data
-      const tplOutput = Mustache.render(tplString, timeInputArray);
+      const tplOutput = Mustache.render(tplString, timeInputObject);
       //  put the rendered template string into the placeholder div
       $('#timeRowPlaceholder').html(tplOutput);
       // add click functions to 3 and up + buttons
-      for (let j = 1; j < (timeInputArray.ids.length + 1); j += 1) {
+      for (let j = 1; j < (timeInputObject.ids.length + 1); j += 1) {
         $(`#add-${j}`).click(() => {
           // BUG: button count is weird. if 4 buttons, says 1,2,4,8
           console.log(`add button add-${j} was clicked`);
