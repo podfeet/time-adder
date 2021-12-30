@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable max-len */
 // calcTime is defined here but called by event listener on input boxes
 /* eslint-disable no-unused-vars */
