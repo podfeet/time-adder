@@ -1,6 +1,5 @@
 /* eslint-disable consistent-return */
 /* eslint-disable max-len */
-// calcTime is defined here but called by event listener on input boxes
 /* eslint-disable no-unused-vars */
 
 // Without this I can't have my render function inside the Class
@@ -87,7 +86,6 @@ $(() => {
       // add click functions to 3 and up + buttons
       for (let j = 1; j < (timeInputObject.ids.length + 1); j += 1) {
         $(`#add-${j}`).click(() => {
-          // BUG: button count is weird. if 4 buttons, says 1,2,4,8
           console.log(`add button add-${j} was clicked`);
           $(`#add-${j}`).removeClass('btn-outline-primary').addClass('btn-primary');
           $(`#sub-${j}`).removeClass('btn-danger').addClass('btn-outline-danger');
@@ -97,17 +95,6 @@ $(() => {
           $(`#sub-${j}`).removeClass('btn-outline-danger').addClass('btn-danger');
           $(`#add-${j}`).removeClass('btn-primary').addClass('btn-outline-primary');
         });
-        // adding onchange event to the input fields to run the calcTime function
-        // NOTE: 'this' has to be an input, so what is this?
-        // I guess I want it to be the VALUE that is being changed
-        // but now I've added it in index.html so commenting out
-        // $(`#h-${j}`).attr('onchange', calcTime(this));
-        // $(`#m-${j}`).attr('onchange', calcTime(this));
-        // $(`#s-${j}`).attr('onchange', calcTime(this));
-        // Helma wrote below to try to talk to the exact ids
-        // $(`#h-${j}`).attr('change', calcTime($(`#h-${j}`)));
-        // $(`#m-${j}`).attr('change', calcTime($(`#m-${j}`)));
-        // $(`#s-${j}`).attr('change', calcTime($(`#s-${j}`)));
       }
     }
   }
@@ -171,7 +158,7 @@ const rowTotalArray = [];
  * It loops through the id's of all of the input boxes, and on each pass creates an Object with the IDs of the hours, minutes and seconds boxes.  It then finds the value in each input box of the current row and coerces it into a Number and stores the values in constants.
  *
  * Finally the math of this whole project occurs. For the given row of the loop, it calculates the total number of seconds in the row and stores it in the array rowTotalArray at position 'i' of the loop.
- * 
+ *
  * Finally it uses the Array.prototype.reduce() method to add up all of the values in rowTotalArray and saves it to the constant totSec.
  * 
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce Mozilla docs on reduce()}
