@@ -114,9 +114,14 @@ $(() => {
   // finish ARow Class definition
 
   //  makeRows creates instances of the rows and adds them to the array
+  /**
+   * makeRows loops through the Array timeInputObject.ids and for each entry creates an instance of the class aRow and then calls the renderRow function to actually display the input boxes and add/subtract buttons
+   * @function makeRows
+   * @param {Array.<timeInputObject.ids>} - The Array of IDs for h/m/s and add/sub buttons
+   */
   function makeRows() {
-    for (let i = 0; i < timeInputArray.ids.length; i += 1) {
-      const row = new ARow(timeInputArray.ids[i]);
+    for (let i = 0; i < timeInputObject.ids.length; i += 1) {
+      const row = new ARow(timeInputObject.ids[i]);
       row.renderRow();
     }
   }
@@ -124,25 +129,25 @@ $(() => {
   // initialize the row number
   rowNum = 2;
 
-  // addRow creates a new row of input boxes and is
-  // triggered by the click function for the Add Another Row button
   /**
-   * A function to add a new row of input boxes
-   * param {string} ids - the id of the button that was clicked
-   * param {Array} timeInputArray - the array of input boxes
+   * addRow creates a new row of input boxes and add/subtract buttons. It is triggered by the onclick event handler for the Add Another Row button
+   * @function addRow
+   * @param {number} rowNum - The number of rows before the add a new row button was clicked
+   * @returns {number} rowNum - The number of rows after the add a new row button was clicked
    */
   function addRow() {
-    rowNum += rowNum;
-    timeInputArray.ids.push({
+    rowNum += 1;
+    timeInputObject.ids.push({
       hoursID: `h-${rowNum}`,
       minID: `m-${rowNum}`,
       secID: `s-${rowNum}`,
       addBtnID: `add-${rowNum}`,
       subBtnID: `sub-${rowNum}`,
     });
-    // console.log(timeInputArray.ids[2].hoursID); //returns h-1
-    // let x = new ARow(timeInputArray.ids[rowNum - 1]);
+    // console.log(timeInputObject.ids[2].hoursID); //returns h-1
+    // let x = new ARow(timeInputObject.ids[rowNum - 1]);
     makeRows();
+    return rowNum;
   }
 
   // click handler for the AddAnotherRow button to call addRow
