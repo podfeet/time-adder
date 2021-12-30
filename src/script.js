@@ -182,6 +182,15 @@ function calcTime() {
 
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     const totSec = rowTotalArray.reduce(reducer);
-    console.log(`DEBUG: Total Seconds for all rows is ${totSec}`);
+    // console.log(`DEBUG: Total Seconds for all rows is ${totSec}`);
+    const roundHours = Math.round(totSec / 3600);
+    console.log(`DEBUG: totHours is ${roundHours}`);
+    const roundMin = Math.round((totSec - (roundHours * 3600)) / 60);
+    // console.log(`DEBUG: totMin is ${roundMin}`);
+    const roundSec = Math.round(totSec - (roundHours * 3600) - (roundMin * 60));
+    // console.log(`DEBUG: totSec is ${roundSec}`);
+    $('#hTot').html(roundHours);
+    $('#mTot').html(roundMin);
+    $('#sTot').html(roundSec);
   }
 }
