@@ -165,7 +165,9 @@ const rowTotalArray = [];
  *
  * Finally the math of this whole project occurs. For the given row of the loop, it calculates the total number of seconds in the row and stores it in the array rowTotalArray at position 'i' of the loop.
  *
- * It then uses the `Array.prototype.reduce()` method to add up all of the values in rowTotalArray and saves it to the constant totSec. totSec then needs to be parsed back into hours, minutes and seconds.
+ * It then uses the `Array.prototype.reduce()` method to add up all of the values in rowTotalArray and saves it to the constant totSec. totSec then needs to be parsed back into hours, minutes and seconds. calcTime  uses `Math.floor()` to round the value down to the nearest whole number while dividing by 3600, 60, and 1 respectively.
+ * 
+ * To do: allow support for subtraction
  *
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce Mozilla docs on reduce()}
  * @function calcTime
@@ -189,11 +191,11 @@ function calcTime() {
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     const totSec = rowTotalArray.reduce(reducer);
     // console.log(`DEBUG: Total Seconds for all rows is ${totSec}`);
-    const roundHours = Math.round(totSec / 3600);
+    const roundHours = Math.floor(totSec / 3600);
     console.log(`DEBUG: totHours is ${roundHours}`);
-    const roundMin = Math.round((totSec - (roundHours * 3600)) / 60);
+    const roundMin = Math.floor((totSec - (roundHours * 3600)) / 60);
     // console.log(`DEBUG: totMin is ${roundMin}`);
-    const roundSec = Math.round(totSec - (roundHours * 3600) - (roundMin * 60));
+    const roundSec = Math.floor(totSec - (roundHours * 3600) - (roundMin * 60));
     // console.log(`DEBUG: totSec is ${roundSec}`);
     $('#hTot').html(roundHours);
     $('#mTot').html(roundMin);
