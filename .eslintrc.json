@@ -35,7 +35,7 @@
         "jsdoc/require-hyphen-before-param-description": "warn",
         "jsdoc/require-param-description": "off",
         "jsdoc/require-returns-description": "off",
-        "max-len": ["error", {"ignoreTemplateLiterals": true}],
+        "max-len": ["error", {"ignoreTemplateLiterals": true, "ignoreComments": true}],
         "no-trailing-spaces": ["error", {"skipBlankLines": true, "ignoreComments": true}],
         "valid-jsdoc": "off"
     }

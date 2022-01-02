@@ -10,11 +10,13 @@
   "author": "Allison Sheridan",
   "license": "ISC",
   "devDependencies": {
+    "docdash": "^1.2.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-google": "^0.14.0",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-import": "^2.25.2",
-    "jsdoc": "^3.6.7",
-    "docdash": "^1.2.0"
+    "eslint-plugin-jsdoc": "^37.5.0",
+    "jsdoc": "^3.6.7"
   }
 }

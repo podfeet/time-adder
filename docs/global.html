@@ -138,7 +138,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="script.js.html">script.js</a>, <a href="script.js.html#line132">line 132</a>
+        <a href="script.js.html">script.js</a>, <a href="script.js.html#line114">line 114</a>
     </li></ul></dd>
     
 
@@ -284,7 +284,7 @@
 
     
 
-    <h4 class="name" id="calcTime"><span class="type-signature"></span>calcTime<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
+    <h4 class="name" id="calcTime"><span class="type-signature"></span>calcTime<span class="signature">(timeInput)</span><span class="type-signature"></span></h4>
 
     
 
@@ -296,7 +296,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="script.js.html">script.js</a>, <a href="script.js.html#line169">line 169</a>
+        <a href="script.js.html">script.js</a>, <a href="script.js.html#line152">line 152</a>
     </li></ul></dd>
     
 
@@ -346,7 +346,8 @@
     <p>The function calcTime is triggered by the onchange event of the input fields
 It loops through the id's of all of the input boxes, and on each pass creates an Object with the IDs of the hours, minutes and seconds boxes.  It then finds the value in each input box of the current row and coerces it into a Number and stores the values in constants.</p>
 <p>Finally the math of this whole project occurs. For the given row of the loop, it calculates the total number of seconds in the row and stores it in the array rowTotalArray at position 'i' of the loop.</p>
-<p>Finally it uses the Array.prototype.reduce() method to add up all of the values in rowTotalArray and saves it to the constant totSec.</p>
+<p>It then uses the <code>Array.prototype.reduce()</code> method to add up all of the values in rowTotalArray and saves it to the constant totSec. totSec then needs to be parsed back into hours, minutes and seconds. calcTime  uses <code>Math.floor()</code> to round the value down to the nearest whole number while dividing by 3600, 60, and 1 respectively.</p>
+<p>To do: allow support for subtraction</p>
 </div>
 
 
@@ -366,6 +367,8 @@ It loops through the id's of all of the input boxes, and on each pass creates an
     <thead>
     <tr>
         
+        <th>Name</th>
+        
 
         <th>Type</th>
 
@@ -381,6 +384,8 @@ It loops through the id's of all of the input boxes, and on each pass creates an
     
 
         <tr>
+            
+                <td class="name"><code>timeInput</code></td>
             
 
             <td class="type">
@@ -418,28 +423,6 @@ It loops through the id's of all of the input boxes, and on each pass creates an
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>totSec - the total number of seconds in all input boxes</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -460,7 +443,7 @@ It loops through the id's of all of the input boxes, and on each pass creates an
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="script.js.html">script.js</a>, <a href="script.js.html#line117">line 117</a>
+        <a href="script.js.html">script.js</a>, <a href="script.js.html#line97">line 97</a>
     </li></ul></dd>
     
 
@@ -501,6 +484,7 @@ It loops through the id's of all of the input boxes, and on each pass creates an
 
 <div class="description usertext">
     <p>makeRows loops through the Array timeInputObject.ids and for each entry creates an instance of the class aRow and then calls the renderRow function to actually display the input boxes and add/subtract buttons</p>
+<p>To do: makeRows erases the values in the input boxes, so I think I need to figure out how to actually ADD rows, not replace all rows and add a new one</p>
 </div>
 
 
@@ -594,7 +578,7 @@ It loops through the id's of all of the input boxes, and on each pass creates an
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="script.js.html">script.js</a>, <a href="script.js.html#line16">line 16</a>
+        <a href="script.js.html">script.js</a>, <a href="script.js.html#line4">line 4</a>
     </li></ul></dd>
     
 
@@ -631,6 +615,58 @@ It loops through the id's of all of the input boxes, and on each pass creates an
 
 
 
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ids</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;{hoursID: string, minID: string, secID: string, addBtnID: string, subBtnID: string}></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the HTML IDs for the input boxes for hours, minutes and seconds in each row, along with the add/subtraction button IDs</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
 
 
 <div class="description usertext">
@@ -643,7 +679,7 @@ It loops through the id's of all of the input boxes, and on each pass creates an
     <ul>
         <li>
             
-<span class="param-type">Object</span>
+<span class="param-type">object</span>
 
 
         </li>
@@ -672,7 +708,7 @@ It loops through the id's of all of the input boxes, and on each pass creates an
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Thu Dec 30 2021 07:27:32 GMT-0800 (Pacific Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Sun Jan 02 2022 08:10:06 GMT-0800 (Pacific Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
