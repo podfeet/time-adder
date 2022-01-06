@@ -29,7 +29,10 @@ const timeInputObject = {
     },
   ],
 };
-let rowNum = 0;
+
+// initialize the row number
+let rowNum = 2;
+
 // initialize values for total hours, minutes and seconds to zero
 $('#hTot').val(0);
 $('#mTot').val(0);
@@ -47,11 +50,11 @@ $(() => {
     /**
      * @constructs
      * @param {string} details
-     * @param {string} hoursID The html ID for the hours input box for a given row
-     * @param {string} minID The html ID for the minutes input box for a given row
-     * @param {string} secID The html ID for the seconds input box for a given row
-     * @param {string} addBtnID The html ID for the add button for a given row
-     * @param {string} subBtnID The html ID for the subtraction button for a given row
+     * @param {string} hoursID - The html ID for the hours input box for a given row
+     * @param {string} minID - The html ID for the minutes input box for a given row
+     * @param {string} secID - The html ID for the seconds input box for a given row
+     * @param {string} addBtnID - The html ID for the add button for a given row
+     * @param {string} subBtnID - The html ID for the subtraction button for a given row
      */
     constructor(details) {
       this.hoursIDhours = details.hoursID;
@@ -92,10 +95,7 @@ $(() => {
     }
   }
   // finish ARow Class definition
-
-  // initialize the row number
-  let rowNum = 2;
-  //  makeRows creates instances of the rows and adds them to the array
+  
   /**
    * makeRows(num) loops through the Array timeInputObject.ids and for each entry creates an instance of the class aRow and then calls the renderRow function to actually display the input boxes and add/subtract buttons
    *
@@ -104,7 +104,7 @@ $(() => {
    * makeRows should make two rows when the page loads, but when called in addRow it should only make one more row
    * 
    * @function makeRows
-   * @param {Array.<timeInputObject.ids>} timeInputObject.ids - The Array of IDs for h/m/s and add/sub buttons
+   * @property {Array.<timeInputObject.ids>} timeInputObject.ids - The Array of IDs for h/m/s and add/sub buttons
    */
   function makeRows() {
     if (rowNum === 2) {
@@ -113,9 +113,9 @@ $(() => {
       const row2 = new ARow(timeInputObject.ids[1]);
       row2.renderRow();
     } else {
-      // BUG: not erroring but not doing math and still erasing all rows when I add a new row
-      const row = new ARow(timeInputObject.ids[(rowNum-1)]);
-      console.log(`DEBUG: rowNum is ${rowNum}`);
+      const x = rowNum - 1;
+      const row = new ARow(timeInputObject.ids[x]);
+      // console.log(`DEBUG: rowNum is ${rowNum}`);
       row.renderRow();
     }
     // }
@@ -140,6 +140,10 @@ $(() => {
     });
     // let x = new ARow(timeInputObject.ids[rowNum - 1]);
     makeRows();
+    for (let i=0; i < timeInputObject.ids.length; i++) {
+      console.log(`DEBUG: timeInputObject.ids[i].hoursID is ${timeInputObject.ids[i].hoursID}`);
+    }
+    console.log(`DEBUG: rowNum is ${rowNum}`);
     return rowNum;
   }
 
@@ -160,8 +164,9 @@ $(() => {
 const rowTotalArray = [];
 
 /**
- * The function calcTime is triggered by the onchange event of the input fields
- * It loops through the id's of all of the input boxes, and on each pass creates an Object with the IDs of the hours, minutes and seconds boxes.  It then finds the value in each input box of the current row and coerces it into a Number and stores the values in constants.
+ * The function calcTime is triggered by the onchange event of the input fields.
+ * 
+ * It loops through the ids of all of the input boxes, and on each pass creates an Object with the IDs of the hours, minutes and seconds boxes.  It then finds the value in each input box of the current row and coerces it into a Number and stores the values in constants.
  *
  * Finally the math of this whole project occurs. For the given row of the loop, it calculates the total number of seconds in the row and stores it in the array rowTotalArray at position 'i' of the loop.
  *
@@ -176,10 +181,11 @@ const rowTotalArray = [];
 function calcTime() {
   for (let i = 0; i < rowNum; i += 1) {
     const {hoursID, minID, secID} = timeInputObject.ids[i];
-
     const hVal = Number($(`#${hoursID}`).val());
     const mVal = Number($(`#${minID}`).val());
     const sVal = Number($(`#${secID}`).val());
+
+    console.log(`DEBUG: mVal is ${mVal}`);
 
     rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
     // eslint-disable-next-line max-len
