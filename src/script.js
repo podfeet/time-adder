@@ -65,7 +65,7 @@ $(() => {
     // ****************************** //
     /**
      * @instance
-     * @param {string} tplString - the template string from the script tag
+     * @property {string} tplString - the template string from the script tag
      * @property {string} tplOutput - the rendered template string with the data
      * @param {timeInput} timeInput
      */
@@ -93,29 +93,40 @@ $(() => {
   }
   // finish ARow Class definition
 
+  // initialize the row number
+  let rowNum = 2;
   //  makeRows creates instances of the rows and adds them to the array
   /**
-   * makeRows loops through the Array timeInputObject.ids and for each entry creates an instance of the class aRow and then calls the renderRow function to actually display the input boxes and add/subtract buttons
+   * makeRows(num) loops through the Array timeInputObject.ids and for each entry creates an instance of the class aRow and then calls the renderRow function to actually display the input boxes and add/subtract buttons
    *
    * To do: makeRows erases the values in the input boxes, so I think I need to figure out how to actually ADD rows, not replace all rows and add a new one
+   * 
+   * makeRows should make two rows when the page loads, but when called in addRow it should only make one more row
+   * 
    * @function makeRows
-   * @param {Array.<timeInputObject.ids>} - The Array of IDs for h/m/s and add/sub buttons
+   * @param {Array.<timeInputObject.ids>} timeInputObject.ids - The Array of IDs for h/m/s and add/sub buttons
    */
   function makeRows() {
-    for (let i = 0; i < timeInputObject.ids.length; i += 1) {
-      const row = new ARow(timeInputObject.ids[i]);
+    if (rowNum === 2) {
+      const row1 = new ARow(timeInputObject.ids[0]);
+      row1.renderRow();
+      const row2 = new ARow(timeInputObject.ids[1]);
+      row2.renderRow();
+    } else {
+      // BUG: not erroring but not doing math and still erasing all rows when I add a new row
+      const row = new ARow(timeInputObject.ids[(rowNum-1)]);
+      console.log(`DEBUG: rowNum is ${rowNum}`);
       row.renderRow();
     }
+    // }
   }
   makeRows();
-  // initialize the row number
-  rowNum = 2;
+  
 
   /**
    * addRow creates a new row of input boxes and add/subtract buttons. It is triggered by the onclick event handler for the Add Another Row button
    * 
    * @function addRow
-   * @param {number} rowNum - The number of rows before the add a new row button was clicked
    * @returns {number} rowNum - The number of rows after the add a new row button was clicked
    */
   function addRow() {
@@ -127,7 +138,6 @@ $(() => {
       addBtnID: `add-${rowNum}`,
       subBtnID: `sub-${rowNum}`,
     });
-    // console.log(timeInputObject.ids[2].hoursID); //returns h-1
     // let x = new ARow(timeInputObject.ids[rowNum - 1]);
     makeRows();
     return rowNum;
