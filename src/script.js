@@ -20,6 +20,7 @@ const timeInputObject = {
       addBtnID: 'add-1',
       subBtnID: 'sub-1',
     },
+    /*
     {
       hoursID: 'h-2',
       minID: 'm-2',
@@ -27,11 +28,12 @@ const timeInputObject = {
       addBtnID: 'add-2',
       subBtnID: 'sub-2',
     },
+    */
   ],
 };
 
 // initialize the row number
-let rowNum = 2;
+let rowNum = 0;
 
 // initialize values for total hours, minutes and seconds to zero
 $('#hTot').val(0);
@@ -78,7 +80,7 @@ $(() => {
       //  render the template string with the data
       const tplOutput = Mustache.render(tplString, timeInputObject);
       //  put the rendered template string into the placeholder div
-      $('#timeRowPlaceholder').html(tplOutput);
+      $('#timeRowPlaceholder').append($(tplOutput));
       // add click functions to 3 and up + buttons
       for (let j = 1; j < (timeInputObject.ids.length + 1); j += 1) {
         $(`#add-${j}`).click(() => {
@@ -107,20 +109,14 @@ $(() => {
    * @property {Array.<timeInputObject.ids>} timeInputObject.ids - The Array of IDs for h/m/s and add/sub buttons
    */
   function makeRows() {
-    if (rowNum === 2) {
-      const row1 = new ARow(timeInputObject.ids[0]);
-      row1.renderRow();
-      const row2 = new ARow(timeInputObject.ids[1]);
-      row2.renderRow();
-    } else {
-      const x = rowNum - 1;
-      const row = new ARow(timeInputObject.ids[x]);
-      // console.log(`DEBUG: rowNum is ${rowNum}`);
+    for (let i = 0; i < timeInputObject.ids.length; i += 1) {
+      const row = new ARow(timeInputObject.ids[i]);
       row.renderRow();
     }
-    // }
   }
   makeRows();
+  rowNum = timeInputObject.ids.length;
+  addRow();
   
 
   /**
@@ -131,19 +127,19 @@ $(() => {
    */
   function addRow() {
     rowNum += 1;
-    timeInputObject.ids.push({
+    timeInputObject.ids = [{
       hoursID: `h-${rowNum}`,
       minID: `m-${rowNum}`,
       secID: `s-${rowNum}`,
       addBtnID: `add-${rowNum}`,
       subBtnID: `sub-${rowNum}`,
-    });
+    }];
     // let x = new ARow(timeInputObject.ids[rowNum - 1]);
     makeRows();
-    for (let i=0; i < timeInputObject.ids.length; i++) {
-      console.log(`DEBUG: timeInputObject.ids[i].hoursID is ${timeInputObject.ids[i].hoursID}`);
-    }
-    console.log(`DEBUG: rowNum is ${rowNum}`);
+    // for (let i=0; i < timeInputObject.ids.length; i++) {
+    //   console.log(`DEBUG: timeInputObject.ids[i].hoursID is ${timeInputObject.ids[i].hoursID}`);
+    // }
+    // console.log(`DEBUG: rowNum is ${rowNum}`);
     return rowNum;
   }
 
@@ -179,18 +175,18 @@ const rowTotalArray = [];
  * @param {timeInput} timeInput
  */
 function calcTime() {
+  let totSec = 0;
   for (let i = 0; i < rowNum; i += 1) {
-    const {hoursID, minID, secID} = timeInputObject.ids[i];
-    const hVal = Number($(`#${hoursID}`).val());
-    const mVal = Number($(`#${minID}`).val());
-    const sVal = Number($(`#${secID}`).val());
-
-    console.log(`DEBUG: mVal is ${mVal}`);
+    const id = i + 1;
+    const hVal = Number($(`#h-`+id).val());
+    const mVal = Number($(`#m-`+id).val());
+    const sVal = Number($(`#s-`+id).val());
 
     rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
+    console.log(`DEBUG: rowTotalArray[i] is ${rowTotalArray[i]}`)
     // eslint-disable-next-line max-len
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
-    const totSec = rowTotalArray.reduce(reducer);
+    totSec = rowTotalArray.reduce(reducer);
     // console.log(`DEBUG: Total Seconds for all rows is ${totSec}`);
     const roundHours = Math.floor(totSec / 3600);
     const roundMin = Math.floor((totSec - (roundHours * 3600)) / 60);
