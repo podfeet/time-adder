@@ -20,15 +20,6 @@ const timeInputObject = {
       addBtnID: 'add-1',
       subBtnID: 'sub-1',
     },
-    /*
-    {
-      hoursID: 'h-2',
-      minID: 'm-2',
-      secID: 's-2',
-      addBtnID: 'add-2',
-      subBtnID: 'sub-2',
-    },
-    */
   ],
 };
 
