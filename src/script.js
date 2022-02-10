@@ -157,9 +157,10 @@ const rowTotalArray = [];
  *
  * Finally the math of this whole project occurs. For the given row of the loop, it calculates the total number of seconds in the row and stores it in the array rowTotalArray at position 'i' of the loop.
  *
- * It then uses the `Array.prototype.reduce()` method to add up all of the values in rowTotalArray and saves it to the constant totSec. totSec then needs to be parsed back into hours, minutes and seconds. calcTime  uses `Math.floor()` to round the value down to the nearest whole number while dividing by 3600, 60, and 1 respectively.
+ * It then uses the `Array.prototype.reduce()` method to add up all of the values in rowTotalArray and saves it to the constant totSec. totSec then needs to be parsed back into hours, minutes and seconds. calcTime  uses `Math.floor()` to round the value down to the nearest whole number while dividing by 3600 for hours, and 60 for minutes. leftoverSec is the remaining seconds in floating point form.
  *
  * To do: allow support for subtraction
+ * Thought: what if they just use negative numbers instead of different functionality?
  *
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce Mozilla docs on reduce()}
  * @function calcTime
@@ -174,16 +175,16 @@ function calcTime() {
     const sVal = Number($(`#s-`+id).val());
 
     rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
-    console.log(`DEBUG: rowTotalArray[i] is ${rowTotalArray[i]}`)
+    console.log(`DEBUG: rowTotalArray[i] is ${rowTotalArray[i]}`);
     // eslint-disable-next-line max-len
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     totSec = rowTotalArray.reduce(reducer);
-    // console.log(`DEBUG: Total Seconds for all rows is ${totSec}`);
+    console.log(`DEBUG: Total Seconds for all rows is ${totSec}`);
     const roundHours = Math.floor(totSec / 3600);
     const roundMin = Math.floor((totSec - (roundHours * 3600)) / 60);
-    const roundSec = Math.floor(totSec - (roundHours * 3600) - (roundMin * 60));
+    const leftoverSec = (totSec - (roundHours * 3600) - (roundMin * 60));
     $('#hTot').html(roundHours);
     $('#mTot').html(roundMin);
-    $('#sTot').html(roundSec);
+    $('#sTot').html(leftoverSec);
   }
 }
