@@ -135,8 +135,6 @@ $(() => {
   }
 
   // click handler for the AddAnotherRow button to call addRow
-  // BUG: BIG BUG - adding a row erases the values in existing rows
-  // NOTE: Maybe I can use rowNum in the iteration for makeRows? like i = rowNum+1?
   $('#moreTimes').click(() => {
     addRow();
   });
