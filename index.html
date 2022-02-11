@@ -73,10 +73,8 @@
       {{#ids}}
         <div class="row mt-2">
           <!-- ADD & SUBTRACT BUTTONS -->
-          <div class="col-4"><!-- without col-4 buttons are above/below each other on mobile -->
-            <input type="text" class="form-control" id="{{id}}" placeholder="optional name" />
-            <!-- <button type="submit" id = "{{addBtnID}}" class="btn btn-primary pl-1 pr-1">+</button>
-            <button type="submit" id = "{{subBtnID}}" class="btn btn-outline-danger">-</button> -->
+          <div class="col-4">
+            <input type="text" class="form-control" id="{{nameID}}" placeholder="optional name" />
           </div>  
           <!-- Columns for hours min sec to be entered -->
           <div class="col-2">
@@ -92,10 +90,6 @@
       {{/ids}}
     </script>
   </div>
-
-
-
-
 
   <!-- include jQuery, Popper & Bootstrap in this order -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
