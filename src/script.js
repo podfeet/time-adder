@@ -2,11 +2,11 @@
 /* global Mustache */
 
 /**
- * timeInputObject is an Object to hold an array of the IDs for the input boxes for hours, minutes and seconds in each row, along with the add/subtraction button IDs.
+ * timeInputObject is an Object to hold an array of the IDs for the input boxes for hours, minutes and seconds in each row, along with an optional name for the row.
  * 
- * @typedef {object} timeInput
- * @property {Array.<{hoursID: string, minID: string, secID: string, addBtnID: string, subBtnID: string}>} ids - the HTML IDs for the input boxes for hours, minutes and seconds in each row, along with the add/subtraction button IDs
- * @param {{hoursID: string, minID: string, secID: string, addBtnID: string, subBtnID: string}} timeInput.ids
+ * @typedef {object} timeInputObject
+ * @property {Array.<{hoursID: string, minID: string, secID: string, nameID: string}>} ids - the HTML IDs for the input boxes for hours, minutes and seconds in each row, along with the name for the row
+ * @param {{hoursID: string, minID: string, secID: string, nameID: string}} timeInput.ids
  */
 const timeInputObject = {
   /**
@@ -19,6 +19,7 @@ const timeInputObject = {
       secID: 's-1',
       addBtnID: 'add-1',
       subBtnID: 'sub-1',
+      nameID: 'n-1',
     },
   ],
 };
@@ -46,15 +47,13 @@ $(() => {
      * @param {string} hoursID - The html ID for the hours input box for a given row
      * @param {string} minID - The html ID for the minutes input box for a given row
      * @param {string} secID - The html ID for the seconds input box for a given row
-     * @param {string} addBtnID - The html ID for the add button for a given row
-     * @param {string} subBtnID - The html ID for the subtraction button for a given row
+     * @param {string} name - the name that will be stored for the row of values
      */
     constructor(details) {
       this.hoursIDhours = details.hoursID;
       this.minIDmin = details.minID;
       this.secIDsec = details.secID;
-      this.addBtnIDadd = details.addBtnID;
-      this.subBtnIDsub = details.subBtnID;
+      this.nameIDname = details.nameID;
     }
     // ****************************** //
     //  Define the Instance functions //
@@ -63,7 +62,7 @@ $(() => {
      * @instance
      * @property {string} tplString - the template string from the script tag
      * @property {string} tplOutput - the rendered template string with the data
-     * @param {timeInput} timeInput
+     * @param {timeInputObject} timeInputObject
      */
     renderRow() {
       //  get the template string from the script tag
@@ -72,29 +71,12 @@ $(() => {
       const tplOutput = Mustache.render(tplString, timeInputObject);
       //  put the rendered template string into the placeholder div
       $('#timeRowPlaceholder').append($(tplOutput));
-      // add click functions to 3 and up + buttons
-      for (let j = 1; j < (timeInputObject.ids.length + 1); j += 1) {
-        $(`#add-${j}`).click(() => {
-          console.log(`add button add-${j} was clicked`);
-          $(`#add-${j}`).removeClass('btn-outline-primary').addClass('btn-primary');
-          $(`#sub-${j}`).removeClass('btn-danger').addClass('btn-outline-danger');
-        });
-        $(`#sub-${j}`).click(() => {
-          console.log(`sub button sub-${j} was clicked`);
-          $(`#sub-${j}`).removeClass('btn-outline-danger').addClass('btn-danger');
-          $(`#add-${j}`).removeClass('btn-primary').addClass('btn-outline-primary');
-        });
-      }
     }
   }
   // finish ARow Class definition
   
   /**
-   * makeRows(num) loops through the Array timeInputObject.ids and for each entry creates an instance of the class aRow and then calls the renderRow function to actually display the input boxes and add/subtract buttons
-   *
-   * To do: makeRows erases the values in the input boxes, so I think I need to figure out how to actually ADD rows, not replace all rows and add a new one
-   * 
-   * makeRows should make two rows when the page loads, but when called in addRow it should only make one more row
+   * makeRows(num) loops through the Array timeInputObject.ids and for each entry creates an instance of the class aRow and then calls the renderRow function to actually display the input boxes
    * 
    * @function makeRows
    * @property {Array.<timeInputObject.ids>} timeInputObject.ids - The Array of IDs for h/m/s and add/sub buttons
@@ -108,7 +90,6 @@ $(() => {
   makeRows();
   rowNum = timeInputObject.ids.length;
   addRow();
-  
 
   /**
    * addRow creates a new row of input boxes and add/subtract buttons. It is triggered by the onclick event handler for the Add Another Row button
@@ -122,13 +103,12 @@ $(() => {
       hoursID: `h-${rowNum}`,
       minID: `m-${rowNum}`,
       secID: `s-${rowNum}`,
-      addBtnID: `add-${rowNum}`,
-      subBtnID: `sub-${rowNum}`,
+      nameID: `n-${rowNum}`,
     }];
     // let x = new ARow(timeInputObject.ids[rowNum - 1]);
     makeRows();
     // for (let i=0; i < timeInputObject.ids.length; i++) {
-    //   console.log(`DEBUG: timeInputObject.ids[i].hoursID is ${timeInputObject.ids[i].hoursID}`);
+    //   console.log(`DEBUG: timeInputObject.ids[i].nameID is ${timeInputObject.ids[i].nameID}`);
     // }
     // console.log(`DEBUG: rowNum is ${rowNum}`);
     return rowNum;
@@ -157,12 +137,9 @@ const rowTotalArray = [];
  *
  * It then uses the `Array.prototype.reduce()` method to add up all of the values in rowTotalArray and saves it to the constant totSec. totSec then needs to be parsed back into hours, minutes and seconds. calcTime  uses `Math.floor()` to round the value down to the nearest whole number while dividing by 3600 for hours, and 60 for minutes. leftoverSec is the remaining seconds in floating point form.
  *
- * To do: allow support for subtraction
- * Thought: what if they just use negative numbers instead of different functionality?
- *
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce Mozilla docs on reduce()}
  * @function calcTime
- * @param {timeInput} timeInput
+ * @param {timeInputObject} timeInputObject
  */
 function calcTime() {
   let totSec = 0;
@@ -171,6 +148,9 @@ function calcTime() {
     const hVal = Number($(`#h-`+id).val());
     const mVal = Number($(`#m-`+id).val());
     const sVal = Number($(`#s-`+id).val());
+    const rowName = $(`#n-`+id).val();
+
+    // TODO:  change the array to have [0][1] so the name is in 0 and the total val is in 1? Why not store the original values too if this would be a fun CSV file?
 
     rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
     console.log(`DEBUG: rowTotalArray[i] is ${rowTotalArray[i]}`);

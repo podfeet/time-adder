@@ -74,8 +74,9 @@
         <div class="row mt-2">
           <!-- ADD & SUBTRACT BUTTONS -->
           <div class="col-4"><!-- without col-4 buttons are above/below each other on mobile -->
-            <button type="submit" id = "{{addBtnID}}" class="btn btn-primary pl-1 pr-1">+</button>
-            <button type="submit" id = "{{subBtnID}}" class="btn btn-outline-danger">-</button>
+            <input type="text" class="form-control" id="{{id}}" placeholder="optional name" />
+            <!-- <button type="submit" id = "{{addBtnID}}" class="btn btn-primary pl-1 pr-1">+</button>
+            <button type="submit" id = "{{subBtnID}}" class="btn btn-outline-danger">-</button> -->
           </div>  
           <!-- Columns for hours min sec to be entered -->
           <div class="col-2">
@@ -109,6 +110,5 @@
 
     <!-- Load the local JS Code AFTER the other libraries -->
     <script type="text/javascript" src="src/script.js"></script>
-    <!-- <script type="module" src="./timeMath.mjs"></script> -->
   </body>
 </html>
