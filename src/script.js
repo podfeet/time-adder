@@ -130,7 +130,7 @@ const rowTotalArray = [];
 
 /**
  * The function calcTime is triggered by the onchange event of the input fields.
- * Since there's no form submittal, data validation needs to also be triggered by the onchange event of the input fields.
+ * Since there's no form submittal, data validation needs to also be triggered by the onchange event of the input fields. The function will check the data as entered for h, m, s and if invalid, add the is-invalid class which will display the error message. If valid it will remove the is-invalid class and erase the error message (or never display it in the first place)
  * It loops through the ids of all of the input boxes, and on each pass creates an Object with the IDs of the hours, minutes and seconds boxes.  It then finds the value in each input box of the current row and coerces it into a Number and stores the values in constants.
  * Finally the math of this whole project occurs. For the given row of the loop, it calculates the total number of seconds in the row and stores it in the array rowTotalArray at position 'i' of the loop.
  * It then uses the `Array.prototype.reduce()` method to add up all of the values in rowTotalArray and saves it to the constant totSec. totSec then needs to be parsed back into hours, minutes and seconds. calcTime  uses `Math.floor()` to round the value down to the nearest whole number while dividing by 3600 for hours, and 60 for minutes. leftoverSec is the remaining seconds in floating point form.
@@ -148,15 +148,19 @@ function calcTime() {
     $('#h-1').removeClass('is-invalid');
   }
   
-
-
   let totSec = 0;
   for (let i = 0; i < rowNum; i += 1) {
     const id = i + 1;
-    const hVal = Number($(`#h-`+id).val());
-    const mVal = Number($(`#m-`+id).val());
-    const sVal = Number($(`#s-`+id).val());
-    const rowName = $(`#n-`+id).val();
+    const $h = $(`#h-`+id);
+    const $m = $(`#m-`+id);
+    const $s = $(`#s-`+id);
+    const $n = $(`#n-`+id)
+
+
+    const hVal = Number($h.val());
+    const mVal = Number($m.val());
+    const sVal = Number($s.val());
+    const rowName = $n.val();
 
     // TODO:  change the array to have [0][1] so the name is in 0 and the total val is in 1? Why not store the original values too if this would be a fun CSV file?
 
