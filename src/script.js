@@ -130,11 +130,9 @@ const rowTotalArray = [];
 
 /**
  * The function calcTime is triggered by the onchange event of the input fields.
- * 
+ * Since there's no form submittal, data validation needs to also be triggered by the onchange event of the input fields.
  * It loops through the ids of all of the input boxes, and on each pass creates an Object with the IDs of the hours, minutes and seconds boxes.  It then finds the value in each input box of the current row and coerces it into a Number and stores the values in constants.
- *
  * Finally the math of this whole project occurs. For the given row of the loop, it calculates the total number of seconds in the row and stores it in the array rowTotalArray at position 'i' of the loop.
- *
  * It then uses the `Array.prototype.reduce()` method to add up all of the values in rowTotalArray and saves it to the constant totSec. totSec then needs to be parsed back into hours, minutes and seconds. calcTime  uses `Math.floor()` to round the value down to the nearest whole number while dividing by 3600 for hours, and 60 for minutes. leftoverSec is the remaining seconds in floating point form.
  *
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce Mozilla docs on reduce()}
@@ -142,6 +140,16 @@ const rowTotalArray = [];
  * @param {timeInputObject} timeInputObject
  */
 function calcTime() {
+  // do some validation first
+  
+  if ($('#h-1').is(':invalid')) {
+    $('#h-1').addClass('is-invalid');
+  } else {
+    $('#h-1').removeClass('is-invalid');
+  }
+  
+
+
   let totSec = 0;
   for (let i = 0; i < rowNum; i += 1) {
     const id = i + 1;
