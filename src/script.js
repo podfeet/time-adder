@@ -118,6 +118,16 @@ $(() => {
   $('#moreTimes').click(() => {
     addRow();
   });
+
+  // console.log(`DEBUG: after addRow() the first time, rowNum = ${rowNum}`);
+// BUG: this works on the last row but doesn't execute the tab, and the tab doesn't work on the next row
+  $('#timeRowPlaceholder').on('keydown', `#s-${rowNum}`, (e) => {
+    const keyCode = e.keyCode || e.which;
+  
+    if (keyCode == 9) {
+      addRow();
+    }
+  });
 });
 
 // Loop through the ids.length because it's keeping track
