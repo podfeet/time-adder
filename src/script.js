@@ -119,8 +119,6 @@ $(() => {
     addRow();
   });
 
-  // console.log(`DEBUG: after addRow() the first time, rowNum = ${rowNum}`);
-// BUG: this works on the last row but doesn't execute the tab, and the tab doesn't work on the next row
   $('#timeRowPlaceholder').on('keydown', `#s-${rowNum}`, (e) => {
     const keyCode = e.keyCode || e.which;
   
@@ -130,12 +128,10 @@ $(() => {
   });
 });
 
-// Loop through the ids.length because it's keeping track
-// of how many rows exist (values have not been created yet)
-// This function must be in global scope (outside of the
-// document ready handler or else the html doesn't know it exists)
-// initialize the total seconds value in the global scope
-// let totSec = 0;
+// Create two arrays - one to hold all of the values of the rows as they're created, which will be used to export a CSV file and one to hold the total value of the summed rows
+const rows = [
+  ['Title', 'Hours', 'Minutes', 'Seconds'],
+];
 const rowTotalArray = [];
 
 /**
@@ -179,6 +175,31 @@ function calcTime() {
     const mVal = Number($m.val());
     const sVal = Number($s.val());
     const rowName = $n.val();
+
+    // Store rows into an array
+    // BUG: this adds a new entry to the array each time the key press event is triggered. so it's got four lines where only the last one is real. it's because this is inside calcTime() and the keypress event is triggered in the onchange event of the input fields.
+    // I need it to work on every keypress, but it should _replace_ the value if it changes.
+    // the titles are in [0], so could we test to see if a row exists yet for id (since it's i+1)?
+    // if (rows[id]) {(rows.splice(id, 1, [rowName, hVal, mVal, sVal]))} else {rows.push([rowName, hVal, mVal, sVal])};
+    if (rows[id]) {
+      console.log(`DEBUG: rows[id] exists`);
+    } else {
+      console.log(`DEBUG: rows[id] does not exist`);
+      rows.push([rowName, hVal, mVal, sVal]);
+    }
+
+    if (rows[id]) {
+      (rows.splice(id, 1, [rowName, hVal, mVal, sVal]))
+    } else {
+      rows.push([rowName, hVal, mVal, sVal]);
+    }
+
+
+
+    // rows.push([rowName, hVal, mVal, sVal]);
+
+    console.log(`DEBUG: rows[${i}] is ${rows[i]}`);
+    
 
     // TODO:  change the array to have [0][1] so the name is in 0 and the total val is in 1? Why not store the original values too if this would be a fun CSV file?
 
