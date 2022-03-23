@@ -119,6 +119,20 @@ $(() => {
     addRow();
   });
 
+  // click handler to export CSV
+  $('#exportCSV').click(() => {
+    console.log('DEBUG: exportCSV button clicked');
+    let csvContent = 'data:text/csv;charset=utf-8,';
+
+    rows.forEach((rows) => {
+      const row = rows.join(',');
+      csvContent += row + '\r\n';
+    });
+    // BUG: throws the error "Not allowed to navigate top frame to data URL"
+    const encodedUri = encodeURI(csvContent);
+    window.open(encodedUri);
+  });
+
   $('#timeRowPlaceholder').on('keydown', `#s-${rowNum}`, (e) => {
     const keyCode = e.keyCode || e.which;
   
@@ -181,7 +195,7 @@ function calcTime() {
     // I need it to work on every keypress, but it should _replace_ the value if it changes.
     // the titles are in [0], so could we test to see if a row exists yet for id (since it's i+1)?
     // if (rows[id]) {(rows.splice(id, 1, [rowName, hVal, mVal, sVal]))} else {rows.push([rowName, hVal, mVal, sVal])};
-    
+
     if (rows[id]) {
       (rows.splice(id, 1, [rowName, hVal, mVal, sVal]))
     } else {
@@ -189,13 +203,7 @@ function calcTime() {
     }
 
 
-
-    // rows.push([rowName, hVal, mVal, sVal]);
-
     console.log(`DEBUG: rows[${i}] is ${rows[i]}`);
-    
-
-    // TODO:  change the array to have [0][1] so the name is in 0 and the total val is in 1? Why not store the original values too if this would be a fun CSV file?
 
     rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
     // console.log(`DEBUG: rowTotalArray[i] is ${rowTotalArray[i]}`);
