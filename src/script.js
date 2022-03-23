@@ -122,7 +122,8 @@ $(() => {
   // click handler to export CSV
   $('#exportCSV').click(() => {
     console.log('DEBUG: exportCSV button clicked');
-    let csvContent = 'data:text/csv;charset=utf-8,';
+    // let csvContent = 'data:text/csv;charset=utf-8,';
+    let csvContent = '';
 
     rows.forEach((rows) => {
       const row = rows.join(',');
@@ -130,7 +131,8 @@ $(() => {
     });
     // BUG: throws the error "Not allowed to navigate top frame to data URL"
     const encodedUri = encodeURI(csvContent);
-    window.open(encodedUri);
+    alert(csvContent);
+    // window.open(encodedUri);
   });
 
   $('#timeRowPlaceholder').on('keydown', `#s-${rowNum}`, (e) => {
@@ -143,8 +145,9 @@ $(() => {
 });
 
 // Create two arrays - one to hold all of the values of the rows as they're created, which will be used to export a CSV file and one to hold the total value of the summed rows
+
 const rows = [
-  ['Title', 'Hours', 'Minutes', 'Seconds'],
+  ['Title', 'Hours', 'Minutes', 'Seconds']
 ];
 const rowTotalArray = [];
 
