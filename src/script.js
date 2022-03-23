@@ -177,17 +177,11 @@ function calcTime() {
     const rowName = $n.val();
 
     // Store rows into an array
-    // BUG: this adds a new entry to the array each time the key press event is triggered. so it's got four lines where only the last one is real. it's because this is inside calcTime() and the keypress event is triggered in the onchange event of the input fields.
+   
     // I need it to work on every keypress, but it should _replace_ the value if it changes.
     // the titles are in [0], so could we test to see if a row exists yet for id (since it's i+1)?
     // if (rows[id]) {(rows.splice(id, 1, [rowName, hVal, mVal, sVal]))} else {rows.push([rowName, hVal, mVal, sVal])};
-    if (rows[id]) {
-      console.log(`DEBUG: rows[id] exists`);
-    } else {
-      console.log(`DEBUG: rows[id] does not exist`);
-      rows.push([rowName, hVal, mVal, sVal]);
-    }
-
+    
     if (rows[id]) {
       (rows.splice(id, 1, [rowName, hVal, mVal, sVal]))
     } else {
