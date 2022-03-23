@@ -41,14 +41,19 @@
         </div>
         <!-- row for Totals -->
         <div class="row">
-            <div class="offset-4 col-2 border" id="hTot" value="">0</div>
-            <div class="col-2 border" id="mTot">0</div>
-            <div class="col-2 border" id="sTot"0>0</div>
+          <!-- button to export CSV -->
+          <button type="submit" id="exportCSV" class="col-4 btn btn-primary mt-2 mr-2 sl-0 pr-5">Export Data to CSV</button>
+          <!-- Totals -->
+          <!-- BUG: ALIGNMENT NOT RIGHT AND BAFFLING -->
+          <div class="col-2 mt-2 border align-middle-text-bottom" id="hTot">0</div>
+          <div class="col-2 mt-2 border" id="mTot">0</div>
+          <div class="col-2 mt-2 border" id="sTot">0</div>
         </div>
       </div>   
       
         <!-- row for hours, min, sec labels -->
       <div class="row mt-1">
+        <!-- totals -->
         <div class="offset-4 col-2" id="hours">H</div>
         <div class="col-2" id="min">M</div>
         <div class="col-2" id="sec">S</div>
