@@ -122,17 +122,18 @@ $(() => {
   // click handler to export CSV
   $('#exportCSV').click(() => {
     console.log('DEBUG: exportCSV button clicked');
-    // let csvContent = 'data:text/csv;charset=utf-8,';
+    // let csvContent = 'data:text/csv;charset=utf-8,'; <-- this puts that as the title
     let csvContent = '';
 
     rows.forEach((rows) => {
       const row = rows.join(',');
       csvContent += row + '\r\n';
     });
-    // BUG: throws the error "Not allowed to navigate top frame to data URL"
+    // bug be gone? BUG: throws the error "Not allowed to navigate top frame to data URL"
     const encodedUri = encodeURI(csvContent);
-    alert(csvContent);
+    alert(csvContent); // works but not showing the optional title for any rows
     // window.open(encodedUri);
+    // BUG: window.open returns Not allowed to load local resource: file:///Users/allison/htdocs/time-adder/Title,Hours,Minutes,Seconds%0D%0A,1,0,0%0D%0A,0,0,0%0D%0A
   });
 
   $('#timeRowPlaceholder').on('keydown', `#s-${rowNum}`, (e) => {
@@ -200,7 +201,7 @@ function calcTime() {
     // if (rows[id]) {(rows.splice(id, 1, [rowName, hVal, mVal, sVal]))} else {rows.push([rowName, hVal, mVal, sVal])};
 
     if (rows[id]) {
-      (rows.splice(id, 1, [rowName, hVal, mVal, sVal]))
+      (rows.splice(id, 1, [rowName, hVal, mVal, sVal]));
     } else {
       rows.push([rowName, hVal, mVal, sVal]);
     }
