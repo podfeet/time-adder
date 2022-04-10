@@ -121,7 +121,7 @@ $(() => {
 
   // click handler to export CSV
   $('#exportCSV').click(() => {
-    console.log('DEBUG: exportCSV button clicked');
+    // console.log('DEBUG: exportCSV button clicked');
     // let csvContent = 'data:text/csv;charset=utf-8,'; <-- this puts that as the title
     let csvContent = '';
 
@@ -207,7 +207,7 @@ function calcTime() {
     }
 
 
-    console.log(`DEBUG: rows[${i}] is ${rows[i]}`);
+    // console.log(`DEBUG: rows[${i}] is ${rows[i]}`);
 
     rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
     // console.log(`DEBUG: rowTotalArray[i] is ${rowTotalArray[i]}`);
