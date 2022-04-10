@@ -129,6 +129,12 @@ $(() => {
       const row = rows.join(',');
       csvContent += row + '\r\n';
     });
+    // eslint-disable-next-line max-len
+    const Total = 'Total';
+    const hTot = $('#hTot').html();
+    const mTot = $('#mTot').html();
+    const sTot = $('#sTot').html();
+    csvContent += 'Total, hTot, mTot, sTot;\r\n';
     // bug be gone? BUG: throws the error "Not allowed to navigate top frame to data URL"
     const encodedUri = encodeURI(csvContent);
     alert(csvContent); // works but not showing the optional title for any rows
@@ -194,18 +200,15 @@ function calcTime() {
     const sVal = Number($s.val());
     const rowName = $n.val();
 
-    // Store rows into an array
-   
+    // Store rows into an array to later be exported as a CSV file
     // I need it to work on every keypress, but it should _replace_ the value if it changes.
-    // the titles are in [0], so could we test to see if a row exists yet for id (since it's i+1)?
-    // if (rows[id]) {(rows.splice(id, 1, [rowName, hVal, mVal, sVal]))} else {rows.push([rowName, hVal, mVal, sVal])};
+    // the titles are in [0], so test to see if a row exists yet for id (since it's i+1)?
 
     if (rows[id]) {
       (rows.splice(id, 1, [rowName, hVal, mVal, sVal]));
     } else {
       rows.push([rowName, hVal, mVal, sVal]);
     }
-
 
     // console.log(`DEBUG: rows[${i}] is ${rows[i]}`);
 
