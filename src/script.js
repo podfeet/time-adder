@@ -107,12 +107,7 @@ $(() => {
       secID: `s-${rowNum}`,
       nameID: `n-${rowNum}`,
     }];
-    // let x = new ARow(timeInputObject.ids[rowNum - 1]);
     makeRows();
-    // for (let i=0; i < timeInputObject.ids.length; i++) {
-    //   console.log(`DEBUG: timeInputObject.ids[i].nameID is ${timeInputObject.ids[i].nameID}`);
-    // }
-    // console.log(`DEBUG: rowNum is ${rowNum}`);
     return rowNum;
   }
 
@@ -131,8 +126,6 @@ $(() => {
       const row = rows.join(',');
       csvContent += row + '\r\n';
     });
-    // totalRow is there now but empty - why does it know rows, but not totalRow?
-    console.log(`DEBUG: totalRow is ${totalRow}`)
     csvContent += totalRow + '\r\n';
 
     // bug be gone? BUG: throws the error "Not allowed to navigate top frame to data URL"
@@ -217,13 +210,9 @@ function calcTime() {
       rows.push([rowName, hVal, mVal, sVal]);
     }
 
-    // console.log(`DEBUG: rows[${i}] is ${rows[i]}`);
-
     rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
-    // console.log(`DEBUG: rowTotalArray[i] is ${rowTotalArray[i]}`);
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     totSec = rowTotalArray.reduce(reducer);
-    // console.log(`DEBUG: Total Seconds for all rows is ${totSec}`);
     const roundHours = Math.floor(totSec / 3600);
     const roundMin = Math.floor((totSec - (roundHours * 3600)) / 60);
     const leftoverSec = (totSec - (roundHours * 3600) - (roundMin * 60));
@@ -234,7 +223,7 @@ function calcTime() {
     $('#sTot').html(leftoverSec);
   }
   Total = 'Total';
-  hTotVal = $('#hTot').text(); // these don't seem accessible in global scope even if defined there
+  hTotVal = $('#hTot').text();
   mTotVal = $('#mTot').text();
   sTotVal = $('#sTot').text();
   totalRow = [Total, hTotVal, mTotVal, sTotVal]
