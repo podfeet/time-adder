@@ -131,7 +131,10 @@ $(() => {
       const row = rows.join(',');
       csvContent += row + '\r\n';
     });
-    
+    // totalRow is there now but empty - why does it know rows, but not totalRow?
+    console.log(`DEBUG: totalRow is ${totalRow}`)
+    csvContent += totalRow + '\r\n';
+
     // bug be gone? BUG: throws the error "Not allowed to navigate top frame to data URL"
     const encodedUri = encodeURI(csvContent);
     alert(csvContent); // works but not showing the optional title for any rows
@@ -154,11 +157,13 @@ const rows = [
   ['Title', 'Hours', 'Minutes', 'Seconds'],
 ];
 const rowTotalArray = [];
-// with these I have access to the variables, but they're frozen at DOM load.
+// create variables in the global scope for use in CSV export
 let Total;
 let hTotVal;
 let mTotVal;
 let sTotVal;
+
+let totalRow = [];
 
 /**
  * The function calcTime is triggered by the onchange event of the input fields.
@@ -227,11 +232,10 @@ function calcTime() {
     $('#hTot').html(roundHours);
     $('#mTot').html(roundMin);
     $('#sTot').html(leftoverSec);
-
-    // return {Total, hTotVal, mTotVal, sTotVal}; // this return statement appears to break the function
   }
   Total = 'Total';
   hTotVal = $('#hTot').text(); // these don't seem accessible in global scope even if defined there
   mTotVal = $('#mTot').text();
   sTotVal = $('#sTot').text();
+  totalRow = [Total, hTotVal, mTotVal, sTotVal]
 }
