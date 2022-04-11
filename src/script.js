@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable init-declarations */
 /* eslint-env jquery */
 /* global Mustache */
 
@@ -129,12 +131,7 @@ $(() => {
       const row = rows.join(',');
       csvContent += row + '\r\n';
     });
-    // eslint-disable-next-line max-len
-    const Total = 'Total';
-    const hTot = $('#hTot').html();
-    const mTot = $('#mTot').html();
-    const sTot = $('#sTot').html();
-    csvContent += 'Total, hTot, mTot, sTot;\r\n';
+    
     // bug be gone? BUG: throws the error "Not allowed to navigate top frame to data URL"
     const encodedUri = encodeURI(csvContent);
     alert(csvContent); // works but not showing the optional title for any rows
@@ -154,9 +151,14 @@ $(() => {
 // Create two arrays - one to hold all of the values of the rows as they're created, which will be used to export a CSV file and one to hold the total value of the summed rows
 
 const rows = [
-  ['Title', 'Hours', 'Minutes', 'Seconds']
+  ['Title', 'Hours', 'Minutes', 'Seconds'],
 ];
 const rowTotalArray = [];
+// with these I have access to the variables, but they're frozen at DOM load.
+let Total;
+let hTotVal;
+let mTotVal;
+let sTotVal;
 
 /**
  * The function calcTime is triggered by the onchange event of the input fields.
@@ -202,7 +204,7 @@ function calcTime() {
 
     // Store rows into an array to later be exported as a CSV file
     // I need it to work on every keypress, but it should _replace_ the value if it changes.
-    // the titles are in [0], so test to see if a row exists yet for id (since it's i+1)?
+    // the titles are in [0], so test to see if a row exists yet for id (since it's i+1)
 
     if (rows[id]) {
       (rows.splice(id, 1, [rowName, hVal, mVal, sVal]));
@@ -214,15 +216,22 @@ function calcTime() {
 
     rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
     // console.log(`DEBUG: rowTotalArray[i] is ${rowTotalArray[i]}`);
-    // eslint-disable-next-line max-len
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     totSec = rowTotalArray.reduce(reducer);
     // console.log(`DEBUG: Total Seconds for all rows is ${totSec}`);
     const roundHours = Math.floor(totSec / 3600);
     const roundMin = Math.floor((totSec - (roundHours * 3600)) / 60);
     const leftoverSec = (totSec - (roundHours * 3600) - (roundMin * 60));
+
+    // Assign total values to the HTML IDs for the totals
     $('#hTot').html(roundHours);
     $('#mTot').html(roundMin);
     $('#sTot').html(leftoverSec);
+
+    // return {Total, hTotVal, mTotVal, sTotVal}; // this return statement appears to break the function
   }
+  Total = 'Total';
+  hTotVal = $('#hTot').text(); // these don't seem accessible in global scope even if defined there
+  mTotVal = $('#mTot').text();
+  sTotVal = $('#sTot').text();
 }
