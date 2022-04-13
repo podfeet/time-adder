@@ -100,6 +100,7 @@ $(() => {
    * @returns {number} rowNum - The number of rows after the add a new row button was clicked
    */
   function addRow() {
+    $('input').last().removeClass('lastSeconds');
     rowNum += 1;
     timeInputObject.ids = [{
       hoursID: `h-${rowNum}`,
@@ -108,18 +109,18 @@ $(() => {
       nameID: `n-${rowNum}`,
     }];
     makeRows();
+    $('input').last().addClass('lastSeconds');
     return rowNum;
   }
 
   // click handler for the AddAnotherRow button to call addRow
   $('#moreTimes').click(() => {
     addRow();
+    console.log('addRow button pushed');
   });
 
   // click handler to export CSV
   $('#exportCSV').click(() => {
-    // console.log('DEBUG: exportCSV button clicked');
-    // let csvContent = 'data:text/csv;charset=utf-8,'; <-- this puts that as the title
     let csvContent = '';
 
     rows.forEach((rows) => {
@@ -135,6 +136,9 @@ $(() => {
     // BUG: window.open returns Not allowed to load local resource: file:///Users/allison/htdocs/time-adder/Title,Hours,Minutes,Seconds%0D%0A,1,0,0%0D%0A,0,0,0%0D%0A
   });
 
+  // on keydown in seconds, if the key pressed is tab (keyCode 9) then add a row
+  // #s-${rowNum} is stuck at #s-2 so it only works on row 2. need to grab updated rowNum
+  // This event handler is in the document ready handler so at DOM load there are only 2 rows.
   $('#timeRowPlaceholder').on('keydown', `#s-${rowNum}`, (e) => {
     const keyCode = e.keyCode || e.which;
   
@@ -226,5 +230,32 @@ function calcTime() {
   hTotVal = $('#hTot').text();
   mTotVal = $('#mTot').text();
   sTotVal = $('#sTot').text();
-  totalRow = [Total, hTotVal, mTotVal, sTotVal]
+  totalRow = [Total, hTotVal, mTotVal, sTotVal];
+
+  // Putting tab key to addrow here in calcTimes makes it NEVER add row
+  // $('#timeRowPlaceholder').on('keydown', `#s-${rowNum}`, (e) => {
+  //   const keyCode = e.keyCode || e.which;
+  
+  //   if (keyCode == 9) {
+  //     addRow();
+  //   }
+  // });
 }
+
+/**
+ * tabAddsRow triggers the addRow function on keyup if and only if the 
+ * tab key is pressed to from the seconds field of the last row.
+ * 
+ * @function tabAddsRow
+ * @param {event} keydown
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode Mozilla docs on keyCode}
+ */
+// function tabAddsRow() {
+//   $('#timeRowPlaceholder').on('keydown', `#s-${rowNum}`, (e) => {
+//     const keyCode = e.keyCode || e.which;
+//     if (keyCode == 9) {
+//       addRow(); // why can't it see addRow?
+//     }
+//   });
+// }
+// tabAddsRow();
