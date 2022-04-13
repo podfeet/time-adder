@@ -94,7 +94,7 @@ $(() => {
   addRow();
 
   /**
-   * addRow creates a new row of input boxes and add/subtract buttons. It is triggered by the onclick event handler for the Add Another Row button
+   * addRow creates a new row of input boxes and add/subtract buttons. It is triggered by the onclick event handler for the Add Another Row button. It also adds an event handler to the last input box on the page to click the Add Another Row Button when the user hits tab
    * 
    * @function addRow
    * @returns {number} rowNum - The number of rows after the add a new row button was clicked
@@ -109,7 +109,13 @@ $(() => {
       nameID: `n-${rowNum}`,
     }];
     makeRows();
-    $('input').last().addClass('lastSeconds');
+
+    $('input').last().on('keydown', (e) => {
+      const keyCode = e.keyCode || e.which;
+      if (keyCode == 9) {
+        $('#moreTimes').click(); // verified this works via console
+      }
+    });
     return rowNum;
   }
 
@@ -129,37 +135,28 @@ $(() => {
     });
     csvContent += totalRow + '\r\n';
 
-    // bug be gone? BUG: throws the error "Not allowed to navigate top frame to data URL"
-    const encodedUri = encodeURI(csvContent);
-    alert(csvContent); // works but not showing the optional title for any rows
-    // window.open(encodedUri);
-    // BUG: window.open returns Not allowed to load local resource: file:///Users/allison/htdocs/time-adder/Title,Hours,Minutes,Seconds%0D%0A,1,0,0%0D%0A,0,0,0%0D%0A
-  });
+    // display CSV in an alert
+    alert(csvContent);
 
-  // on keydown in seconds, if the key pressed is tab (keyCode 9) then add a row
-  // #s-${rowNum} is stuck at #s-2 so it only works on row 2. need to grab updated rowNum
-  // This event handler is in the document ready handler so at DOM load there are only 2 rows.
-  $('#timeRowPlaceholder').on('keydown', `#s-${rowNum}`, (e) => {
-    const keyCode = e.keyCode || e.which;
-  
-    if (keyCode == 9) {
-      addRow();
-    }
+    // Attempt to create a new window with the CSV content (do I really need this to work?)
+    // window.open returns Not allowed to load local resource: file:///Users/allison/htdocs/time-adder/Title,Hours,Minutes,Seconds%0D%0A,1,0,0%0D%0A,0,0,0%0D%0A
+    // const encodedUri = encodeURI(csvContent);
+    // window.open(encodedUri);
   });
 });
 
-// Create two arrays - one to hold all of the values of the rows as they're created, which will be used to export a CSV file and one to hold the total value of the summed rows
+// Initialize two arrays - one to hold all of the values of the rows as they're created, which will be used to export a CSV file and one to hold the total value of the summed rows. The totalRow array will be populated by the calcTime function.
 
 const rows = [
   ['Title', 'Hours', 'Minutes', 'Seconds'],
 ];
 const rowTotalArray = [];
+
 // create variables in the global scope for use in CSV export
 let Total;
 let hTotVal;
 let mTotVal;
 let sTotVal;
-
 let totalRow = [];
 
 /**
@@ -226,36 +223,11 @@ function calcTime() {
     $('#mTot').html(roundMin);
     $('#sTot').html(leftoverSec);
   }
+  // Capture text values of the total row to be used in the export CSV function
   Total = 'Total';
   hTotVal = $('#hTot').text();
   mTotVal = $('#mTot').text();
   sTotVal = $('#sTot').text();
   totalRow = [Total, hTotVal, mTotVal, sTotVal];
-
-  // Putting tab key to addrow here in calcTimes makes it NEVER add row
-  // $('#timeRowPlaceholder').on('keydown', `#s-${rowNum}`, (e) => {
-  //   const keyCode = e.keyCode || e.which;
-  
-  //   if (keyCode == 9) {
-  //     addRow();
-  //   }
-  // });
 }
 
-/**
- * tabAddsRow triggers the addRow function on keyup if and only if the 
- * tab key is pressed to from the seconds field of the last row.
- * 
- * @function tabAddsRow
- * @param {event} keydown
- * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode Mozilla docs on keyCode}
- */
-// function tabAddsRow() {
-//   $('#timeRowPlaceholder').on('keydown', `#s-${rowNum}`, (e) => {
-//     const keyCode = e.keyCode || e.which;
-//     if (keyCode == 9) {
-//       addRow(); // why can't it see addRow?
-//     }
-//   });
-// }
-// tabAddsRow();
