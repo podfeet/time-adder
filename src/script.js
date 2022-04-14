@@ -97,10 +97,11 @@ $(() => {
    * addRow creates a new row of input boxes and add/subtract buttons. It is triggered by the onclick event handler for the Add Another Row button. It also adds an event handler to the last input box on the page to click the Add Another Row Button when the user hits tab
    * 
    * @function addRow
+   * 
    * @returns {number} rowNum - The number of rows after the add a new row button was clicked
    */
   function addRow() {
-    $('input').last().removeClass('lastSeconds');
+    $('input').removeClass('lastSeconds');
     rowNum += 1;
     timeInputObject.ids = [{
       hoursID: `h-${rowNum}`,
@@ -109,8 +110,10 @@ $(() => {
       nameID: `n-${rowNum}`,
     }];
     makeRows();
+    $('input').last().addClass('lastSeconds');
 
-    $('input').last().on('keydown', (e) => {
+    // looks for keydown on input with class lastSeconds. if the keycode registered is 9 (tab) then it actually clicks the Add Another Row button (which has ID #moreTimes). It seems like this would create an infinite loop but it requires the tab key to keep it going.
+    $('input.lastSeconds').on('keydown', (e) => {
       const keyCode = e.keyCode || e.which;
       if (keyCode == 9) {
         $('#moreTimes').click(); // verified this works via console
