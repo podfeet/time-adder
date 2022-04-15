@@ -102,6 +102,7 @@ $(() => {
    */
   function addRow() {
     $('input').removeClass('lastSeconds');
+    $('input').last().off('keydown');
     rowNum += 1;
     timeInputObject.ids = [{
       hoursID: `h-${rowNum}`,
