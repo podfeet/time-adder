@@ -84,19 +84,19 @@
           <div class="col-2">
             <input type="number" id={{hoursID}} class="form-control text-right" placeholder="0" aria-labelledby="hours" oninput="calcTime(id)">
             <div id="h-valid-{{hoursID}}" class="invalid-feedback">
-              Hours has to be a number, you chowderhead!
+              Positive or negative numbers only.
             </div>
           </div>
           <div class="col-2">
             <input type="number" id={{minID}} class="form-control text-right" placeholder="0" aria-labelledby="min" oninput="calcTime(id)">
             <div id="m-valid-{{minID}}" class="invalid-feedback">
-              Minutes has to be a number, you chowderhead!
+              Positive or negative numbers only.
             </div>
           </div> 
           <div class="col-2">
             <input type="number" id={{secID}} class="form-control text-right" placeholder="0" aria-labelledby="sec" oninput="calcTime(id)">
             <div id="s-valid-{{secID}}" class="invalid-feedback">
-              Seconds has to be a number, you chowderhead!
+              Positive or negative numbers only.
             </div>
           </div>  
         </div>      
@@ -104,12 +104,12 @@
     </script>
   </div>
 
-  <!-- include jQuery, Popper & Bootstrap in this order -->
+  <!-- include jQuery, Popper & Bootstrap 5 in this order -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-    <!-- Load mustache.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js" integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+     <!-- Load mustache.js from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.5.1/mustache.min.js" integrity="sha512-sPEy+9yNbQ1EeqCoJ6B0t++upTDRzr1GZpWcXWiy5bOcNpAfGMZ8tdqkenvGeuwDNOaGnWTeyBjpEqBjkXmqfQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Load Font Awesome -->
