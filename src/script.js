@@ -1,3 +1,7 @@
+import TimeAddr from './time-addr.js'
+
+console.log(TimeAddr.mkTime(100));
+
 /* eslint-disable max-len */
 /* eslint-disable init-declarations */
 /* eslint-env jquery */
@@ -5,7 +9,7 @@
 
 /**
  * timeInputObject is an Object to hold an array of the IDs for the input boxes for hours, minutes and seconds in each row, along with an optional name for the row.
- * 
+ *
  * @typedef {object} timeInputObject
  * @property {Array.<{hoursID: string, minID: string, secID: string, nameID: string}>} ids - the HTML IDs for the input boxes for hours, minutes and seconds in each row, along with the name for the row
  * @param {{hoursID: string, minID: string, secID: string, nameID: string}} timeInput.ids
@@ -76,10 +80,10 @@ $(() => {
     }
   }
   // finish ARow Class definition
-  
+
   /**
    * makeRows(num) loops through the Array timeInputObject.ids and for each entry creates an instance of the class aRow and then calls the renderRow function to actually display the input boxes
-   * 
+   *
    * @function makeRows
    * @property {Array.<timeInputObject.ids>} timeInputObject.ids - The Array of IDs for h/m/s and add/sub buttons
    */
@@ -95,7 +99,7 @@ $(() => {
 
   /**
    * addRow creates a new row of input boxes and add/subtract buttons. It is triggered by the onclick event handler for the Add Another Row button. It also adds an event handler to the last input box on the page to click the Add Another Row Button when the user hits tab
-   * 
+   *
    * @function addRow
    * @returns {number} rowNum - The number of rows after the add a new row button was clicked
    */
@@ -230,4 +234,3 @@ function calcTime() {
   sTotVal = $('#sTot').text();
   totalRow = [Total, hTotVal, mTotVal, sTotVal];
 }
-
