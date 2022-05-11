@@ -17,6 +17,7 @@
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsdoc": "^37.5.0",
+    "jest": "^28.1.0",
     "jsdoc": "^3.6.7"
   }
 }

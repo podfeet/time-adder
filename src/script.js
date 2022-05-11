@@ -4,6 +4,10 @@
 /* global Mustache */
 
 /**
+ * @fileoverview Main entry point for the script.
+ */
+ import calcTime from "./calcTime.mjs";
+/**
  * timeInputObject is an Object to hold an array of the IDs for the input boxes for hours, minutes and seconds in each row, along with an optional name for the row.
  * 
  * @typedef {object} timeInputObject
@@ -234,4 +238,3 @@ function calcTime() {
   sTotVal = $('#sTot').text();
   totalRow = [Total, hTotVal, mTotVal, sTotVal];
 }
-
