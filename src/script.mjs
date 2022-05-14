@@ -139,7 +139,7 @@ $(() => {
   // click handler to export CSV
   $('#exportCSV').click(() => {
     let csvContent = '';
-
+    const row = rows.join(',');
     rows.forEach((rows) => {
       csvContent += row + '\r\n';
     });
