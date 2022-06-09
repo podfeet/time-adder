@@ -78,25 +78,28 @@
       {{#ids}}
         <div class="row mt-2 form" >
           <div class="col-4">
-            <input type="text" class="form-control" id="{{nameID}}" placeholder="optional name" />
+            <!-- Seems silly to calcTime on the rowName but otherwise it doesn't end up in the exported CSV file -->
+            <input type="text" class="form-control" id="{{nameID}}" placeholder="optional name"  oninput="calcTime(id)"/>
           </div>  
           <!-- Columns for hours min sec to be entered -->
           <div class="col-2">
             <input type="number" id={{hoursID}} class="form-control text-right" placeholder="0" aria-labelledby="hours" oninput="calcTime(id)">
             <div id="h-valid-{{hoursID}}" class="invalid-feedback">
-              Positive or negative numbers only.
+              Numbers, please! Negative, integer, floating point, but numbers!
             </div>
           </div>
           <div class="col-2">
             <input type="number" id={{minID}} class="form-control text-right" placeholder="0" aria-labelledby="min" oninput="calcTime(id)">
             <div id="m-valid-{{minID}}" class="invalid-feedback">
-              Positive or negative numbers only.
+              
+              Numbers, please! Negative, integer, floating point, but numbers!
             </div>
           </div> 
           <div class="col-2">
             <input type="number" id={{secID}} class="form-control text-right" placeholder="0" aria-labelledby="sec" oninput="calcTime(id)">
             <div id="s-valid-{{secID}}" class="invalid-feedback">
-              Positive or negative numbers only.
+              
+              Numbers, please! Negative, integer, floating point, but numbers!
             </div>
           </div>  
         </div>      
