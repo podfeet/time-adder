@@ -1,0 +1,16 @@
+  /* removes spinner (up/down arrows) on input="number" */
+  input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+   appearance: none;
+   margin: 0;
+  }
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+  /* Align placeholder input text to right */
+  input[type="number"]::placeholder {
+    text-align: right;
+  }
+  input[type="number"] {
+    text-align: right;
+  }
