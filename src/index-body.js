@@ -7,6 +7,9 @@ import 'bootstrap';
 // mustache templates
 import Mustache from 'mustache';
 
+// import styles
+import '.index.css';
+
 // look for and see if you need:
 // popper and font-awesome
 
