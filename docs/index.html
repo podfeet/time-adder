@@ -1,93 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+	<head>
+    <meta charset="utf-8" />
+    <!-- Responsive viewport meta tag (for Bootstrap) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    <!-- import the head bundle (applies the CSS) -->
+	<script src="./bundle-head.js"></script>
+   
+		<title>A Web App to Add Time</title>
+	</head>
+
+	<body>
+    <!-- container to hold the column labels & time rows -->
+    <div class="container text-center">
+      <div class="container border bg-light">
+        <!-- row for Title of Totals -->
+        <div class="row mt-2">
+          <div class="h3 offset-4 col-6">Total</div>
+        </div>
+        <!-- row for Totals -->
+        <div class="row">
+          <!-- button to export CSV -->
+          <button type="submit" id="exportCSV" class="col-4 btn btn-primary mt-2 mr-2 sl-0 pr-5">Export Data to CSV</button>
+          <!-- Totals -->
+          <!-- BUG: ALIGNMENT NOT RIGHT AND BAFFLING -->
+          <div class="col-2 mt-2 border align-middle-text-bottom" id="hTot">0</div>
+          <div class="col-2 mt-2 border" id="mTot">0</div>
+          <div class="col-2 mt-2 border" id="sTot">0</div>
+        </div>
+      </div>   
+      
+        <!-- row for hours, min, sec labels -->
+      <div class="row mt-1">
+        <!-- totals -->
+        <div class="offset-4 col-2" id="hours">H</div>
+        <div class="col-2" id="min">M</div>
+        <div class="col-2" id="sec">S</div>
+      </div>
+      <!-- placeholder html for new time rows -->
+      <div class="row mt-2">
+        <div class="col">
+          <div class="col" id="timeRowPlaceholder"></div>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="offset-4 col-6">
+          <!-- button to add more rows -->
+          <button type="submit" id="moreTimes" class="btn btn-primary mt-2">Add Another Row</button>
+        </div>
+      </div>
+    </div>
+
+   <!-- define the template string -->
+   <div class="container"></div>
+    <script type="text/html" id="tpl_string">
+      {{#ids}}
+        <div class="row mt-2 form "  >
+          <div class="col-4">
+            <!-- Seems silly to calcTime on the rowName but otherwise it doesn't end up in the exported CSV file -->
+            <input type="text" class="form-control" id="{{nameID}}" placeholder="optional name"  oninput="calcTime(id)"/>
+          </div>  
+          <!-- Columns for hours min sec to be entered -->
+          <div class="col-2">
+            <input type="number" id={{hoursID}} class="form-control text-right" placeholder="0" aria-labelledby="hours" oninput="calcTime(id)">
+            <div id="h-valid-{{hoursID}}" class="invalid-feedback">
+              Numbers, you silly goose!
+            </div>
+          </div>
+          <div class="col-2">
+            <input type="number" id={{minID}} class="form-control text-right" placeholder="0" aria-labelledby="min" oninput="calcTime(id)">
+            <div id="m-valid-{{minID}}" class="invalid-feedback">
+              Numbers, you silly goose!
+            </div>
+          </div> 
+          <div class="col-2">
+            <input type="number" id={{secID}} class="form-control text-right" placeholder="0" aria-labelledby="sec" oninput="calcTime(id)">
+            <div id="s-valid-{{secID}}" class="invalid-feedback">
+              Numbers, you silly goose!
+            </div>
+          </div>  
+        </div>      
+      {{/ids}}
+    </script>
+  </div>
+
+  <!-- include jQuery, Popper & Bootstrap 5 in this order -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js" integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha256-cMPWkL3FzjuaFSfEYESYmjF25hCIL6mfRSPnW8OVvM4=" crossorigin="anonymous"></script> -->
+     <!-- Load mustache.js from CDN -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.5.1/mustache.min.js" integrity="sha512-sPEy+9yNbQ1EeqCoJ6B0t++upTDRzr1GZpWcXWiy5bOcNpAfGMZ8tdqkenvGeuwDNOaGnWTeyBjpEqBjkXmqfQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <!-- Load Font Awesome -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <!-- Load the local JS Code AFTER the other libraries -->
+    <!-- <script type="text/javascript" src="src/script.js"></script> -->
+
+    <!--
+    == Import JavaScript ==
+    -->
+    <!-- import the body bundle (JavaScript code + dependencies) -->
+    <script type="text/javascript" src="./bundle-body.js"></script>
     
-    <meta charset="utf-8">
-    <title>Home - Documentation</title>
-    
-    
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
-    <script src="scripts/nav.js" defer></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
-
-<label for="nav-trigger" class="overlay"></label>
-
-<nav >
-    
-    <input type="text" id="nav-search" placeholder="Search" />
-    
-    <h2><a href="index.html">Home</a></h2><h2><a href="https://pbs.bartificer.net" target="_blank" >Programming by Stealth</a></h2><h2><a href="https://jsdoc.app/index.html" target="_blank" >JSDoc</a></h2><h3>Classes</h3><ul><li><a href="ARow.html">ARow</a><ul class='methods'><li data-type='method' style='display: none;'><a href="ARow.html#renderRow">renderRow</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#addRow">addRow</a></li><li><a href="global.html#calcTime">calcTime</a></li><li><a href="global.html#makeRows">makeRows</a></li><li><a href="global.html#timeInput">timeInput</a></li></ul>
-</nav>
-
-<div id="main">
-    
-
-    
-
-
-
-    
-
-
-    <section class="package">
-        <h3> </h3>		
-    </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    <section class="readme usertext">
-        <article><p>Time Adder Is designed to allow users to enter multiple elapsed time values in hours, minutes and seconds and calculate the sum of the elapsed times.  New rows can be added to allow for more times to be added. If desired, on a row by row basis, time values can be subtracted rather than added to to the total.</p>
-<p>Total elapsed time will be calculated simply by adding up the number of seconds in each row and adding/subtracting them from the total.</p>
-<p>Future goals include storing of values.</p></article>
-    </section>
-
-
-
-
-
-
-    
-    
-</div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Sun Jan 02 2022 08:10:06 GMT-0800 (Pacific Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/polyfill.js"></script>
-<script src="scripts/linenumber.js"></script>
-
-<script src="scripts/search.js" defer></script>
-
-
-<script src="scripts/collapse.js" defer></script>
-
-
-</body>
+  </body>
 </html>
