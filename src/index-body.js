@@ -8,7 +8,7 @@ import 'bootstrap';
 import Mustache from 'mustache';
 
 // import styles
-import '.index.css';
+import './index.css';
 
 // look for and see if you need:
 // popper and font-awesome
