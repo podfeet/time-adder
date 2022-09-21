@@ -9,15 +9,21 @@ import {fileURLToPath} from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// import webpack's standard functionality
+import webpack from 'webpack';
+
 // import the Webpack copy plugin
 import CopyPlugin from 'copy-webpack-plugin';
 
 // export the Webpack config
 export default {
-  entry: './src/index-body.js',
+  entry: {
+    head: './src/index-head.js', // CSS will be imported into header
+    body: './src/index-body.js', // JavaScript will be appended to the body
+  },
   output: {
     path: path.resolve(__dirname, 'docs'),
-    filename: 'bundle.js',
+    filename: 'bundle-[name].js',
   },
   module: {
     rules: [
