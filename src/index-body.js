@@ -10,9 +10,6 @@ import 'bootstrap';
 // import calcTime
 import calcTime from './calcTime.js';
 
-// Add event handler to all text input boxes to call calcTime
-$('input[type="text"]').on('input', calcTime);
-
 // look for and see if you need:
 // popper and font-awesome
 
@@ -44,7 +41,7 @@ const timeInputObject = {
 };
 // initialize the row number
 let rowNum = 0;
-console.log(`DEBUG: rowNum is ${rowNum}`)
+
 // initialize values for total hours, minutes and seconds to zero
 $('#hTot').val(0);
 $('#mTot').val(0);
