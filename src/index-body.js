@@ -87,6 +87,12 @@ $(() => {
       $('#timeRowPlaceholder').append($(tplOutput));
     }
   }
+  
+  // Add event handler to all text input boxes to call calcTime
+  // Both the optional text label boxes and the time boxes are used in calcTime() 
+  $('input[type="number"]').on('input', calcTime());
+  $('input[type="text"]').on('input', calcTime());
+
   // finish ARow Class definition
   /**
    * makeRows(num) loops through the Array timeInputObject.ids and for each entry creates an instance of the class aRow and then calls the renderRow function to actually display the input boxes
@@ -233,3 +239,7 @@ $(() => {
 //   sTotVal = $('#sTot').text();
 //   totalRow = [Total, hTotVal, mTotVal, sTotVal];
 // }
+
+// rowNum is needed by calcTime so let's export it:
+
+export {rowNum as rowNum};
