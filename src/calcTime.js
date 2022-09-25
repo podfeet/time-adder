@@ -1,3 +1,15 @@
+// Initialize two arrays - one to hold all of the values of the rows as they're created, which will be used to export a CSV file and one to hold the total value of the summed rows. The totalRow array will be populated by the calcTime function.
+const rows = [
+  ['Title', 'Hours', 'Minutes', 'Seconds'],
+];
+const rowTotalArray = [];
+// create variables in the global scope for use in CSV export
+let Total;
+let hTotVal;
+let mTotVal;
+let sTotVal;
+let totalRow = [];
+
 /**
  * The function calcTime is triggered by the oninput event of the input fields.
  * Since there's no form submittal, data validation needs to also be triggered by the oninput event of the input fields. The function will check the data as entered for h, m, s and if invalid, add the is-invalid class which will display the error message. If valid it will remove the is-invalid class and erase the error message (or never display it in the first place)
@@ -64,3 +76,5 @@ function calcTime() {
   sTotVal = $('#sTot').text();
   totalRow = [Total, hTotVal, mTotVal, sTotVal];
 }
+
+export {calcTime as default};
