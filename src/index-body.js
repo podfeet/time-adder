@@ -159,7 +159,8 @@ $(() => {
   });
 });
 
-/*  */
+// rowNum is needed by calcTime so let's export it:
+export {rowNum as rowNum};
 
 // Initialize two arrays - one to hold all of the values of the rows as they're created, which will be used to export a CSV file and one to hold the total value of the summed rows. The totalRow array will be populated by the calcTime function.
 // const rows = [
@@ -240,6 +241,3 @@ $(() => {
 //   totalRow = [Total, hTotVal, mTotVal, sTotVal];
 // }
 
-// rowNum is needed by calcTime so let's export it:
-
-export {rowNum as rowNum};
