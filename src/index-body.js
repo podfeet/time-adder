@@ -11,8 +11,7 @@ import 'bootstrap';
 // import calcTime from './calcTime.js';
 
 // import timeMath
-import {roundHours, roundMin, leftoverSec} from './timeMath.js';
-
+// import {roundHours, roundMin, leftoverSec} from './timeMath.js';
 
 // look for and see if you need:
 // popper and font-awesome
@@ -170,7 +169,6 @@ export {rowNum as rowNum};
 const rows = [
   ['Title', 'Hours', 'Minutes', 'Seconds'],
 ];
-console.log(rows);
 
 // const rowTotalArray = [];
 
@@ -250,6 +248,7 @@ function calcTime() {
   mTotVal = $('#mTot').text();
   sTotVal = $('#sTot').text();
   totalRow = [Total, hTotVal, mTotVal, sTotVal];
+  // return rows; this didn't make rows available
 }
 // export values entered
 export {rows};
