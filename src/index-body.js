@@ -11,7 +11,7 @@ import 'bootstrap';
 // import calcTime from './calcTime.js';
 
 // import timeMath
-import timeMath from './timeMath.js';
+import {roundHours, roundMin, leftoverSec} from './timeMath.js';
 
 
 // look for and see if you need:
@@ -170,7 +170,10 @@ export {rowNum as rowNum};
 const rows = [
   ['Title', 'Hours', 'Minutes', 'Seconds'],
 ];
-const rowTotalArray = [];
+console.log(rows);
+
+// const rowTotalArray = [];
+
 // create variables in the global scope for use in CSV export
 let Total;
 let hTotVal;
@@ -190,7 +193,7 @@ let totalRow = [];
  * @param {timeInputObject} timeInputObject
  */
 function calcTime() {
-  let totSec = 0;
+  // let totSec = 0;
   for (let i = 0; i < rowNum; i += 1) {
     const id = i + 1;
     // create some simple variables for clarity
@@ -227,14 +230,16 @@ function calcTime() {
       rows.push([rowName, hVal, mVal, sVal]);
     }
     
-    timeMath();
     // rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
     // const reducer = (previousValue, currentValue) => previousValue + currentValue;
     // totSec = rowTotalArray.reduce(reducer);
     // const roundHours = Math.floor(totSec / 3600);
     // const roundMin = Math.floor((totSec - (roundHours * 3600)) / 60);
     // const leftoverSec = (totSec - (roundHours * 3600) - (roundMin * 60));
+
+    // roundHours, roundMin, leftoverSec come from timeMath.js\
     // Assign total values to the HTML IDs for the totals
+
     $('#hTot').html(roundHours);
     $('#mTot').html(roundMin);
     $('#sTot').html(leftoverSec);
