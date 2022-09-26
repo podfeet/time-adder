@@ -61,12 +61,21 @@ function calcTime() {
     } else {
       rows.push([rowName, hVal, mVal, sVal]);
     }
+    // Math starts here
+    // import hVal, mVal, sVal
     rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
+    /* The reducer walks through the array element-by-element, at each step 
+    adding the current array value to the result from the previous step 
+    (this result is the running sum of all the previous steps) — until 
+    there are no more elements to add. */
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     totSec = rowTotalArray.reduce(reducer);
     const roundHours = Math.floor(totSec / 3600);
     const roundMin = Math.floor((totSec - (roundHours * 3600)) / 60);
     const leftoverSec = (totSec - (roundHours * 3600) - (roundMin * 60));
+    // Math ends here
+    // export roundHours, RoundMin, leftoverSec
+
     // Assign total values to the HTML IDs for the totals
     $('#hTot').html(roundHours);
     $('#mTot').html(roundMin);
