@@ -8,7 +8,7 @@ import Mustache from 'mustache';
 import 'bootstrap';
 
 // import calcTime
-// import calcTime from './calcTime.js';
+import {calc as timeMath} from './timeMath.js';
 
 // import timeMath
 // import {roundHours, roundMin, leftoverSec} from './timeMath.js';
@@ -237,6 +237,8 @@ function calcTime() {
 
     // roundHours, roundMin, leftoverSec come from timeMath.js\
     // Assign total values to the HTML IDs for the totals
+
+    timeMath();
 
     $('#hTot').html(roundHours);
     $('#mTot').html(roundMin);
