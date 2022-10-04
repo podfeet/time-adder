@@ -7,14 +7,10 @@ import Mustache from 'mustache';
 // bootstrap 4 JS and plugins
 import 'bootstrap';
 
-// import calcTime
+// import calc function
 import {default as timeMath} from './timeMath.js';
-
-// import timeMath
-// import {roundHours, roundMin, leftoverSec} from './timeMath.js';
-
-// look for and see if you need:
-// popper and font-awesome
+// import dictionary holding answers for summarized hours, min, sec
+import {ct} from './timeMath.js';
 
 /* eslint-disable max-len */
 /* eslint-disable init-declarations */
@@ -225,21 +221,11 @@ function calcTime() {
       rows.push([rowName, hVal, mVal, sVal]);
     }
     
-    // rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
-    // const reducer = (previousValue, currentValue) => previousValue + currentValue;
-    // totSec = rowTotalArray.reduce(reducer);
-    // const roundHours = Math.floor(totSec / 3600);
-    // const roundMin = Math.floor((totSec - (roundHours * 3600)) / 60);
-    // const leftoverSec = (totSec - (roundHours * 3600) - (roundMin * 60));
+    timeMath(); // calculate total added seconds, parse as h, m, s
 
-    // roundHours, roundMin, leftoverSec come from timeMath.js\
-    // Assign total values to the HTML IDs for the totals
-
-    timeMath();
-
-    $('#hTot').html(roundHours);
-    $('#mTot').html(roundMin);
-    $('#sTot').html(leftoverSec);
+    $('#hTot').html(ct.roundHours);
+    $('#mTot').html(ct.roundMin);
+    $('#sTot').html(ct.leftoverSec);
   }
   // Capture text values of the total row to be used in the export CSV function
   Total = 'Total';
