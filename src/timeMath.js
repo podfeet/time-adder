@@ -40,17 +40,10 @@ export default function calc() {
   }
 
   // BUG: Math.floor doesn't work as expected on negative values
-  const roundHours = Math.floor(totSec / 3600);
-  const roundMin = Math.floor((totSec - (roundHours * 3600)) / 60);
-  const leftoverSec = (totSec - (roundHours * 3600) - (roundMin * 60));
-  console.log(`DEBUG: roundHours is ${roundHours}`)
-
-  return {
-    roundHours: roundHours,
-    roundMin: roundMin,
-    leftoverSec: leftoverSec,
-  }
+  roundHours = Math.floor(totSec / 3600);
+  roundMin = Math.floor((totSec - (roundHours * 3600)) / 60);
+  leftoverSec = (totSec - (roundHours * 3600) - (roundMin * 60));
+  
+  ct = {roundHours, roundMin, leftoverSec};
+  console.log(`Finshed calculations`);
 }
-
-// Math ends here
-export {roundHours, roundMin, leftoverSec};
