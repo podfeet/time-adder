@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-returns-check */
 // Math starts here
 // import entered times from index-body.js
 import {rows} from './index-body.js';
@@ -24,7 +25,6 @@ export {ct};
  * @function calc
  * @returns {ct} - dictionary holding 3 calculated times
  */
- 
 export default function calc() {
   console.log(`Starting calculation`);
   let h = 0;
