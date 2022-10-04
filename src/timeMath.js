@@ -1,22 +1,32 @@
 // Math starts here
 // import entered times from index-body.js
 import {rows} from './index-body.js';
-// console.log('I tried to run timeMath.js') // it gets this far
-// rows will look like this:
-// console.log(rows); // this does not work
 
+// rows will look like this:
 // example
 // const rows = [
 //   ["Title", "Hours", "Minutes", "Seconds"],
 //   ["pancakes", 3, 27, 59],
 //   ["waffles", 43, 3, 1]
 // ];
-
+// Initialize global variables
 let roundHours = 0;
 let roundMin = 0;
 let leftoverSec = 0;
 
-export function calc() {
+// define a dictionary object called ct to hold calculated times
+let ct= {};
+export {ct};
+
+/**
+ * calc uses the numbers entered into the text boxes and adds them together as seconds to get the total number of seconds. It then parses those seconds back to hh:mm:ss
+ * 
+ * @function calc
+ * @returns {ct} - dictionary holding 3 calculated times
+ */
+ 
+export default function calc() {
+  console.log(`Starting calculation`);
   let h = 0;
   let m = 0;
   let s = 0;
