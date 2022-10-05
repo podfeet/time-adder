@@ -227,6 +227,7 @@ function calcTime() {
     }
     console.log(`starting math from index-body.js`);
     timeMath(); // calculate total added seconds, parse as h, m, s
+    const ct = timeMath(rows); // calculate total added seconds, parse as h, m, s
 
     console.log(`DEBUG: ct.roundHours is ${ct.roundHours}`)
 
@@ -243,5 +244,4 @@ function calcTime() {
   // return rows; this didn't make rows available
 }
 // export values entered
-export {rows};
 
