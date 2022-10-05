@@ -23,6 +23,7 @@ let ct= {};
  * 
  * @function calc
  * @returns {ct} - dictionary holding 3 calculated times
+ * @param rows - array of data from input boxes
  */
 export default function calc(rows) {
   console.log(`Starting calculation`);
