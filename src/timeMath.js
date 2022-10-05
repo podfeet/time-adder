@@ -17,7 +17,6 @@ let leftoverSec = 0;
 
 // define a dictionary object called ct to hold calculated times
 let ct= {};
-export {ct};
 
 /**
  * calc uses the numbers entered into the text boxes and adds them together as seconds to get the total number of seconds. It then parses those seconds back to hh:mm:ss
@@ -46,4 +45,5 @@ export default function calc(rows) {
   
   ct = {roundHours, roundMin, leftoverSec};
   console.log(`Finshed calculations`);
+  return ct;
 }
