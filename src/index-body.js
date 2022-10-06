@@ -135,6 +135,10 @@ $(() => {
   $('#moreTimes').click(() => {
     addRow();
   });
+
+  // Add an event listener to the number inputs to trigger the calculations (class="time")
+  $('.time').on('keyup', calcTime);
+
   // click handler to export CSV
   $('#exportCSV').click(() => {
     let csvContent = '';
