@@ -7,10 +7,9 @@ import Mustache from 'mustache';
 // bootstrap 4 JS and plugins
 import 'bootstrap';
 
-// import calc function
+// import calc function and call it timeMath. Also gives access to {ct} dictionary
 import {default as timeMath} from './timeMath.js';
 // import dictionary holding answers for summarized hours, min, sec
-import {ct} from './timeMath.js';
 
 /* eslint-disable max-len */
 /* eslint-disable init-declarations */
