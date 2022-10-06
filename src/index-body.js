@@ -134,7 +134,6 @@ $(() => {
   // click handler for the AddAnotherRow button to call addRow
   $('#moreTimes').click(() => {
     addRow();
-    console.log('addRow button pushed');
   });
   // click handler to export CSV
   $('#exportCSV').click(() => {
