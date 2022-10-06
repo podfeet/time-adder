@@ -7,11 +7,9 @@ import Mustache from 'mustache';
 // bootstrap 4 JS and plugins
 import 'bootstrap';
 
-// import calcTime
-import calcTime from './calcTime.js';
-
-// look for and see if you need:
-// popper and font-awesome
+// import calc function and call it timeMath. Also gives access to {ct} dictionary
+import {default as timeMath} from './timeMath.js';
+// import dictionary holding answers for summarized hours, min, sec
 
 /* eslint-disable max-len */
 /* eslint-disable init-declarations */
@@ -87,11 +85,6 @@ $(() => {
       $('#timeRowPlaceholder').append($(tplOutput));
     }
   }
-  
-  // Add event handler to all text input boxes to call calcTime
-  // Both the optional text label boxes and the time boxes are used in calcTime() 
-  $('input[type="number"]').on('input', calcTime());
-  $('input[type="text"]').on('input', calcTime());
 
   // finish ARow Class definition
   /**
@@ -107,6 +100,7 @@ $(() => {
     }
   }
   makeRows();
+
   rowNum = timeInputObject.ids.length;
   addRow();
   /**
@@ -140,8 +134,11 @@ $(() => {
   // click handler for the AddAnotherRow button to call addRow
   $('#moreTimes').click(() => {
     addRow();
-    console.log('addRow button pushed');
   });
+
+  // Add an event listener to the number inputs to trigger the calculations (class="time")
+  $('.time').on('keyup', calcTime);
+
   // click handler to export CSV
   $('#exportCSV').click(() => {
     let csvContent = '';
@@ -159,20 +156,17 @@ $(() => {
   });
 });
 
-// rowNum is needed by calcTime so let's export it:
-export {rowNum as rowNum};
-
 // Initialize two arrays - one to hold all of the values of the rows as they're created, which will be used to export a CSV file and one to hold the total value of the summed rows. The totalRow array will be populated by the calcTime function.
-// const rows = [
-//   ['Title', 'Hours', 'Minutes', 'Seconds'],
-// ];
-// const rowTotalArray = [];
-// // create variables in the global scope for use in CSV export
-// let Total;
-// let hTotVal;
-// let mTotVal;
-// let sTotVal;
-// let totalRow = [];
+const rows = [
+  ['Title', 'Hours', 'Minutes', 'Seconds'],
+];
+
+// create variables in the global scope for use in CSV export
+let Total;
+let hTotVal;
+let mTotVal;
+let sTotVal;
+let totalRow = [];
 
 /**
  * The function calcTime is triggered by the oninput event of the input fields.
@@ -185,59 +179,56 @@ export {rowNum as rowNum};
  * @function calcTime
  * @param {timeInputObject} timeInputObject
  */
-// function calcTime() {
-//   let totSec = 0;
-//   for (let i = 0; i < rowNum; i += 1) {
-//     const id = i + 1;
-//     // create some simple variables for clarity
-//     const $h = $(`#h-`+id);
-//     const $m = $(`#m-`+id);
-//     const $s = $(`#s-`+id);
-//     const $n = $(`#n-`+id);
-//     // form validation
-//     if ($h.is(':invalid')) {
-//       $h.addClass('is-invalid');
-//     } else {
-//       $h.removeClass('is-invalid');
-//     }
-//     if ($m.is(':invalid')) {
-//       $m.addClass('is-invalid');
-//     } else {
-//       $m.removeClass('is-invalid');
-//     }
-//     if ($s.is(':invalid')) {
-//       $s.addClass('is-invalid');
-//     } else {
-//       $s.removeClass('is-invalid');
-//     }
-//     const hVal = Number($h.val());
-//     const mVal = Number($m.val());
-//     const sVal = Number($s.val());
-//     const rowName = $n.val();
-//     // Store rows into an array to later be exported as a CSV file
-//     // I need it to work on every keypress, but it should _replace_ the value if it changes.
-//     // the titles are in [0], so test to see if a row exists yet for id (since it's i+1)
-//     if (rows[id]) {
-//       (rows.splice(id, 1, [rowName, hVal, mVal, sVal]));
-//     } else {
-//       rows.push([rowName, hVal, mVal, sVal]);
-//     }
-//     rowTotalArray[i] = hVal * 3600 + mVal * 60 + sVal;
-//     const reducer = (previousValue, currentValue) => previousValue + currentValue;
-//     totSec = rowTotalArray.reduce(reducer);
-//     const roundHours = Math.floor(totSec / 3600);
-//     const roundMin = Math.floor((totSec - (roundHours * 3600)) / 60);
-//     const leftoverSec = (totSec - (roundHours * 3600) - (roundMin * 60));
-//     // Assign total values to the HTML IDs for the totals
-//     $('#hTot').html(roundHours);
-//     $('#mTot').html(roundMin);
-//     $('#sTot').html(leftoverSec);
-//   }
-//   // Capture text values of the total row to be used in the export CSV function
-//   Total = 'Total';
-//   hTotVal = $('#hTot').text();
-//   mTotVal = $('#mTot').text();
-//   sTotVal = $('#sTot').text();
-//   totalRow = [Total, hTotVal, mTotVal, sTotVal];
-// }
+function calcTime() {
+  // let totSec = 0;
+  for (let i = 0; i < rowNum; i += 1) {
+    const id = i + 1;
+    // create some simple variables for clarity
+    const $h = $(`#h-`+id);
+    const $m = $(`#m-`+id);
+    const $s = $(`#s-`+id);
+    const $n = $(`#n-`+id);
+    // form validation
+    if ($h.is(':invalid')) {
+      $h.addClass('is-invalid');
+    } else {
+      $h.removeClass('is-invalid');
+    }
+    if ($m.is(':invalid')) {
+      $m.addClass('is-invalid');
+    } else {
+      $m.removeClass('is-invalid');
+    }
+    if ($s.is(':invalid')) {
+      $s.addClass('is-invalid');
+    } else {
+      $s.removeClass('is-invalid');
+    }
+    const hVal = Number($h.val());
+    const mVal = Number($m.val());
+    const sVal = Number($s.val());
+    const rowName = $n.val();
+    // Store rows into an array to later be exported as a CSV file
+    // I need it to work on every keypress, but it should _replace_ the value if it changes.
+    // the titles are in [0], so test to see if a row exists yet for id (since it's i+1)
+    if (rows[id]) {
+      (rows.splice(id, 1, [rowName, hVal, mVal, sVal]));
+    } else {
+      rows.push([rowName, hVal, mVal, sVal]);
+    }
+    
+    // ct a dictionary of the calcluated times that are returned by timeMath 
+    const ct = timeMath(rows);
 
+    $('#hTot').html(ct.roundHours);
+    $('#mTot').html(ct.roundMin);
+    $('#sTot').html(ct.leftoverSec);
+  }
+  // Capture text values of the total row to be used in the export CSV function
+  Total = 'Total';
+  hTotVal = $('#hTot').text();
+  mTotVal = $('#mTot').text();
+  sTotVal = $('#sTot').text();
+  totalRow = [Total, hTotVal, mTotVal, sTotVal];
+  // return rows; this didn't make rows available
+}
