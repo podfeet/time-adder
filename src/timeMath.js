@@ -26,7 +26,6 @@ let ct= {};
  * @param rows - array of data from input boxes
  */
 export default function calc(rows) {
-  console.log(`Starting calculation`);
   let h = 0;
   let m = 0;
   let s = 0;
@@ -45,6 +44,5 @@ export default function calc(rows) {
   leftoverSec = (totSec - (roundHours * 3600) - (roundMin * 60));
   
   ct = {roundHours, roundMin, leftoverSec};
-  console.log(`Finshed calculations`);
   return ct;
 }
