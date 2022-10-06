@@ -216,11 +216,9 @@ function calcTime() {
     } else {
       rows.push([rowName, hVal, mVal, sVal]);
     }
-    console.log(`starting math from index-body.js`);
-    timeMath(); // calculate total added seconds, parse as h, m, s
-    const ct = timeMath(rows); // calculate total added seconds, parse as h, m, s
-
+    
     // ct a dictionary of the calcluated times that are returned by timeMath 
+    const ct = timeMath(rows);
 
     $('#hTot').html(ct.roundHours);
     $('#mTot').html(ct.roundMin);
