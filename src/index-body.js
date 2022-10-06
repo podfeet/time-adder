@@ -85,16 +85,6 @@ $(() => {
       $('#timeRowPlaceholder').append($(tplOutput));
     }
   }
-  
-  // Add event handler to all text input boxes to call calcTime
-  // Both the optional text label boxes and the time boxes are used in calcTime() 
-  // $('input[type="number"]').on('input', calcTime());
-  // $('input[type="text"]').on('input', calcTime());
-
-  // Add an event listener to the number inputs to trigger the calculations
-  // BUG: "SyntaxError: The string did not match the expected pattern"
-  const input = document.querySelector( $('input[type="number"]'));
-  input.addEventListener('input', calcTime);
 
   // finish ARow Class definition
   /**
