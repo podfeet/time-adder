@@ -100,6 +100,7 @@ $(() => {
     }
   }
   makeRows();
+
   rowNum = timeInputObject.ids.length;
   addRow();
   /**
@@ -156,8 +157,6 @@ $(() => {
 const rows = [
   ['Title', 'Hours', 'Minutes', 'Seconds'],
 ];
-
-// const rowTotalArray = [];
 
 // create variables in the global scope for use in CSV export
 let Total;
@@ -218,7 +217,7 @@ function calcTime() {
     timeMath(); // calculate total added seconds, parse as h, m, s
     const ct = timeMath(rows); // calculate total added seconds, parse as h, m, s
 
-    console.log(`DEBUG: ct.roundHours is ${ct.roundHours}`)
+    // ct a dictionary of the calcluated times that are returned by timeMath 
 
     $('#hTot').html(ct.roundHours);
     $('#mTot').html(ct.roundMin);
@@ -232,5 +231,3 @@ function calcTime() {
   totalRow = [Total, hTotVal, mTotVal, sTotVal];
   // return rows; this didn't make rows available
 }
-// export values entered
-
