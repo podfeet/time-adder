@@ -11,7 +11,11 @@
   "scripts": {
     "build": "npx webpack --mode=production",
     "docs": "docDir='./docs'; [[ -e \"$docDir\" ]] && rm -rf \"$docDir/\"*; npx jsdoc -c ./jsdoc.conf.json --destination \"$docDir/\" --template node_modules/docdash",
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest tape test/*.js",
+    "watch": "npm-watch"
+  },
+  "watch": {
+    "test": "{src,test}/*.js"
   },
   "author": "Allison Sheridan",
   "license": "ISC",
@@ -34,6 +38,7 @@
   "dependencies": {
     "bootstrap": "^4.6.2",
     "jquery": "^3.6.1",
-    "mustache": "^4.2.0"
+    "mustache": "^4.2.0",
+    "npm-watch": "^0.11.0"
   }
 }
