@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable jsdoc/require-returns-check */
 // Math starts here
 // import entered times from index-body.js
