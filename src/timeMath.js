@@ -39,9 +39,20 @@ export default function calc(rows) {
   }
 
   // BUG: Math.floor doesn't work as expected on negative values
-  roundHours = Math.floor(totSec / 3600);
-  roundMin = Math.floor((totSec - (roundHours * 3600)) / 60);
-  leftoverSec = (totSec - (roundHours * 3600) - (roundMin * 60));
+  const totSecSign = Math.sign(totSec);
+  console.log(`DEBUG: totSecSign is ${totSecSign}`)
+
+  const totSecPos = Math.abs(totSec);
+  console.log(`DEBUG: totSecPos is ${totSecPos}`)
+  
+  const roundHoursPos = Math.floor(totSecPos / 3600);
+  roundHours = totSecSign * roundHoursPos;
+
+  const roundMinPos = Math.floor((totSecPos - (roundHoursPos * 3600)) / 60);
+  roundMin = totSecSign * roundMinPos;
+
+  const leftoverSecPos = (totSecPos - (roundHoursPos * 3600) - (roundMinPos * 60));
+  leftoverSec = totSecSign * leftoverSecPos;
   
   ct = {roundHours, roundMin, leftoverSec};
   return ct;
