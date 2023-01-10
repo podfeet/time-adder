@@ -66,7 +66,8 @@ export default function calc(rows) {
   roundMin = totSecSign * roundMinPos;
 
   // Find positive value of leftoverSec
-  const leftoverSecPos = (totSecPos - (roundHoursPos * 3600) - (roundMinPos * 60));
+  // parseFloat required because these floating point calcs have precision errors. 1.1 hours returned 1 hour, 6 min, and 4.547473508864641e-13 seconds! picked 2 decimal places to cap it.
+  const leftoverSecPos = parseFloat((totSecPos - (roundHoursPos * 3600) - (roundMinPos * 60))).toFixed(2);
   // Apply the sign to get the real leftoverSec
   leftoverSec = totSecSign * leftoverSecPos;
   
