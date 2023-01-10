@@ -39,20 +39,35 @@ export default function calc(rows) {
     totSec += s + m*60 + h*3600;
   }
 
-  // BUG: Math.floor doesn't work as expected on negative values
-  const totSecSign = Math.sign(totSec);
-  console.log(`DEBUG: totSecSign is ${totSecSign}`)
+  // Can't use Math.floor from the outset doesn't work as expected on negative values
+  // math.floor() rounds down the opposite of normal roundDown in Excel.
+  // If  totSec/3600 is -4:10
+  // In Excel that rounds down to -4 (expected)
+  // math.floor() rounds it down to -5
+  // Instead I'll start with the absolute value of totSec and after all calculations, assign the sign of totSec
 
+  // First get the sign of the value in totSec
+  // The Math.sign() static method returns 1 or -1, indicating the sign of the number passed as argument. If the input is 0 or -0, it will be returned as-is.
+  const totSecSign = Math.sign(totSec);
+
+  // The Math.abs() static method returns the absolute value of a number.
+  // Find positive value of totSec
   const totSecPos = Math.abs(totSec);
-  console.log(`DEBUG: totSecPos is ${totSecPos}`)
   
+  // The Math.floor() static method always rounds down and returns the largest integer less than or equal to a given number.
+  // Find positive value of roundHours
   const roundHoursPos = Math.floor(totSecPos / 3600);
+  // Apply the sign to get the real roundHours
   roundHours = totSecSign * roundHoursPos;
 
+  // Find positive value of roundMin
   const roundMinPos = Math.floor((totSecPos - (roundHoursPos * 3600)) / 60);
+  // Apply the sign to get the real roundMin
   roundMin = totSecSign * roundMinPos;
 
+  // Find positive value of leftoverSec
   const leftoverSecPos = (totSecPos - (roundHoursPos * 3600) - (roundMinPos * 60));
+  // Apply the sign to get the real leftoverSec
   leftoverSec = totSecSign * leftoverSecPos;
   
   ct = {roundHours, roundMin, leftoverSec};
