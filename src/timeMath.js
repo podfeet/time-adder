@@ -24,7 +24,7 @@ let ct= {};
  * 
  * @function calc
  * @returns {ct} - dictionary holding 3 calculated times
- * @param rows - array of data from input boxes
+ * @param {Array} rows - array of data from input boxes
  */
 export default function calc(rows) {
   let h = 0;
