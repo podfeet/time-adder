@@ -33,6 +33,7 @@ export default function calc(rows) {
   let totSec = 0;
 
   for ( let i = 1; i < rows.length; i++ ) {
+    // typing in the 3rd+ row doesn't trigger this function
     h = rows[i][1];
     m = rows[i][2];
     s = rows[i][3];

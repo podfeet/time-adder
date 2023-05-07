@@ -2,9 +2,8 @@
 // jQuery isn't loaded because this file looks just at the script.js file
 // and jQuery is called by the html file
 
-// BUG: what do I want to import 
-import from "./index-body.js"
-// import joiner from "./joiner.mjs";
+
+import {default as timeMath} from './timeMath.js';
 
 const totSect = require('./script');
 

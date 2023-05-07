@@ -74,7 +74,7 @@ $(() => {
      * @instance
      * @property {string} tplString - the template string from the script tag
      * @property {string} tplOutput - the rendered template string with the data
-     * @param {timeInputObject} timeInputObject
+     * @param {timeInputObject} timeInputObject - should this be {Object}?
      */
     renderRow() {
       //  get the template string from the script tag
@@ -129,6 +129,8 @@ $(() => {
         $('#moreTimes').click(); // verified this works via console
       }
     });
+    // Add an event listener to the number inputs to trigger the calculations (class="time")
+    $('.time').on('keyup', calcTime);
     return rowNum;
   }
   // click handler for the AddAnotherRow button to call addRow
@@ -136,8 +138,6 @@ $(() => {
     addRow();
   });
 
-  // Add an event listener to the number inputs to trigger the calculations (class="time")
-  $('.time').on('keyup', calcTime);
 
   // click handler to export CSV
   $('#exportCSV').click(() => {
