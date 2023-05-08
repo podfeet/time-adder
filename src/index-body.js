@@ -129,8 +129,8 @@ $(() => {
         $('#moreTimes').click(); // verified this works via console
       }
     });
-    // Add an event listener to the number inputs to trigger the calculations (class="time")
-    $('.time').on('keyup', calcTime);
+    // Add an event listener to the number inputs and optional row names to trigger the calculations (class="time" and "row-name")
+    $('.time, .row-name').on('keyup', calcTime);
     return rowNum;
   }
   // click handler for the AddAnotherRow button to call addRow
