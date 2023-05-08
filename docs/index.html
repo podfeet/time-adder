@@ -17,26 +17,33 @@
       <div class="container border bg-light">
         <!-- row for Title of Totals -->
         <div class="row mt-2">
-          <div class="h3 offset-4 col-6">Total</div>
+          <!-- offset-4 centers "Total" over the 3 columns -->
+          <!-- was col-6 which constrains to 10 of 12 -->
+          <div class="h3 offset-4 col-8">Total</div>
         </div>
         <!-- row for Totals -->
         <div class="row">
           <!-- button to export CSV -->
-          <button type="submit" id="exportCSV" class="col-4 btn btn-primary mt-2 mr-2 sl-0 pr-5">Export Data to CSV</button>
+          <!-- removed pr-5 looks way better -->
+          <!-- had sl-0 but I don't know what that is. removed. -->
+          <!-- removed mr-2 b/c that takes away from column widhts -->
+          <!-- seconds column didn't have room to be col-3 -->
+          <button type="submit" id="exportCSV" class="col-3 btn btn-primary mt-2 ">Export to CSV</button>
           <!-- Totals -->
           <!-- BUG: ALIGNMENT NOT RIGHT AND BAFFLING -->
-          <div class="col-2 mt-2 border align-middle-text-bottom" id="hTot">0</div>
-          <div class="col-2 mt-2 border" id="mTot">0</div>
-          <div class="col-2 mt-2 border" id="sTot">0</div>
+          <div class="col-3 mt-2 border align-middle-text-bottom" id="hTot">0</div>
+          <div class="col-3 mt-2 border" id="mTot">0</div>
+          <div class="col-3 mt-2 border" id="sTot">0</div>
         </div>
       </div>   
       
-        <!-- row for hours, min, sec labels -->
+        <!-- row for hours, min, sec LABELS -->
       <div class="row mt-1">
         <!-- totals -->
-        <div class="offset-4 col-2" id="hours">H</div>
-        <div class="col-2" id="min">M</div>
-        <div class="col-2" id="sec">S</div>
+        <!-- changed offset and cols to 3 each -->
+        <div class="offset-3 col-3" id="hours">H</div>
+        <div class="col-3" id="min">M</div>
+        <div class="col-3" id="sec">S</div>
       </div>
       <!-- placeholder html for new time rows -->
       <div class="row mt-2">
@@ -45,7 +52,7 @@
         </div>
       </div>
       <div class="row text-center">
-        <div class="offset-4 col-6">
+        <div class="offset-3 col-9">
           <!-- button to add more rows -->
           <button type="submit" id="moreTimes" class="btn btn-primary mt-2">Add Another Row</button>
         </div>
@@ -57,24 +64,24 @@
     <script type="text/html" id="tpl_string">
       {{#ids}}
         <div class="row mt-2 form "  >
-          <div class="col-4">
+          <div class="col-3 p-0">
             <!-- Optional row name -->
-            <input type="text" class="form-control row-name" id="{{nameID}}" placeholder="optional name"/>
+            <input type="text" class="form-control row-name" id="{{nameID}}" placeholder="title (optional)"/>
           </div>  
           <!-- Columns for hours min sec to be entered -->
-          <div class="col-2">
+          <div class="col-3 p-0">
             <input type="number" step="any" id={{hoursID}} class="form-control text-right time" placeholder="0" aria-labelledby="hours">
             <div id="h-valid-{{hoursID}}" class="invalid-feedback">
               Numbers, you silly goose!
             </div>
           </div>
-          <div class="col-2">
+          <div class="col-3 p-0">
             <input type="number" step="any" id={{minID}} class="form-control text-right time" placeholder="0" aria-labelledby="min">
             <div id="m-valid-{{minID}}" class="invalid-feedback">
               Numbers, you silly goose!
             </div>
           </div> 
-          <div class="col-2">
+          <div class="col-3 p-0">
             <input type="number" step="any" id={{secID}} class="form-control text-right time" placeholder="0" aria-labelledby="sec">
             <div id="s-valid-{{secID}}" class="invalid-feedback">
               Numbers, you silly goose!
