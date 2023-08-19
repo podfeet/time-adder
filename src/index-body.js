@@ -133,10 +133,6 @@ $(() => {
     $('.time, .row-name').on('keyup', calcTime);
     return rowNum;
   }
-  // click handler for the AddAnotherRow button to call addRow
-  // $('#moreTimes').click(() => {
-  //   addRow();
-  // });
 
   // click handler for the AddAnotherRow button to call addRow
   $('#moreTimes').on('click', (() => {
@@ -144,7 +140,7 @@ $(() => {
   }));
 
   // click handler to export CSV
-  $('#exportCSV').click(() => {
+  $('#exportCSV').on('click', (() => {
     let csvContent = '';
     rows.forEach((rows) => {
       const row = rows.join(',');
@@ -157,7 +153,7 @@ $(() => {
     // window.open returns Not allowed to load local resource: file:///Users/allison/htdocs/time-adder/Title,Hours,Minutes,Seconds%0D%0A,1,0,0%0D%0A,0,0,0%0D%0A
     // const encodedUri = encodeURI(csvContent);
     // window.open(encodedUri);
-  });
+  }));
 });
 
 // Initialize two arrays - one to hold all of the values of the rows as they're created, which will be used to export a CSV file and one to hold the total value of the summed rows. The totalRow array will be populated by the calcTime function.
