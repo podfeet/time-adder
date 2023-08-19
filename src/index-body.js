@@ -121,14 +121,18 @@ $(() => {
       nameID: `n-${rowNum}`,
     }];
     makeRows();
+    // Add the class lastSeconds to the seconds in the newest row
+    // To be used to add a new row if the tab key is heard from that field
     $('input').last().addClass('lastSeconds');
-    // looks for keydown on input with class lastSeconds. if the keycode registered is 9 (tab) then it actually clicks the Add Another Row button (which has ID #moreTimes). It seems like this would create an infinite loop but it requires the tab key to keep it going.
+    // Listen for tab key after the field with lastSeconds class and add a new row
+    // changed keyCode to KeyboardEvent.code
     $('input.lastSeconds').on('keydown', (e) => {
-      const keyCode = e.keyCode || e.which;
-      if (keyCode == 9) {
-        $('#moreTimes').click(); // verified this works via console
+      if (e.key === 'Tab') {
+        // alert('tab was used');
+        addRow();
       }
     });
+
     // Add an event listener to the number inputs and optional row names to trigger the calculations (class="time" and "row-name")
     $('.time, .row-name').on('keyup', calcTime);
     return rowNum;
