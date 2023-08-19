@@ -134,10 +134,14 @@ $(() => {
     return rowNum;
   }
   // click handler for the AddAnotherRow button to call addRow
-  $('#moreTimes').click(() => {
-    addRow();
-  });
+  // $('#moreTimes').click(() => {
+  //   addRow();
+  // });
 
+  // click handler for the AddAnotherRow button to call addRow
+  $('#moreTimes').on('click', (() => {
+    addRow();
+  }));
 
   // click handler to export CSV
   $('#exportCSV').click(() => {
