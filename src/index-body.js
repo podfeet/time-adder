@@ -121,26 +121,30 @@ $(() => {
       nameID: `n-${rowNum}`,
     }];
     makeRows();
+// Add the class lastSeconds to the seconds in the newest row
+    // To be used to add a new row if the tab key is heard from that field
     $('input').last().addClass('lastSeconds');
-    // looks for keydown on input with class lastSeconds. if the keycode registered is 9 (tab) then it actually clicks the Add Another Row button (which has ID #moreTimes). It seems like this would create an infinite loop but it requires the tab key to keep it going.
+    // Listen for tab key after the field with lastSeconds class and add a new row
+    // changed keyCode to KeyboardEvent.code
     $('input.lastSeconds').on('keydown', (e) => {
-      const keyCode = e.keyCode || e.which;
-      if (keyCode == 9) {
-        $('#moreTimes').click(); // verified this works via console
+      if (e.key === 'Tab') {
+        // alert('tab was used');
+        addRow();
       }
     });
+
     // Add an event listener to the number inputs and optional row names to trigger the calculations (class="time" and "row-name")
     $('.time, .row-name').on('keyup', calcTime);
     return rowNum;
   }
-  // click handler for the AddAnotherRow button to call addRow
-  $('#moreTimes').click(() => {
-    addRow();
-  });
 
+  // click handler for the AddAnotherRow button to call addRow
+  $('#moreTimes').on('click', (() => {
+    addRow();
+  }));
 
   // click handler to export CSV
-  $('#exportCSV').click(() => {
+  $('#exportCSV').on('click', (() => {
     let csvContent = '';
     rows.forEach((rows) => {
       const row = rows.join(',');
@@ -153,7 +157,7 @@ $(() => {
     // window.open returns Not allowed to load local resource: file:///Users/allison/htdocs/time-adder/Title,Hours,Minutes,Seconds%0D%0A,1,0,0%0D%0A,0,0,0%0D%0A
     // const encodedUri = encodeURI(csvContent);
     // window.open(encodedUri);
-  });
+  }));
 });
 
 // Initialize two arrays - one to hold all of the values of the rows as they're created, which will be used to export a CSV file and one to hold the total value of the summed rows. The totalRow array will be populated by the calcTime function.
