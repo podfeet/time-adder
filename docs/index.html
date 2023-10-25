@@ -70,7 +70,7 @@
           </div>  
           <!-- Columns for hours min sec to be entered -->
           <div class="col-3 p-0">
-            <input type="number" step="any" id={{hoursID}} class="form-control text-right time" placeholder="0" aria-labelledby="hours">
+            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" id={{hoursID}} class="form-control text-right time" placeholder="0" aria-labelledby="hours">
             <div id="h-valid-{{hoursID}}" class="invalid-feedback">
               Numbers, you silly goose!
             </div>

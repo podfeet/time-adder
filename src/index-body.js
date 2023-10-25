@@ -189,11 +189,17 @@ function calcTime() {
     const $s = $(`#s-`+id);
     const $n = $(`#n-`+id);
     // form validation
-    if ($h.is(':invalid')) {
-      $h.addClass('is-invalid');
+    if ($h.value =='-') {
+      // do nothing
+      console.log(`that's a dash folks`);
     } else {
-      $h.removeClass('is-invalid');
+      if ($h.is(':invalid')) {
+        $h.addClass('is-invalid');
+      } else {
+        $h.removeClass('is-invalid');
+      }
     }
+   
     if ($m.is(':invalid')) {
       $m.addClass('is-invalid');
     } else {
