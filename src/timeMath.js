@@ -57,19 +57,28 @@ export default function calc(rows) {
   // The Math.floor() static method always rounds down and returns the largest integer less than or equal to a given number.
   // Find positive value of roundHours
   const roundHoursPos = Math.floor(totSecPos / 3600);
-  // Apply the sign to get the real roundHours
+  // Apply the sign to get the real roundHours, but not -0
   roundHours = totSecSign * roundHoursPos;
+  if (roundHours == -0) {
+    roundHours = 0;
+  }
 
   // Find positive value of roundMin
   const roundMinPos = Math.floor((totSecPos - (roundHoursPos * 3600)) / 60);
   // Apply the sign to get the real roundMin
   roundMin = totSecSign * roundMinPos;
+  if (roundMin == -0) {
+    roundMin = 0;
+  }
 
   // Find positive value of leftoverSec
   // parseFloat required because these floating point calcs have precision errors. 1.1 hours returned 1 hour, 6 min, and 4.547473508864641e-13 seconds! picked 2 decimal places to cap it.
   const leftoverSecPos = parseFloat((totSecPos - (roundHoursPos * 3600) - (roundMinPos * 60))).toFixed(2);
   // Apply the sign to get the real leftoverSec
   leftoverSec = totSecSign * leftoverSecPos;
+  if (leftoverSec == -0) {
+    leftoverSec = 0;
+  }
   
   ct = {roundHours, roundMin, leftoverSec};
   return ct;
