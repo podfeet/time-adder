@@ -21,12 +21,29 @@ let leftoverSec = 0;
 let ct= {};
 
 /**
+ * Helper function to allow some symbols to accepted as zero
+ * If input is minus, dot, or space, turn them into zeroes
+ * Ternary operation to change - and . and space to zero if entered, else use real value
+ * 
+ * @param {*} x 
+ * @returns {number}
+ */
+function changeToZero(x) {
+  if (typeof x == 'string') {
+    x = x.trim();
+    x = ((x == '-') || (x == '.') || (x == '')) ? 0 : x;
+  }
+  return x;
+}
+
+/**
  * calc uses the numbers entered into the text boxes and adds them together as seconds to get the total number of seconds. It then parses those seconds back to hh:mm:ss
  * 
  * @function calc
  * @returns {ct} - dictionary holding 3 calculated times
  * @param {Array} rows - array of data from input boxes
  */
+
 export default function calc(rows) {
   let h = 0;
   let m = 0;
