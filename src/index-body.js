@@ -209,9 +209,10 @@ function calcTime() {
     } else {
       $s.removeClass('is-invalid');
     }
-    const hVal = Number($h.val());
-    const mVal = Number($m.val());
-    const sVal = Number($s.val());
+    // this line used to say 'const hVal = Number($h.val());' which converted symbols such as - and . and space to numbers before I had a chance to change them to zeroes
+    const hVal = ($h.val());
+    const mVal = ($m.val());
+    const sVal = ($s.val());
     const rowName = $n.val();
     // Store rows into an array to later be exported as a CSV file
     // I need it to work on every keypress, but it should _replace_ the value if it changes.
@@ -224,7 +225,6 @@ function calcTime() {
     
     // ct a dictionary of the calcluated times that are returned by timeMath 
     const ct = timeMath(rows);
-
     $('#hTot').html(ct.roundHours);
     $('#mTot').html(ct.roundMin);
     $('#sTot').html(ct.leftoverSec);
