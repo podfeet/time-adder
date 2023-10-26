@@ -51,10 +51,11 @@ export default function calc(rows) {
   let totSec = 0;
 
   for ( let i = 1; i < rows.length; i++ ) {
-    h = rows[i][1];
-    m = rows[i][2];
-    s = rows[i][3];
-    totSec += s + m*60 + h*3600;
+    h = changeToZero(rows[i][1]);
+    m = changeToZero(rows[i][2]);
+    s = changeToZero(rows[i][3]);
+    // Multiply sec x 1 so '7' becomes a number not a string
+    totSec += 1*s + m*60 + h*3600;
   }
 
   // Can't use Math.floor from the outset doesn't work as expected on negative values
