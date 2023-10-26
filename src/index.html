@@ -70,19 +70,20 @@
           </div>  
           <!-- Columns for hours min sec to be entered -->
           <div class="col-3 p-0">
+            <!-- input type changed to text so I could allow minus & dot & space without error -->
             <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" id={{hoursID}} class="form-control text-right time" placeholder="0" aria-labelledby="hours">
             <div id="h-valid-{{hoursID}}" class="invalid-feedback">
               Numbers, you silly goose!
             </div>
           </div>
           <div class="col-3 p-0">
-            <input type="number" step="any" id={{minID}} class="form-control text-right time" placeholder="0" aria-labelledby="min">
+            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" step="any" id={{minID}} class="form-control text-right time" placeholder="0" aria-labelledby="min">
             <div id="m-valid-{{minID}}" class="invalid-feedback">
               Numbers, you silly goose!
             </div>
           </div> 
           <div class="col-3 p-0">
-            <input type="number" step="any" id={{secID}} class="form-control text-right time" placeholder="0" aria-labelledby="sec">
+            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" step="any" id={{secID}} class="form-control text-right time" placeholder="0" aria-labelledby="sec">
             <div id="s-valid-{{secID}}" class="invalid-feedback">
               Numbers, you silly goose!
             </div>
