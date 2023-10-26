@@ -278,7 +278,7 @@ describe('Multiple dot symbols', () => {
 });
 
 describe('Generalized test with dot minus and spaces', () =>{
-  test('Allow one dot symbol in s', () => {
+  test('Allow one dot minus and spaces in h m s', () => {
     const input = [
       ['Title', 'Hours', 'Minutes', 'Seconds'],
       ['bob', '-', '     ', '.'],
@@ -292,4 +292,4 @@ describe('Generalized test with dot minus and spaces', () =>{
 
     expect(timeMath(input)).toStrictEqual(output);
   });
-})
+});
