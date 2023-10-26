@@ -1,3 +1,4 @@
+/* eslint-disable no-compare-neg-zero */
 /* eslint-disable max-len */
 /* eslint-disable jsdoc/require-returns-check */
 // Math starts here
