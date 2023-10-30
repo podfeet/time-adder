@@ -24,45 +24,50 @@ test('if hours is positive', () => {
   expect(timeMath(input)).toStrictEqual(output);
 });
 
-test('Negative Zero: if total is negative, the 0s should not be -0. min & sec test', () => {
-  const input = [
-    ['Title', 'Hours', 'Minutes', 'Seconds'],
-    ['bob', '-7', 0, 0],
-  ];
-  const output = {
-    'roundHours': -7,
-    'roundMin': 0,
-    'leftoverSec': 0,
-  };
-
-  expect(timeMath(input)).toStrictEqual(output);
+describe('Ensuring no negative 0s', () => {
+  test('Negative Zero: if total is negative, the 0s should not be -0. min & sec test', () => {
+    const input = [
+      ['Title', 'Hours', 'Minutes', 'Seconds'],
+      ['bob', '-7', 0, 0],
+    ];
+    const output = {
+      'roundHours': -7,
+      'roundMin': 0,
+      'leftoverSec': 0,
+    };
+  
+    expect(timeMath(input)).toStrictEqual(output);
+  });
+  test('Negative Zero: if total is negative, the 0s should not be -0. hrs & sec test', () => {
+    const input = [
+      ['Title', 'Hours', 'Minutes', 'Seconds'],
+      ['bob', '0', -7, 0],
+    ];
+    const output = {
+      'roundHours': 0,
+      'roundMin': -7,
+      'leftoverSec': 0,
+    };
+  
+    expect(timeMath(input)).toStrictEqual(output);
+  });
 });
-test('Negative Zero: if total is negative, the 0s should not be -0. hrs & sec test', () => {
-  const input = [
-    ['Title', 'Hours', 'Minutes', 'Seconds'],
-    ['bob', '0', -7, 0],
-  ];
-  const output = {
-    'roundHours': 0,
-    'roundMin': -7,
-    'leftoverSec': 0,
-  };
 
-  expect(timeMath(input)).toStrictEqual(output);
-});
+describe('Large enough positive values with smaller negative values should be positive', () => {
+  test('Large enough positive value in min with negative hours should be positive end result', () => {
+    const input = [
+      ['Title', 'Hours', 'Minutes', 'Seconds'],
+      ['bob', '-1', 61, 0],
+    ];
+    const output = {
+      'roundHours': 0,
+      'roundMin': 1,
+      'leftoverSec': 0,
+    };
 
-test('Large enough positive value in min with negative hours should be positive end result', () => {
-  const input = [
-    ['Title', 'Hours', 'Minutes', 'Seconds'],
-    ['bob', '-1', 61, 0],
-  ];
-  const output = {
-    'roundHours': 0,
-    'roundMin': 1,
-    'leftoverSec': 0,
-  };
+    expect(timeMath(input)).toStrictEqual(output);
+  });
 
-  expect(timeMath(input)).toStrictEqual(output);
 });
 
 // ------------------------------------//
