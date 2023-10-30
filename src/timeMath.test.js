@@ -8,7 +8,7 @@
 // and jQuery is called by the html file
 
 
-import {default as timeMath } from './timeMath.js';
+import {default as timeMath} from './timeMath.js';
 
 test('if hours is positive', () => {
   const input = [
