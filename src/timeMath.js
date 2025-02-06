@@ -21,7 +21,7 @@ let leftoverSec = 0;
 let ct= {};
 
 /**
- * Helper function to allow some symbols to accepted as zero
+ * Helper function to allow some symbols to be accepted as zero
  * If input is minus, dot, or space, turn them into zeroes
  * Ternary operation to change - and . and space to zero if entered, else use real value
  * 
@@ -37,13 +37,12 @@ function changeToZero(x) {
 }
 
 /**
- * calc uses the numbers entered into the text boxes and adds them together as seconds to get the total number of seconds. It then parses those seconds back to hh:mm:ss
+ * Calculates the total time in hours, minutes, and seconds from the given rows of time data.
  * 
  * @function calc
- * @returns {ct} - dictionary holding 3 calculated times
- * @param {Array} rows - array of data from input boxes
+ * @param {Array} rows - Array of time data where each row contains title, hours, minutes, and seconds.
+ * @returns {object} - An object containing the calculated total hours, minutes, and seconds (ct).
  */
-
 export default function calc(rows) {
   let h = 0;
   let m = 0;
