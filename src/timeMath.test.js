@@ -3,10 +3,8 @@
 
 // Tests timeMath.js module only
 
-// This test file doesn't work because jest does not recognize $
-// jQuery isn't loaded because this file looks just at the script.js file
-// and jQuery is called by the html file
-
+// Terminal in root dir: npm test
+// or npm test src/timeMath.test.js
 
 import {default as timeMath} from './timeMath.js';
 
