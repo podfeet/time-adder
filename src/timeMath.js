@@ -12,6 +12,10 @@
 //   ["pancakes", 3, 27, 59],
 //   ["waffles", 43, 3, 1]
 // ];
+
+// import is-it-check library
+import is from 'is-it-check';
+
 // Initialize global variables
 let roundHours = 0;
 let roundMin = 0;
@@ -29,7 +33,8 @@ let ct= {};
  * @returns {number}
  */
 function changeToZero(x) {
-  if (typeof x == 'string') {
+  // if (typeof x == 'string') { // used is.js library which I've removed. can delete this line
+  if (is.string(x)) { // use is-it-check library
     x = x.trim();
     x = ((x == '-') || (x == '.') || (x == '')) ? 0 : x;
   }
