@@ -68,16 +68,14 @@
         <!-- row for Totals -->
         <div class="row">
           <!-- button to export CSV -->
-          <!-- removed pr-5 looks way better -->
-          <!-- had sl-0 but I don't know what that is. removed. -->
-          <!-- removed mr-2 b/c that takes away from column widhts -->
-          <!-- seconds column didn't have room to be col-3 -->
-          <button type="submit" id="exportCSV" class="col-3 btn btn-primary mt-2 ">Export to CSV</button>
+          <button type="submit" id="exportCSV" class="col-3 btn btn-success mt-2 ">Export to CSV</button>
+          <!-- button to export ISO8601-->
+          <button type="submit" id="exportISO" class="col-3 btn btn-danger mt-2 ">Export to HH:MM:SS</button>
           <!-- Totals -->
           <!-- BUG: ALIGNMENT NOT RIGHT AND BAFFLING -->
-          <div class="col-3 mt-2 border align-middle-text-bottom" id="hTot">0</div>
-          <div class="col-3 mt-2 border" id="mTot">0</div>
-          <div class="col-3 mt-2 border" id="sTot">0</div>
+          <div class="col-2 mt-2 border align-middle-text-bottom" id="hTot">0</div>
+          <div class="col-2 mt-2 border" id="mTot">0</div>
+          <div class="col-2 mt-2 border" id="sTot">0</div>
         </div>
       </div>   
       
