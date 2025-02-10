@@ -4,7 +4,7 @@ import $ from 'jquery';
 // mustache templates
 import Mustache from 'mustache';
 
-// bootstrap 4 JS and plugins
+// bootstrap 5 JS and plugins
 import 'bootstrap';
 
 // import calc function and call it timeMath. Also gives access to {ct} dictionary
