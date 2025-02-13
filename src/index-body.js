@@ -203,7 +203,7 @@ $(() => {
 
   // Create a new array with the padded values.
   const newRows = padArrayData(rows);
-  console.log(newRows);
+  // console.log(newRows);
 
   // click handler to export CSV
   $('#exportCSV').on('click', (() => {
@@ -224,8 +224,10 @@ $(() => {
 
   // click handler to export ISO HH:MM:SS
   $('#exportISO').on('click', (() => {
+    // Create a new array with the padded values.
+    const newRows = padArrayData(rows);
     let ISOContent = '';
-    rows.forEach((row) => {
+    newRows.forEach((row) => {
       // row = rows.join(':');
       ISOContent += row[0] + ': ' + row.slice(1, 4).join(':') + '\r\n';
     });
