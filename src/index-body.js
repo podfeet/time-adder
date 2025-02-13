@@ -121,7 +121,7 @@ $(() => {
       nameID: `n-${rowNum}`,
     }];
     makeRows();
-// Add the class lastSeconds to the seconds in the newest row
+    // Add the class lastSeconds to the seconds in the newest row
     // To be used to add a new row if the tab key is heard from that field
     $('input').last().addClass('lastSeconds');
     // Listen for tab key after the field with lastSeconds class and add a new row
@@ -147,12 +147,30 @@ $(() => {
   $('#exportCSV').on('click', (() => {
     let csvContent = '';
     rows.forEach((rows) => {
+    // alert(rows[1][0]); // this alerts the title of the first row
       const row = rows.join(',');
       csvContent += row + '\r\n';
     });
     csvContent += totalRow + '\r\n';
     // display CSV in an alert
     alert(csvContent);
+    // Attempt to create a new window with the CSV content (do I really need this to work?)
+    // window.open returns Not allowed to load local resource: file:///Users/allison/htdocs/time-adder/Title,Hours,Minutes,Seconds%0D%0A,1,0,0%0D%0A,0,0,0%0D%0A
+    // const encodedUri = encodeURI(csvContent);
+    // window.open(encodedUri);
+  }));
+
+  // click handler to export ISO HH:MM:SS
+  // bugs: No space after title, numbers don't have two digits, and the total row has commas
+  $('#exportISO').on('click', (() => {
+    let ISOContent = '';
+    rows.forEach((rows) => {
+      const row = rows.join(': ');
+      ISOContent += row + '\r\n';
+    });
+    ISOContent += totalRow[0]+' '+totalRow[1] + ':' + totalRow[2] + ':' + totalRow[3] + '\r\n';
+    // display CSV in an alert
+    alert(ISOContent);
     // Attempt to create a new window with the CSV content (do I really need this to work?)
     // window.open returns Not allowed to load local resource: file:///Users/allison/htdocs/time-adder/Title,Hours,Minutes,Seconds%0D%0A,1,0,0%0D%0A,0,0,0%0D%0A
     // const encodedUri = encodeURI(csvContent);
