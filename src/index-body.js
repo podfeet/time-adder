@@ -153,7 +153,6 @@ $(() => {
    * @returns {string} The padded numeric string.
    */
   function padToTwo(rows) {
-    console.log(rows); // rows hasn't been populated yet?
     if (rows.startsWith('-')) {
       // Extract the digits after the '-' sign.
       const digits = rows.slice(1);
@@ -201,10 +200,6 @@ $(() => {
     });
   }
 
-  // Create a new array with the padded values.
-  const newRows = padArrayData(rows);
-  // console.log(newRows);
-
   // click handler to export CSV
   $('#exportCSV').on('click', (() => {
     let csvContent = '';
@@ -224,20 +219,18 @@ $(() => {
 
   // click handler to export ISO HH:MM:SS
   $('#exportISO').on('click', (() => {
+    //  Add totalRow to rows so it gets padded to two also
+    rows.push(totalRow);
     // Create a new array with the padded values.
     const newRows = padArrayData(rows);
     let ISOContent = '';
+    // Title should be immediately followed by colon-spac
+    // then hours, minutes, seconds should be separated by just colons
     newRows.forEach((row) => {
-      // row = rows.join(':');
       ISOContent += row[0] + ': ' + row.slice(1, 4).join(':') + '\r\n';
     });
-    ISOContent += totalRow[0] + ': ' + totalRow.slice(1, 4).join(':') + '\r\n';
-    // display CSV in an alert
+    // display ISO times in an alert
     alert(ISOContent);
-    // Attempt to create a new window with the CSV content (do I really need this to work?)
-    // window.open returns Not allowed to load local resource: file:///Users/allison/htdocs/time-adder/Title,Hours,Minutes,Seconds%0D%0A,1,0,0%0D%0A,0,0,0%0D%0A  
-    // const encodedUri = encodeURI(csvContent);
-    // window.open(encodedUri);
   }));
 });
 
