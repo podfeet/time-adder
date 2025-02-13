@@ -91,7 +91,7 @@ $(() => {
    * makeRows(num) loops through the Array timeInputObject.ids and for each entry creates an instance of the class aRow and then calls the renderRow function to actually display the input boxes
    * 
    * @function makeRows
-   * @property {Array.<timeInputObject.ids>} timeInputObject.ids - The Array of IDs for h/m/s and add/sub buttons
+   * @property {Array.<timeInputObject.ids>} timeInputObject.ids - The Array of IDs for h/m/s
    */
   function makeRows() {
     for (let i = 0; i < timeInputObject.ids.length; i += 1) {
@@ -104,7 +104,7 @@ $(() => {
   rowNum = timeInputObject.ids.length;
   addRow();
   /**
-   * addRow creates a new row of input boxes and add/subtract buttons. It is triggered by the onclick event handler for the Add Another Row button. It also adds an event handler to the last input box on the page to click the Add Another Row Button when the user hits tab
+   * addRow creates a new row of input boxes. It is triggered by the onclick event handler for the Add Another Row button. It also adds an event handler to the last input box on the page to click the Add Another Row Button when the user hits tab
    * 
    * @function addRow
    * 
@@ -143,6 +143,68 @@ $(() => {
     addRow();
   }));
 
+  // Function to ensure the numeric string is at least two digits.
+  // It handles negative numbers by padding the absolute part.
+  /**
+   * Pads a numeric string to ensure it has at least two digits.
+   * If the number is negative, the absolute part is padded while preserving the negative sign.
+   *
+   * @param {string} rows - The numeric string to pad.
+   * @returns {string} The padded numeric string.
+   */
+  function padToTwo(rows) {
+    console.log(rows); // rows hasn't been populated yet?
+    if (rows.startsWith('-')) {
+      // Extract the digits after the '-' sign.
+      const digits = rows.slice(1);
+      // If there is only one digit, pad it with a leading zero.
+      if (digits.length < 2) {
+        return '-' + digits.padStart(2, '0');
+      }
+      return rows; // Already two digits or more.
+    } else {
+      if (rows.length < 2) {
+        return rows.padStart(2, '0');
+      }
+      return rows; // Already two digits or more.
+    }
+  }
+
+  /**
+   * Processes a 2D array (table) of strings, padding numeric values to ensure they have at least two digits.
+   * Assumes that:
+   * - The first row is a header row and remains unmodified.
+   * - The first column of each subsequent row is non-numeric (e.g., a title or name) and remains unmodified.
+   *
+   * @param {Array<Array<string>>} rows - The 2D array representing the table data.
+   * @returns {Array<Array<string>>} A new 2D array with numeric cells padded to two digits.
+   */
+  function padArrayData(rows) {
+    return rows.map((row, rowIndex) => {
+      // Return the header row unmodified.
+      if (rowIndex === 0) {
+        return row;
+      }
+      // Process the cells of the row.
+      return row.map((cell, cellIndex) => {
+        // Leave the first column (e.g., names or titles) unchanged.
+        if (cellIndex === 0) {
+          return cell;
+        }
+        // Check if the cell contains a number and pad if necessary.
+        if (!isNaN(Number(cell))) {
+          return padToTwo(cell);
+        }
+        // Return non-numeric cells unchanged.
+        return cell;
+      });
+    });
+  }
+
+  // Create a new array with the padded values.
+  const newRows = padArrayData(rows);
+  console.log(newRows);
+
   // click handler to export CSV
   $('#exportCSV').on('click', (() => {
     let csvContent = '';
@@ -161,18 +223,17 @@ $(() => {
   }));
 
   // click handler to export ISO HH:MM:SS
-  // bugs: No space after title, numbers don't have two digits, and the total row has commas
   $('#exportISO').on('click', (() => {
     let ISOContent = '';
-    rows.forEach((rows) => {
-      const row = rows.join(': ');
-      ISOContent += row + '\r\n';
+    rows.forEach((row) => {
+      // row = rows.join(':');
+      ISOContent += row[0] + ': ' + row.slice(1, 4).join(':') + '\r\n';
     });
-    ISOContent += totalRow[0]+' '+totalRow[1] + ':' + totalRow[2] + ':' + totalRow[3] + '\r\n';
+    ISOContent += totalRow[0] + ': ' + totalRow.slice(1, 4).join(':') + '\r\n';
     // display CSV in an alert
     alert(ISOContent);
     // Attempt to create a new window with the CSV content (do I really need this to work?)
-    // window.open returns Not allowed to load local resource: file:///Users/allison/htdocs/time-adder/Title,Hours,Minutes,Seconds%0D%0A,1,0,0%0D%0A,0,0,0%0D%0A
+    // window.open returns Not allowed to load local resource: file:///Users/allison/htdocs/time-adder/Title,Hours,Minutes,Seconds%0D%0A,1,0,0%0D%0A,0,0,0%0D%0A  
     // const encodedUri = encodeURI(csvContent);
     // window.open(encodedUri);
   }));
@@ -227,7 +288,7 @@ function calcTime() {
     } else {
       $s.removeClass('is-invalid');
     }
-    // this line used to say 'const hVal = Number($h.val());' which converted symbols such as - and . and space to numbers before I had a chance to change them to zeroes
+    // get the values of the input boxes
     const hVal = ($h.val());
     const mVal = ($m.val());
     const sVal = ($s.val());
@@ -253,5 +314,4 @@ function calcTime() {
   mTotVal = $('#mTot').text();
   sTotVal = $('#sTot').text();
   totalRow = [Total, hTotVal, mTotVal, sTotVal];
-  // return rows; this didn't make rows available
 }
