@@ -56,20 +56,20 @@
 
     <!-- container to hold the column labels & time rows -->
        <div class="container border rounded bg-light justify-content-center">
-        <!-- row for Title of Totals -->
-        <div class="row mt-2 ">
-          <!-- offset-6 centers "Total" over the 3 columns -->
-          <div class="h3 offset-6 col-9 ">Total</div>
+        <!-- open row for export buttons -->
+        <div class="row p-0"> 
+          <!-- button to export CSV -->
+          <button type="submit" id="exportCSV" class="btn btn-success mt-2 w-100 ">Export to CSV</button>
+          <!-- button to export ISO8601-->
+          <button type="submit" id="exportISO" class="btn btn-danger mt-2 w-100 ">Export to HH:MM:SS</button>
         </div>
         <!-- open row for Totals -->
         <div class="row">
-          <!-- open col for export buttons -->
-          <div class="col-3 p-0"> 
-             <!-- button to export CSV -->
-            <button type="submit" id="exportCSV" class="btn btn-success mt-2 w-100 ">Export to CSV</button>
-            <!-- button to export ISO8601-->
-            <button type="submit" id="exportISO" class="btn btn-danger mt-2 w-100 ">Export to HH:MM:SS</button>
-          </div>
+          <!-- col for Title of Totals -->
+        <div class="col-3 mt-2 ">
+          <!-- offset-6 centers "Total" over the 3 columns -->
+          <div class="h3 offset-6 col-9 ">Total</div>
+        </div>
           <!-- close col for export buttons -->
           <!-- Total numbers -->
           <div class="col-3 mt-2 border d-flex align-items-center justify-content-center" id="hTot">0</div>
