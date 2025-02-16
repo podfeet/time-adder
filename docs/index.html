@@ -28,7 +28,7 @@
                 A web app to add (and subtract) <em>elapsed</em> time
               </p>
             </div>
-          </div> <!-- cloose row for Title-->
+          </div> <!-- close row for Title-->
             <!-- row for explanation button -->
             <div class="row"> <!-- row for explanation button -->
               <div class="col offset-4">
@@ -55,51 +55,52 @@
     </header>
 
     <!-- container to hold the column labels & time rows -->
-    <div class="container text-center">
-      <div class="container border rounded bg-light">
-        <!-- row for Title of Totals -->
-        <div class="row mt-2">
-          <!-- offset-4 centers "Total" over the 3 columns -->
-          <!-- was col-6 which constrains to 10 of 12 -->
-          <div class="h3 offset-3 col-9">Total</div>
+       <div class="container border rounded bg-light justify-content-center">
+        <!-- open row for export buttons -->
+        <div class="row p-0"> 
+          <!-- button to export CSV -->
+          <button type="submit" id="exportCSV" class="btn btn-success col-6 ">Export to CSV</button>
+          <!-- button to export ISO8601-->
+          <button type="submit" id="exportISO" class="btn btn-danger col-6 ">Export to HH:MM:SS</button>
         </div>
-        <!-- row for Totals -->
+        <!-- close row for export buttons -->
+        <!-- open row for Totals -->
         <div class="row">
-          <!-- open col for export buttons -->
-          <div class="col-3 p-0"> 
-             <!-- button to export CSV -->
-            <button type="submit" id="exportCSV" class="btn btn-success mt-2 w-100 ">Export to CSV</button>
-            <!-- button to export ISO8601-->
-            <button type="submit" id="exportISO" class="btn btn-danger mt-2 w-100 ">Export to HH:MM:SS</button>
-          </div>
-          <!-- Totals -->
-          <div class="col-3 mt-2 border align-middle-text-bottom" id="hTot">0</div>
-          <div class="col-3 mt-2 border" id="mTot">0</div>
-          <div class="col-3 mt-2 border" id="sTot">0</div>
+          <!-- col for Title of Totals -->
+        <div class="col-3 mt-2 ">
+          <!-- offset-6 centers "Total" over the 3 columns -->
+          <div class="h4 offset-6 col-9 ">Total</div>
+        </div>
+          
+          <!-- Total numbers -->
+          <div class="h4 col-3 mt-2 border d-flex align-items-center justify-content-center" id="hTot">0</div>
+          <div class="h4 col-3 mt-2 border d-flex align-items-center justify-content-center" id="mTot">0</div>
+          <div class="h4 col-3 mt-2 border d-flex align-items-center justify-content-center" id="sTot">0</div>
         </div>
       </div>   
       
+      <div class="container text-center">
         <!-- row for hours, min, sec LABELS -->
-      <div class="row mt-1">
-        <!-- totals -->
-        <!-- changed offset and cols to 3 each -->
-        <div class="offset-3 col-3" id="hours">H</div>
-        <div class="col-3" id="min">M</div>
-        <div class="col-3" id="sec">S</div>
-      </div>
-      <!-- placeholder html for new time rows -->
-      <div class="row mt-2">
-        <div class="col">
-          <div class="col" id="timeRowPlaceholder"></div>
+        <div class="row mt-1">
+          <!-- totals -->
+          <!-- changed offset and cols to 3 each -->
+          <div class="offset-3 col-3" id="hours">H</div>
+          <div class="col-3" id="min">M</div>
+          <div class="col-3" id="sec">S</div>
+        </div>
+        <!-- placeholder html for new time rows -->
+        <div class="row mt-2">
+          <div class="col d-flex align-items-center justify-content-center">
+            <div class="col " id="timeRowPlaceholder"></div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="offset-3 col-9">
+            <!-- button to add more rows -->
+            <button type="submit" id="moreTimes" class="btn btn-primary mt-2">Add Another Row</button>
+          </div>
         </div>
       </div>
-      <div class="row text-center">
-        <div class="offset-3 col-9">
-          <!-- button to add more rows -->
-          <button type="submit" id="moreTimes" class="btn btn-primary mt-2">Add Another Row</button>
-        </div>
-      </div>
-    </div>
 
    <!-- define the template string -->
    <div class="container"></div>
