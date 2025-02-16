@@ -55,7 +55,7 @@
     </header>
 
     <!-- container to hold the column labels & time rows -->
-       <div class="container border rounded bg-light justify-content-center">
+      <div class="container border rounded bg-light justify-content-center">
         <!-- open row for export buttons -->
         <div class="row p-0"> 
           <!-- button to export CSV -->
@@ -63,20 +63,22 @@
           <!-- button to export ISO8601-->
           <button type="submit" id="exportISO" class="btn btn-danger col-6 ">Export to HH:MM:SS</button>
         </div>
+      </div>
         <!-- close row for export buttons -->
         <!-- open row for Totals -->
+      <div class="container mt-2 h4 border rounded bg-light justify-content-center">
         <div class="row">
           <!-- col for Title of Totals -->
-        <div class="col-3 mt-2 ">
-          <!-- offset-6 centers "Total" over the 3 columns -->
-          <div class="h4 offset-6 col-9 ">Total</div>
-        </div>
+          <div class="col-3 text-center">
+            Total
+          </div>
           
           <!-- Total numbers -->
-          <div class="h4 col-3 mt-2 border d-flex align-items-center justify-content-center" id="hTot">0</div>
-          <div class="h4 col-3 mt-2 border d-flex align-items-center justify-content-center" id="mTot">0</div>
-          <div class="h4 col-3 mt-2 border d-flex align-items-center justify-content-center" id="sTot">0</div>
+          <div class="col-3 border d-flex align-items-center justify-content-center" id="hTot">0</div>
+          <div class="col-3 border d-flex align-items-center justify-content-center" id="mTot">0</div>
+          <div class="col-3 border d-flex align-items-center justify-content-center" id="sTot">0</div>
         </div>
+      </div>
       </div>   
       
       <div class="container text-center">
