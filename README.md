@@ -10,5 +10,3 @@ Total elapsed time will be calculated simply by calculating the number of second
 
 You have two export options: Export to CSV and Export to HH:MM:SS. Both export options will pop up an alert allowing the usuer to copy the data to the clipboard.
 
- can export a CSV list of the calculations. This isn't stored, so you simply copy it from the screen.
-
