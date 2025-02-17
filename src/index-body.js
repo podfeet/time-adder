@@ -72,7 +72,7 @@ $(() => {
     // ****************************** //
     /**
      * @instance
-     * @property {string} tplString - the template string from the script tag
+     * @property {string} tplString - the template string from the script tag.
      * @property {string} tplOutput - the rendered template string with the data
      * @param {timeInputObject} timeInputObject - should this be {Object}?
      */
