@@ -8,5 +8,7 @@ Time Adder Is designed to allow users to enter multiple elapsed time values in h
 
 Total elapsed time will be calculated simply by calculating the number of seconds in each row and adding/subtracting them from the total and then converting them back into hours, minutes, and seconds.
 
-You can export a CSV list of the calculations. This isn't stored, so you simply copy it from the screen.
+You have two export options: Export to CSV and Export to HH:MM:SS. Both export options will pop up an alert allowing the usuer to copy the data to the clipboard.
+
+ can export a CSV list of the calculations. This isn't stored, so you simply copy it from the screen.
 
