@@ -49,13 +49,17 @@ $(() => {
      * @param {string} hoursID - The html ID for the hours input box for a given row
      * @param {string} minID - The html ID for the minutes input box for a given row
      * @param {string} secID - The html ID for the seconds input box for a given row
-     * @param {string} name - the name that will be stored for the row of values
+     * @param {string} nameID - the name that will be stored for the row of values
+     * @param {string} addBtnID - The html ID for the + button for a given row
+     * @param {string} subBtnID - The html ID for the - button for a given row
      */
     constructor(details) {
       this.hoursIDhours = details.hoursID;
       this.minIDmin = details.minID;
       this.secIDsec = details.secID;
       this.nameIDname = details.nameID;
+      this.addBtnIDadd = details.addBtnID;
+      this.subBtnIDsub = details.subBtnID;
     }
     // ****************************** //
     //  Define the Instance functions //
