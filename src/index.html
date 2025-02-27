@@ -123,7 +123,7 @@
           <!-- hours -->
           <div class="col-2 p-0">
             <!-- input type changed to text so I could allow minus & dot & space without error -->
-            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" id={{hoursID}} class="form-control text-center time" placeholder="0" aria-labelledby="hours">
+            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" id="{{hoursID}}" class="form-control text-center time" placeholder="0" aria-labelledby="hours">
             <div id="h-valid-{{hoursID}}" class="invalid-feedback">
               Numbers, you silly goose!
             </div>
@@ -131,7 +131,7 @@
 
           <!-- minutes -->
           <div class="col-2 p-0">
-            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" step="any" id={{minID}} class="form-control text-center time" placeholder="0" aria-labelledby="min">
+            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" step="any" id="{{minID}}" class="form-control text-center time" placeholder="0" aria-labelledby="min">
             <div id="m-valid-{{minID}}" class="invalid-feedback">
               Numbers, you silly goose!
             </div>
@@ -139,7 +139,7 @@
 
           <!-- seconds -->
           <div class="col-2 p-0">
-            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" step="any" id={{secID}} class="form-control text-center time" placeholder="0" aria-labelledby="sec">
+            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" step="any" id="{{secID}}" class="form-control text-center time" placeholder="0" aria-labelledby="sec">
             <div id="s-valid-{{secID}}" class="invalid-feedback">
               Numbers, you silly goose!
             </div>
@@ -148,8 +148,8 @@
           <!-- +/- buttons -->
           <div class="btn-group col-2" id="btn-group" role="group" aria-label="buttons to add and subtract">
             <!-- Add button default to "active" -->
-            <button type="button" id={{addBtnID}} class="active btn btn-outline-primary">+</button>
-            <button type="button" id={{subBtnID}} class="btn btn-outline-primary">-</button>
+            <button type="button" id="{{addBtnID}}" class="active btn btn-outline-primary">+</button>
+            <button type="button" id="{{subBtnID}}" class="btn btn-outline-primary">-</button>
           </div>
 
         </div>      
