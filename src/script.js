@@ -117,7 +117,8 @@ $(() => {
       subBtnID: `sub-${rowNum}`,
     }];
     makeRows();
-    $('input').last().addClass('lastSeconds'); // BUG: MIGHT add this class to the subtract button
+    // Add lastSeconds class so the tab key knows to trigger the Add Another Row button
+    $('#s-${rowNum}').addClass('lastSeconds');
 
     // looks for keydown on input with class lastSeconds. if the keycode registered is 9 (tab) then it actually clicks the Add Another Row button (which has ID #moreTimes). It seems like this would create an infinite loop but it requires the tab key to keep it going.
     $('input.lastSeconds').on('keydown', (e) => {
