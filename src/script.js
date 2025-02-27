@@ -7,8 +7,8 @@
  * timeInputObject is an Object to hold an array of the IDs for the input boxes for hours, minutes and seconds in each row, along with an optional name for the row.
  * 
  * @typedef {object} timeInputObject
- * @property {Array.<{hoursID: string, minID: string, secID: string, nameID: string}>} ids - the HTML IDs for the input boxes for hours, minutes and seconds in each row, along with the name for the row
- * @param {{hoursID: string, minID: string, secID: string, nameID: string}} timeInput.ids
+ * @property {Array.<{hoursID: string, minID: string, secID: string, nameID: string, addBtnID: string, subBtnID: string}>} ids - the HTML IDs for the input boxes for hours, minutes and seconds in each row, along with the name for the row
+ * @param {{hoursID: string, minID: string, secID: string, nameID: string, addBtnID: string, subBtnID: string}} timeInput.ids
  */
 const timeInputObject = {
   /**
@@ -19,9 +19,9 @@ const timeInputObject = {
       hoursID: 'h-1',
       minID: 'm-1',
       secID: 's-1',
+      nameID: 'n-1',
       addBtnID: 'add-1',
       subBtnID: 'sub-1',
-      nameID: 'n-1',
     },
   ],
 };
@@ -113,9 +113,11 @@ $(() => {
       minID: `m-${rowNum}`,
       secID: `s-${rowNum}`,
       nameID: `n-${rowNum}`,
+      addBtnID: `add-${rowNum}`,
+      subBtnID: `sub-${rowNum}`,
     }];
     makeRows();
-    $('input').last().addClass('lastSeconds');
+    $('input').last().addClass('lastSeconds'); // BUG: MIGHT add this class to the subtract button
 
     // looks for keydown on input with class lastSeconds. if the keycode registered is 9 (tab) then it actually clicks the Add Another Row button (which has ID #moreTimes). It seems like this would create an infinite loop but it requires the tab key to keep it going.
     $('input.lastSeconds').on('keydown', (e) => {
