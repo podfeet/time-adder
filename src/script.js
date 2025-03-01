@@ -131,13 +131,13 @@ $(() => {
   }
 
   // click handler for the AddAnotherRow button to call addRow
-  $('#moreTimes').click(() => {
+  $('#moreTimes').on('click', () => {
     addRow();
     console.log('addRow button pushed');
   });
 
   // click handler to export CSV
-  $('#exportCSV').click(() => {
+  $('#exportCSV').on('click', () => {
     let csvContent = '';
 
     rows.forEach((rows) => {
