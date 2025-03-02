@@ -63,12 +63,11 @@ export default function calc(rows) {
    
     // Check for minus button to reverse the signs
     if ($(`#sub-`+[i]).hasClass('active')) {
-      h = -h;
-      m = -m;
-      s = -s;
-    }
+      totSec += -(1*s + m*60 + h*3600);
+    } else {
     // Multiply sec x 1 so '7' becomes a number not a string
-    totSec += 1*s + m*60 + h*3600;
+      totSec += 1*s + m*60 + h*3600;
+    }
   }
 
   // Can't use Math.floor from the outset doesn't work as expected on negative values
