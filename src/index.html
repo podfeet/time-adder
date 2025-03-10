@@ -80,31 +80,31 @@
       </div>
     </div> <!-- close container for Totals -->
       <!-- </div>    -->
-      
-      <div class="container text-center">
-        <!-- row for hours, min, sec LABELS -->
-        <div class="row mt-1">
-          <!-- totals -->
-          <!-- changed offset and cols to 3 each -->
-          <div class="offset-3 col-3" id="hours">H</div>
-          <div class="col-3" id="min">M</div>
-          <div class="col-3" id="sec">S</div>
+    <!-- container just for H M S headings -->
+    <div class="container text-center">
+      <!-- row for hours, min, sec LABELS -->
+      <div class="row mt-1">
+        <!-- offset to 3 so aligned above -->
+        <div class="offset-3 col-3" id="hours">H</div>
+        <div class="col-3" id="min">M</div>
+        <div class="col-3" id="sec">S</div>
+      </div>
+    </div><!-- close container for H M S headings -->
+    <!-- open container for time rows -->
+    <div class="container text-center">  
+      <!-- placeholder html for new time rows -->
+      <div class="row mt-2">
+        <div class="col d-flex">
+          <div class="col justify-content-center " id="timeRowPlaceholder"></div>
         </div>
       </div>
-      <div class="container text-center">  
-        <!-- placeholder html for new time rows -->
-        <div class="row mt-2">
-          <div class="col d-flex">
-            <div class="col justify-content-center " id="timeRowPlaceholder"></div>
-          </div>
-        </div>
-        <div class="row text-center">
-          <div class="offset-3 col-9">
-            <!-- button to add more rows -->
-            <button type="submit" id="moreTimes" class="btn btn-primary mt-2">Add Another Row</button>
-          </div>
+      <div class="row text-center">
+        <div class="offset-3 col-9">
+          <!-- button to add more rows -->
+          <button type="submit" id="moreTimes" class="btn btn-primary mt-2">Add Another Row</button>
         </div>
       </div>
+    </div> <!-- close container for time rows -->
 
    <!-- define the template string -->
    <div class="container"></div>
