@@ -301,11 +301,13 @@ function calcTime() {
     } else {
       $s.removeClass('is-invalid');
     }
-    // get the values of the input boxes
+    // get the values from the input for hours, min, sec
     const hVal = ($h.val());
     const mVal = ($m.val());
     const sVal = ($s.val());
     const rowName = $n.val();
+
+    
     // Store rows into an array to later be exported as a CSV file
     // I need it to work on every keypress, but it should _replace_ the value if it changes.
     // the titles are in [0], so test to see if a row exists yet for id (since it's i+1)
