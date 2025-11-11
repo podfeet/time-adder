@@ -13,6 +13,9 @@
 //   ["waffles", 43, 3, 1]
 // ];
 
+// jquery
+import $ from 'jquery';
+
 // import is-it-check library
 import is from 'is-it-check';
 
@@ -33,7 +36,6 @@ let ct= {};
  * @returns {number}
  */
 function changeToZero(x) {
-  // if (typeof x == 'string') { // used is.js library which I've removed. can delete this line
   if (is.string(x)) { // use is-it-check library
     x = x.trim();
     x = ((x == '-') || (x == '.') || (x == '')) ? 0 : x;
@@ -58,8 +60,14 @@ export default function calc(rows) {
     h = changeToZero(rows[i][1]);
     m = changeToZero(rows[i][2]);
     s = changeToZero(rows[i][3]);
+   
+    // Check for minus button to reverse the signs
+    if ($(`#sub-`+[i]).hasClass('active')) {
+      totSec += -(1*s + m*60 + h*3600);
+    } else {
     // Multiply sec x 1 so '7' becomes a number not a string
-    totSec += 1*s + m*60 + h*3600;
+      totSec += 1*s + m*60 + h*3600;
+    }
   }
 
   // Can't use Math.floor from the outset doesn't work as expected on negative values

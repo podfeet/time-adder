@@ -131,30 +131,30 @@ $(() => {
   }
 
   // click handler for the AddAnotherRow button to call addRow
-  $('#moreTimes').click(() => {
+  $('#moreTimes').on('click', () => {
     addRow();
     console.log('addRow button pushed');
   });
+// BUG: I don't think this does anything because index-body.js does this function and export to ISO.
+  // // click handler to export CSV
+  // $('#exportCSV').on('click', () => {
+  //   let csvContent = '';
 
-  // click handler to export CSV
-  $('#exportCSV').click(() => {
-    let csvContent = '';
+  //   rows.forEach((rows) => {
+  //     const row = rows.join(',');
+  //     csvContent += row + '\r\n';
+  //   });
+  //   csvContent += totalRow + '\r\n';
 
-    rows.forEach((rows) => {
-      const row = rows.join(',');
-      csvContent += row + '\r\n';
-    });
-    csvContent += totalRow + '\r\n';
-
-    // display CSV in an alert
-    alert(csvContent);
+  //   // display CSV in an alert
+  //   alert(csvContent);
 
     // Attempt to create a new window with the CSV content (do I really need this to work?)
     // window.open returns Not allowed to load local resource: file:///Users/allison/htdocs/time-adder/Title,Hours,Minutes,Seconds%0D%0A,1,0,0%0D%0A,0,0,0%0D%0A
     // const encodedUri = encodeURI(csvContent);
     // window.open(encodedUri);
-  });
-});
+//   });
+// });
 
 // Initialize two arrays - one to hold all of the values of the rows as they're created, which will be used to export a CSV file and one to hold the total value of the summed rows. The totalRow array will be populated by the calcTime function.
 

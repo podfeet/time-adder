@@ -12,6 +12,7 @@ import {default as timeMath} from './timeMath.js';
 // import dictionary holding answers for summarized hours, min, sec
 
 /* eslint-disable max-len */
+/* eslint-disable no-invalid-this */
 /* eslint-disable init-declarations */
 /* eslint-env jquery */
 /* global Mustache */
@@ -169,6 +170,23 @@ $(() => {
     }
   }
 
+  // function to toggle the selected +/- button from active to inactive
+  /**
+   * Toggles the active class on buttons within a btn-group when clicked.
+   */
+  function toggleActive() {
+    // When a button in a btn-group is clicked
+    $('.btn-group button').on('click', function() {
+      // Get the parent btn-group
+      const parentGroup = $(this).closest('.btn-group');
+      // Remove active class from all buttons in this specific btn-group
+      parentGroup.find('button').removeClass('active');
+      // Add active class to the clicked button
+      $(this).addClass('active');
+    });
+  }
+  toggleActive();
+
   /**
    * Processes a 2D array (table) of strings, padding numeric values to ensure they have at least two digits.
    * Assumes that:
@@ -283,11 +301,13 @@ function calcTime() {
     } else {
       $s.removeClass('is-invalid');
     }
-    // get the values of the input boxes
+    // get the values from the input for hours, min, sec
     const hVal = ($h.val());
     const mVal = ($m.val());
     const sVal = ($s.val());
     const rowName = $n.val();
+
+    
     // Store rows into an array to later be exported as a CSV file
     // I need it to work on every keypress, but it should _replace_ the value if it changes.
     // the titles are in [0], so test to see if a row exists yet for id (since it's i+1)

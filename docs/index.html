@@ -23,7 +23,7 @@
             </div> <!-- open/close col-2 for logo -->
             
             <div class="col col-md-8"><!-- open col-8 for title and explanation button -->
-              <h1 class="row h3 d-md-inline">Elapsed Time Adder</h1> <!-- row for Heading -->
+              <h1 class="row h3 d-md-inline">🙏Elapsed Time Adder</h1> <!-- row for Heading -->
               <p>
                 A web app to add (and subtract) <em>elapsed</em> time
               </p>
@@ -91,6 +91,7 @@
           <div class="col-3" id="sec">S</div>
         </div>
       </div>
+
       <div class="container text-center">  
         <!-- placeholder html for new time rows -->
         <div class="row mt-2">
@@ -106,43 +107,71 @@
         </div>
       </div>
 
+      <!-- Open 2 containers for Buy Me a Coffee -->
+      <div class="container d-flex justify-content-center mt-5">
+        <div class="col">
+          <div class="row">
+            <p class="text-center">
+                If you find this web app useful, please make a small donation.
+                </p>
+          </div>
+        </div>
+      </div>
+      <div class="container d-flex justify-content-center">
+        <div class="col-6">
+          <div class="row">
+            <a href="https://podfeet.com/donate" target="_blank" class="btn btn-light" aria-labelledby="Takes you to a site to let you donate with a credit card or Apple Pay in increments of $5 so like the price of a cup of coffee">
+                <span class="me-2">☕</span>
+                <span>Buy me a coffee</span>
+              </a>
+          </div>
+        </div>
+      </div>
+      <!-- Close containers for Buy Me a Coffee -->
+
    <!-- define the template string -->
    <div class="container"></div>
     <script type="text/html" id="tpl_string">
       {{#ids}}
         <div class="row mt-2 form "  >
+
+          <!-- Optional row name -->
           <div class="col-4 p-0">
-            <!-- Optional row name -->
             <input type="text" class="form-control row-name text-center" id="{{nameID}}" placeholder="title (opt)"/>
           </div>  
+
           <!-- Columns for hours min sec to be entered -->
-           <!-- hours -->
+
+          <!-- hours -->
           <div class="col-2 p-0">
             <!-- input type changed to text so I could allow minus & dot & space without error -->
-            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" id={{hoursID}} class="form-control text-center time" placeholder="0" aria-labelledby="hours">
+            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" id="{{hoursID}}" class="form-control text-center time" placeholder="0" aria-labelledby="hours">
             <div id="h-valid-{{hoursID}}" class="invalid-feedback">
               Numbers, you silly goose!
             </div>
           </div>
+
           <!-- minutes -->
           <div class="col-2 p-0">
-            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" step="any" id={{minID}} class="form-control text-center time" placeholder="0" aria-labelledby="min">
+            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" step="any" id="{{minID}}" class="form-control text-center time" placeholder="0" aria-labelledby="min">
             <div id="m-valid-{{minID}}" class="invalid-feedback">
               Numbers, you silly goose!
             </div>
           </div> 
+
           <!-- seconds -->
           <div class="col-2 p-0">
-            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" step="any" id={{secID}} class="form-control text-center time" placeholder="0" aria-labelledby="sec">
+            <input type="text" pattern="[ ]*|-?\d*(\.\d*)?" step="any" id="{{secID}}" class="form-control text-center time" placeholder="0" aria-labelledby="sec">
             <div id="s-valid-{{secID}}" class="invalid-feedback">
               Numbers, you silly goose!
             </div>
           </div>  
+          
           <!-- +/- buttons -->
-          <div class="btn-group col-2" role="group" aria-label="buttons to add and subtract">
-            <!-- Default function is add, so its button is active -->
-            <button type="button" id={{addBtnID}} class="active btn btn-outline-primary">+</button>
-            <button type="button" id={{subBtnID}} class="btn btn-outline-primary">-</button>
+          <div class="btn-group col-2" id="btn-group" role="group" aria-label="buttons to add and subtract">
+            <!-- Add button default to "active" -->
+            <button type="button" id="{{addBtnID}}" class="active btn btn-outline-primary">+</button>
+            <button type="button" id="{{subBtnID}}" class="btn btn-outline-primary">-</button>
           </div>
 
         </div>      
