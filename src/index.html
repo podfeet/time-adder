@@ -13,98 +13,120 @@
 
 	<body>
     <header>
+      <!-- Open container for header -->
       <div class="container-fluid mb-2 mt-2 rounded">
-        <div class="row"> <!-- Open row for header -->
-          <p class="lead">
-            <div class="col-2 mr-2">
-              <a href = "https://podfeet.com" target="_blank" title="Podfeet Podcasts">
-                <img width="50" alt="Podfeet Logo" src="https://www.podfeet.com/blog/wp-content/uploads/2017/04/100px-square-podfeet-transparent-1.png">
-              </a>
-            </div> <!-- open/close col-2 for logo -->
-            
-            <div class="col col-md-8"><!-- open col-8 for title and explanation button -->
-              <h1 class="row h3 d-md-inline">Elapsed Time Adder</h1> <!-- row for Heading -->
+        <div class="row"> <!-- Open row for Title -->
+          <div class="col-2 mr-2"><!-- open col-2 for logo -->
+            <a href = "https://podfeet.com" target="_blank" title="Podfeet Podcasts">
+              <img width="50" alt="Podfeet Logo" src="https://www.podfeet.com/blog/wp-content/uploads/2017/04/100px-square-podfeet-transparent-1.png">
+            </a>
+          </div> <!-- open/close col-2 for logo -->
+          <!-- open col-8 for title and explanation button -->
+          <div class="col col-md-8">
+            <h1 class="row h3 d-md-inline">Elapsed Time Adder</h1> <!-- row for Heading -->
+            <p>
+              A web app to add (and subtract) <em>elapsed</em> time
+            </p>
+          </div> <!-- close col title & explanation button -->
+        </div> <!-- close row for Title-->
+          <!-- row for explanation button -->
+          <div class="row">
+            <div class="col offset-4">
               <p>
-                A web app to add (and subtract) <em>elapsed</em> time
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#explanationText" aria-expanded="false" aria-controls="explanationText">
+                  Push to Learn How This Works
+                </button>
               </p>
             </div>
-          </div> <!-- close row for Title-->
-            <!-- row for explanation button -->
-            <div class="row"> <!-- row for explanation button -->
-              <div class="col offset-4">
-                <p>
-                  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#explanationText" aria-expanded="false" aria-controls="explanationText">
-                    Push to Learn How This Works
-                  </button>
-                </p>
-             </div>
-            </div> <!-- close row for explanation button -->
-          <!-- </div> close column for title & explanation button -->
-          </p> <!-- close paragraph for button?-->
-        </div> <!-- close row for header? -->
-        <div class="row"> <!-- open row for explanation -->
-          <div class="collapse" id="explanationText">
-            <div class="card card-body">
-              <p>The purpose of this web app is to help you add and subtract _elapsed_ time.</p>
-              <p>Why not use Excel, Numbers, or Google Sheets? Because they don't do <em>elapsed</em> time, they do absolute time. Don't believe me? Open one of those apps and add 22:00 + 5:00. You think you'll get 27:00 but you won't. You'll get 3:00AM!</p>
-              <p>This marvelous web app allows you to type in positive or negative values for each row, and as you add values, the total is automatically calculated. </p>
-              <p>You can add an optional title for each row, and when you're done, tap the "Export to CSV" button and you'll get the comma separated value data to paste into a spreadsheet if you so desire.</p>
-            </div>
-          </div>
-        </div>
-    </header>
+          </div> <!-- close row for explanation button -->
+      </div> <!-- close container for header -->
+      <!-- open row for explanation -->
+      <div class="row">
+        <!-- open div for collapsed explanation -->
+        <div class="collapse" id="explanationText">
+          <!-- open card for explanation -->
+          <div class="card card-body">
+            <p>The purpose of this web app is to help you add and subtract _elapsed_ time.</p>
+            <p>Why not use Excel, Numbers, or Google Sheets? Because they don't do <em>elapsed</em> time, they do absolute time. Don't believe me? Open one of those apps and add 22:00 + 5:00. You think you'll get 27:00 but you won't. You'll get 3:00AM!</p>
+            <p>This marvelous web app allows you to type in positive or negative values for each row, and as you add values, the total is automatically calculated. </p>
+            <p>You can add an optional title for each row, and when you're done, tap the "Export to CSV" button and you'll get the comma separated value data to paste into a spreadsheet if you so desire.</p>
+          </div> <!-- close card for explanation -->
+        </div> <!-- close div for collapsed explanation -->
+      </div> <!-- close row for explanation -->
+    </header> <!-- close header -->
 
-    <!-- container to hold the column labels & time rows -->
-      <div class="container bg-light justify-content-center">
-        <!-- open row for export buttons -->
-        <div class="row p-0"> 
-          <!-- button to export CSV -->
-          <button type="submit" id="exportCSV" class="btn btn-success col-6 ">Export to CSV</button>
-          <!-- button to export ISO8601-->
-          <button type="submit" id="exportISO" class="btn btn-danger col-6 ">Export to HH:MM:SS</button>
+    <!-- container for export buttons -->
+    <div class="container bg-light justify-content-center">
+      <!-- open row for export buttons -->
+      <div class="row p-0"> 
+        <!-- button to export CSV -->
+        <button type="submit" id="exportCSV" class="btn btn-success col-6 ">Export to CSV</button>
+        <!-- button to export ISO8601-->
+        <button type="submit" id="exportISO" class="btn btn-danger col-6 ">Export to HH:MM:SS</button>
+      </div> <!-- close row for export buttons -->
+    </div> <!-- close container for export buttons -->
+
+    <!-- open container for Totals -->
+    <div class="container mt-2 h4 bg-light justify-content-center">
+      <div class="row">
+        <!-- col for Title of Totals -->
+        <div class="col-3 text-center">
+          Total
+        </div>
+        <!-- Total numbers -->
+        <div class="col-3 border rounded d-flex align-items-center justify-content-center" id="hTot">0</div>
+        <div class="col-3 border rounded d-flex align-items-center justify-content-center" id="mTot">0</div>
+        <div class="col-3 border rounded d-flex align-items-center justify-content-center" id="sTot">0</div>
+      </div>
+    </div> <!-- close container for Totals -->
+      <!-- </div>    -->
+    <!-- container just for H M S headings -->
+    <div class="container text-center">
+      <!-- row for hours, min, sec LABELS -->
+      <div class="row mt-1">
+        <!-- offset to 3 so aligned above -->
+        <div class="offset-3 col-3" id="hours">H</div>
+        <div class="col-3" id="min">M</div>
+        <div class="col-3" id="sec">S</div>
+      </div>
+    </div><!-- close container for H M S headings -->
+    <!-- open container for time rows -->
+    <div class="container text-center">  
+      <!-- placeholder html for new time rows -->
+      <div class="row mt-2">
+        <div class="col d-flex">
+          <div class="col justify-content-center " id="timeRowPlaceholder"></div>
         </div>
       </div>
-        <!-- close row for export buttons -->
-        <!-- open row for Totals -->
-      <div class="container mt-2 h4 bg-light justify-content-center">
-        <div class="row">
-          <!-- col for Title of Totals -->
-          <div class="col-3 text-center">
-            Total
-          </div>
-          
-          <!-- Total numbers -->
-          <div class="col-3 border rounded d-flex align-items-center justify-content-center" id="hTot">0</div>
-          <div class="col-3 border rounded d-flex align-items-center justify-content-center" id="mTot">0</div>
-          <div class="col-3 border rounded d-flex align-items-center justify-content-center" id="sTot">0</div>
+      <div class="row text-center">
+        <div class="offset-3 col-9">
+          <!-- button to add more rows -->
+          <button type="submit" id="moreTimes" class="btn btn-primary mt-2">Add Another Row</button>
         </div>
       </div>
-      </div>   
-      
-      <div class="container text-center">
-        <!-- row for hours, min, sec LABELS -->
-        <div class="row mt-1">
-          <!-- totals -->
-          <!-- changed offset and cols to 3 each -->
-          <div class="offset-3 col-3" id="hours">H</div>
-          <div class="col-3" id="min">M</div>
-          <div class="col-3" id="sec">S</div>
-        </div>
-      </div>
-      <div class="container text-center">  
-        <!-- placeholder html for new time rows -->
-        <div class="row mt-2">
-          <div class="col d-flex">
-            <div class="col justify-content-center " id="timeRowPlaceholder"></div>
-          </div>
-        </div>
-        <div class="row text-center">
-          <div class="offset-3 col-9">
-            <!-- button to add more rows -->
-            <button type="submit" id="moreTimes" class="btn btn-primary mt-2">Add Another Row</button>
-          </div>
-        </div>
-      </div>
+    </div> <!-- close container for time rows -->
+
+    <!-- Open 2 containers for Buy Me a Coffee -->
+    <div class="container d-flex justify-content-center mt-5">
+    	<div class="col">
+    		<div class="row">
+    			<p class="text-center">
+            	If you find this web app useful, please make a small donation.
+            	</p>
+    		</div>
+    	</div>
+    </div>
+    <div class="container d-flex justify-content-center">
+    	<div class="col-6">
+    		<div class="row">
+    			<a href="https://podfeet.com/donate" target="_blank" class="btn btn-light" aria-labelledby="Takes you to a site to let you donate with a credit card or Apple Pay in increments of $5 so like the price of a cup of coffee">
+          		<span class="me-2">☕</span>
+          		<span>Buy me a coffee</span>
+        		</a>
+    		</div>
+    	</div>
+    </div>
+    <!-- Close containers for Buy Me a Coffee -->
 
    <!-- define the template string -->
    <div class="container"></div>
