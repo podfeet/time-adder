@@ -40,7 +40,8 @@ export default {
   plugins: [
     new CopyPlugin({
       patterns: [
-        {from: 'src/index.html', to: 'index.html'}
+        {from: 'src/index.html', to: 'index.html'},
+        {from: 'src/favicon.ico'), to: 'favicon.icon'}
       ],
     }),
   ],
