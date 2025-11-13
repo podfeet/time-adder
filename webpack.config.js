@@ -42,6 +42,13 @@ export default {
       patterns: [
         {from: 'src/index.html', to: 'index.html'},
         {from: 'src/favicon.ico', to: 'favicon.ico'},
+        {from: 'src/apple-touch-icon.png', to: 'apple-touch-icon.png'},
+        {from: 'src/favicon-96x96.png', to: 'favicon-96x96.png'},
+        {from: 'src/favicon.svg', to: 'favicon-96x96.svg'},
+        {from: 'src/web-app-manifest-192x192.png', 
+          to: 'web-app-manifest-192x192.png'},
+        {from: 'src/web-app-manifest-512x512.png', 
+          to: 'fweb-app-manifest-512x512.png'},
       ],
     }),
   ],
