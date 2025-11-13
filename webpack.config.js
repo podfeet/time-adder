@@ -49,6 +49,7 @@ export default {
           to: 'web-app-manifest-192x192.png'},
         {from: 'src/web-app-manifest-512x512.png', 
           to: 'web-app-manifest-512x512.png'},
+        {from: 'manifest.json', to: 'manifest.json'},
       ],
     }),
   ],
